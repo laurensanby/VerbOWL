@@ -36,7 +36,7 @@ public class Driver {
             OWLOntologyManager m = OWLManager.createOWLOntologyManager();
             OWLOntology o = m.loadOntologyFromOntologyDocument(f);
          
-            constraints = readXML("C:\\Users\\Lauren\\Documents\\UCT\\Honours\\project\\Template\\template_v1.xml");
+            constraints = readXML("template_v1.xml");
             //walker
             OWLOntologyWalker walker = new OWLOntologyWalker(Collections.singleton(o));
             OWLOntologyWalkerVisitor visitor;
