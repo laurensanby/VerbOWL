@@ -89,10 +89,11 @@ public class Driver {
                           
                     else if (superClassExpr.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM)
                     {
-                        someValuesFrom(superClassExpr, subClass+"");                       
+                        relationsDL(superClassExpr, subClass+"", "OWLObjectSomeValuesFrom");                       
                     }
-                    else
+                    else if (superClassExpr.getClassExpressionType()==ClassExpressionType.OBJECT_ALL_VALUES_FROM)
                     {
+                        relationsDL(superClassExpr, subClass+"", "OWLObjectAllValuesFrom");
                         //System.out.println(sub.getNNF());
                     }
                 }
@@ -108,7 +109,7 @@ public class Driver {
         }
     }
     
-    public static void someValuesFrom(OWLClassExpression superClassExpr, String subClass)
+    public static void relationsDL(OWLClassExpression superClassExpr, String subClass, String type)
     {
         Set<OWLObjectProperty> objProp;
         Set<OWLClassExpression> nested = superClassExpr.getNestedClassExpressions();
@@ -145,7 +146,11 @@ public class Driver {
                 break;
             }
         }
-        printSentence(literals.split(";"),roles.split(";"),"OWLObjectSomeValuesFrom", negation, union);
+        if (type.equals("OWLObjectAllValuesFrom"))
+        {
+            roles = roles.replaceFirst("-", ";");
+        }
+        printSentence(literals.split(";"),roles.split(";"),type, negation, union);
     }
     
     public static void printSentence(String[] objects, String[] roles, String type)
@@ -186,7 +191,8 @@ public class Driver {
                     break;
                 case "Role":
                     index = Integer.parseInt(child.getAttributes().getNamedItem("index").getTextContent());
-                    System.out.print(roles[index]+" ");
+                    if (index<roles.length)
+                    {    System.out.print(roles[index]+" ");    }
                     break;
                 case "Loop":
                     index = Integer.parseInt(child.getAttributes().getNamedItem("index").getTextContent());

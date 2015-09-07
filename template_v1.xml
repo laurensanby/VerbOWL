@@ -31,7 +31,7 @@
 	<Text>Elke</Text>
 	<Object index="0"/>
 	<Role index="0"/>
-	<Text>iets wat nie 'n</Text>
+	<Text>ten minste een van iets wat nie 'n</Text>
 	<Object index="1"/>
 	<Text>is nie</Text>
 </Constraint>
@@ -57,13 +57,36 @@
 </Constraint>
 
 
-<!--<Constraint type="Restriction allValuesFrom">
+<Constraint type="OWLObjectAllValuesFrom">
 	<Text>Elke</Text>
-	<Object index="rdf:about"/>
-	<Object index="owl:onProperty"/>
+	<Object index="0"/> <!--blaar-->
+	<Role index="0"/> <!--is-->
+	<Text>net</Text> <!--net-->
+	<Role index="1"/> <!--deel van 'n-->
+	<Object index="1"/> <!--boom-->
+</Constraint>
+
+<Constraint type="OWLObjectAllValuesFrom negation">
+	<Text>Elke</Text>
+	<Object index="0"/>
+	<Role index="0"/>
+	<Text>net iets wat nie 'n</Text>
+	<Object index="1"/>
+	<Text>is nie</Text>
+</Constraint>
+
+<Constraint type="OWLObjectAllValuesFrom union">
+	<Text>Elke</Text>
+	<Object index="0"/>
+	<Role index="0"/>
 	<Text>net</Text>
-	<Object index="owl:allValuesFrom"/>
-</Constraint>-->
+	<Role index="1"/>
+	<Object index="1"/>
+ 	<Loop index="2" >
+ 		<Text>of</Text>
+ 		<Object index="n"/>
+ 	</Loop>
+</Constraint>
 
 </VerbOwlBody>
 
