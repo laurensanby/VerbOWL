@@ -6,8 +6,11 @@ import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+//import org.semanticweb.HermiT.Reasoner;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.util.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -35,7 +38,10 @@ public class Driver {
             File f = new File("C:\\Users\\Lauren\\Documents\\UCT\\Honours\\project\\AfricanWildlifeOntology1.owl");
             OWLOntologyManager m = OWLManager.createOWLOntologyManager();
             OWLOntology o = m.loadOntologyFromOntologyDocument(f);
-         
+            /*OWLReasonerFactory reasonerFactory = new Reasoner.ReasonerFactory();
+            OWLReasoner reasoner = reasonerFactory.createReasoner(o);
+            InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner);
+            iog.fillOntology((OWLDataFactory) m, o);*/
             constraints = readXML("template_v1.xml");
             //walker
             OWLOntologyWalker walker = new OWLOntologyWalker(Collections.singleton(o));
@@ -43,12 +49,25 @@ public class Driver {
             visitor = new OWLOntologyWalkerVisitor(walker){
                 @Override
                 public void visit(OWLEquivalentClassesAxiom axiom) {
+                    /*OWLAxiom axiom1 = getCurrentAxiom();
+                    System.out.println("!!-->"+axiom1);
+                    Set<OWLEquivalentClassesAxiom> s1 = axiom.asPairwiseAxioms();
+                    for (OWLEquivalentClassesAxiom e : s1)
+                    {
+                    System.out.println("--"+e);
+                    }
+                    Set<OWLClassExpression> s = axiom.getNestedClassExpressions();
+                    for (OWLClassExpression a : s)
+                    {
                     
+                    System.out.println("!!"+a);
+                    }*/
                 }
                 
                 @Override
                 public void visit(OWLObjectSomeValuesFrom desc) {
                     OWLAxiom axiom = getCurrentAxiom();
+                    //System.out.println(axiom.toString().toUpperCase());
                 }
                 
                 @Override
@@ -66,6 +85,7 @@ public class Driver {
                             objects[i] = getName(l+"");
                             i++;
                         }
+                        System.out.print("Disjoint ");
                         printSentence(objects, null, "Disjoint");
                     }
                 }
@@ -83,6 +103,7 @@ public class Driver {
                              getName(subClass),
                              getName(superClass)
                             };
+                            System.out.print("Subclass ");
                             printSentence(objects, null, "OWLSubClassOfAxiom");
                         }
                     }
@@ -95,6 +116,10 @@ public class Driver {
                     {
                         relationsDL(superClassExpr, subClass+"", "OWLObjectAllValuesFrom");
                         //System.out.println(sub.getNNF());
+                    }
+                    else if (superClassExpr.getClassExpressionType()==ClassExpressionType.OBJECT_INTERSECTION_OF)
+                    {
+                        relationsDL(superClassExpr, subClass+"", "OWLObjectIntersectionOf");
                     }
                 }
             
@@ -150,15 +175,21 @@ public class Driver {
         {
             roles = roles.replaceFirst("-", ";");
         }
-        printSentence(literals.split(";"),roles.split(";"),type, negation, union);
+        if (type.equals("OWLObjectIntersectionOf"))
+        {
+            type = "OWLObjectSomeValuesFrom";
+        }
+        //if (intersection && all roles are the same)
+        System.out.print(type+" ");
+        printSentence(literals.split(";"),roles.split(";"),type, negation, union, intersection);
     }
     
     public static void printSentence(String[] objects, String[] roles, String type)
     {
-        printSentence(objects, roles, type, false, false);
+        printSentence(objects, roles, type, false, false, false);
     }
      
-     public static void printSentence(String[] objects, String[] roles, String type, boolean negation, boolean union)
+     public static void printSentence(String[] objects, String[] roles, String type, boolean negation, boolean union, boolean intersection)
      {
         //Choose constraint based on type
         //FIND MORE GENERIC WAY TO DO THIS??
@@ -166,9 +197,10 @@ public class Driver {
         String cType="";
         for (int j=0; j<constraints.getLength(); j++){
             cType = constraints.item(j).getAttributes().getNamedItem("type").toString();
-            if (!negation && !union && cType.equals("type=\""+type+"\"") 
+            if (!negation && !union && !intersection && cType.equals("type=\""+type+"\"") 
                     || (negation && cType.equals("type=\""+type+" negation\""))
-                    || (union && cType.equals("type=\""+type+" union\"")))
+                    || (union && cType.equals("type=\""+type+" union\""))
+                    || (intersection && cType.equals("type=\""+type+" intersection\"")))
             {
                 prop = constraints.item(j);
                 break;
@@ -208,6 +240,9 @@ public class Driver {
                                 break;
                             case "Object":
                                 System.out.print(objects[index]+" ");
+                                break;
+                            case "Role":
+                                System.out.print(roles[index-1]+" ");
                                 break;
                             }
                         }

@@ -48,6 +48,20 @@
  	</Loop>
 </Constraint>
 
+<Constraint type="OWLObjectSomeValuesFrom intersection">
+	<Text>Elke</Text>
+	<Object index="0"/>
+	<Role index="0"/>
+	<Text>ten minste een</Text>
+	<Object index="1"/>
+ 	<Loop index="2" >
+ 		<Text>en</Text>
+ 		<Role index="n-1"/>
+		<Text>ten minste een</Text>
+ 		<Object index="n"/>
+ 	</Loop>
+</Constraint>
+
 <Constraint type="Disjoint">
 	<Text>'n</Text>
 	<Object index="0"/>
@@ -89,35 +103,6 @@
 </Constraint>
 
 </VerbOwlBody>
-
-
-
-
-
-
-
-
-
-
-
-<!-- Object Properties -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
