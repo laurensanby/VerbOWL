@@ -5,101 +5,114 @@
 <VerbOwlBody>
 
 <Constraint type="OWLSubClassOfAxiom">
-	<Text>Elke</Text>
+	<Text>Elke </Text>
 	<Object index="0"/>
-	<Text>is 'n</Text>
+	<Text> is 'n </Text>
 	<Object index="1"/>
+	<Text>.</Text>
 </Constraint>
 
 <Constraint type="OWLSubClassOfAxiom negation">
-	<Text>Elke</Text>
+	<Text>Elke </Text>
 	<Object index="0"/>
-	<Text>is nie 'n</Text>
+	<Text> is nie 'n </Text>
 	<Object index="1"/>
-	<Text>nie</Text>
+	<Text> nie.</Text>
 </Constraint>
 
 <Constraint type="OWLObjectSomeValuesFrom">
-	<Text>Elke</Text>
+	<Text>Elke </Text>
 	<Object index="0"/>
+	<Text> </Text>
 	<Role index="0"/>
-	<Text>ten minste een</Text>
+	<Text>ten minste een </Text>
 	<Object index="1"/>
+	<Text>.</Text>
 </Constraint>
 
 <Constraint type="OWLObjectSomeValuesFrom negation">
-	<Text>Elke</Text>
+	<Text>Elke </Text>
 	<Object index="0"/>
+	<Text> </Text>
 	<Role index="0"/>
-	<Text>ten minste een van iets wat nie 'n</Text>
+	<Text>ten minste een van iets wat nie 'n </Text>
 	<Object index="1"/>
-	<Text>is nie</Text>
+	<Text> is nie.</Text>
 </Constraint>
 
 <Constraint type="OWLObjectSomeValuesFrom union">
-	<Text>Elke</Text>
+	<Text>Elke </Text>
 	<Object index="0"/>
+	<Text> </Text>
 	<Role index="0"/>
-	<Text>ten minste een</Text>
+	<Text>ten minste een </Text>
 	<Object index="1"/>
  	<Loop index="2" >
- 		<Text>of</Text>
+ 		<Text> of </Text>
  		<Object index="n"/>
  	</Loop>
+ 	<Text>.</Text>
 </Constraint>
 
 <Constraint type="OWLObjectSomeValuesFrom intersection">
-	<Text>Elke</Text>
+	<Text>Elke </Text>
 	<Object index="0"/>
+	<Text> </Text>
 	<Role index="0"/>
-	<Text>ten minste een</Text>
+	<Text>ten minste een </Text>
 	<Object index="1"/>
  	<Loop index="2" >
- 		<Text>en</Text>
+ 		<Text> en </Text>
  		<Role index="n-1"/>
-		<Text>ten minste een</Text>
+		<Text>ten minste een </Text>
  		<Object index="n"/>
  	</Loop>
+ 	<Text>.</Text>
 </Constraint>
 
 <Constraint type="Disjoint">
-	<Text>'n</Text>
+	<Text>'n </Text>
 	<Object index="0"/>
-	<Text>is nie 'n</Text>
+	<Text> is nie 'n </Text>
 	<Object index="1"/>
-	<Text>nie</Text>
+	<Text> nie.</Text>
 </Constraint>
 
 
 <Constraint type="OWLObjectAllValuesFrom">
-	<Text>Elke</Text>
+	<Text>Elke </Text>
 	<Object index="0"/> <!--blaar-->
+	<Text> </Text>
 	<Role index="0"/> <!--is-->
-	<Text>net</Text> <!--net-->
+	<Text>net </Text> <!--net-->
 	<Role index="1"/> <!--deel van 'n-->
 	<Object index="1"/> <!--boom-->
+	<Text>.</Text>
 </Constraint>
 
 <Constraint type="OWLObjectAllValuesFrom negation">
-	<Text>Elke</Text>
+	<Text>Elke </Text>
 	<Object index="0"/>
+	<Text> </Text>
 	<Role index="0"/>
-	<Text>net iets wat nie 'n</Text>
+	<Text>net iets wat nie 'n </Text>
 	<Object index="1"/>
-	<Text>is nie</Text>
+	<Text> is nie.</Text>
 </Constraint>
 
 <Constraint type="OWLObjectAllValuesFrom union">
-	<Text>Elke</Text>
+	<Text>Elke </Text>
 	<Object index="0"/>
+	<Text> </Text>
 	<Role index="0"/>
-	<Text>net</Text>
+	<Text>net </Text>
 	<Role index="1"/>
 	<Object index="1"/>
  	<Loop index="2" >
- 		<Text>of</Text>
+ 		<Text> of </Text>
  		<Object index="n"/>
  	</Loop>
+ 	<Text>.</Text>
 </Constraint>
 
 </VerbOwlBody>

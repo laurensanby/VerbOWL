@@ -6,11 +6,8 @@ import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-//import org.semanticweb.HermiT.Reasoner;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
-import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.util.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -29,20 +26,22 @@ import org.xml.sax.SAXException;
  */
 public class Driver {
     
+    static int count, subClassCount, disjointCount, owlThingCount;
     static NodeList constraints;
     
     public static void main(String[] args){
         // TODO code application logic here
+        count=0;
+        subClassCount=0;
+        disjointCount=0;
+        owlThingCount=0;
         try
         {
             File f = new File("C:\\Users\\Lauren\\Documents\\UCT\\Honours\\project\\AfricanWildlifeOntology1.owl");
             OWLOntologyManager m = OWLManager.createOWLOntologyManager();
             OWLOntology o = m.loadOntologyFromOntologyDocument(f);
-            /*OWLReasonerFactory reasonerFactory = new Reasoner.ReasonerFactory();
-            OWLReasoner reasoner = reasonerFactory.createReasoner(o);
-            InferredOntologyGenerator iog = new InferredOntologyGenerator(reasoner);
-            iog.fillOntology((OWLDataFactory) m, o);*/
             constraints = readXML("template_v1.xml");
+                       
             //walker
             OWLOntologyWalker walker = new OWLOntologyWalker(Collections.singleton(o));
             OWLOntologyWalkerVisitor visitor;
@@ -72,6 +71,8 @@ public class Driver {
                 
                 @Override
                 public void visit(OWLDisjointClassesAxiom axiom) {
+                    count++;
+                    disjointCount++;
                     Set<OWLDisjointClassesAxiom> classes = axiom.asPairwiseAxioms();
                     Set<OWLClassExpression> literals;
                     String[] objects = new String[2];
@@ -86,6 +87,7 @@ public class Driver {
                             i++;
                         }
                         System.out.print("Disjoint ");
+                        
                         printSentence(objects, null, "Disjoint");
                     }
                 }
@@ -104,7 +106,13 @@ public class Driver {
                              getName(superClass)
                             };
                             System.out.print("Subclass ");
+                            count++;
+                            subClassCount++;
                             printSentence(objects, null, "OWLSubClassOfAxiom");
+                        }
+                        else
+                        { //Not printing OWLThing
+                            owlThingCount++;
                         }
                     }
                           
@@ -127,11 +135,32 @@ public class Driver {
         
             walker.walkStructure(visitor);
          
+            //TESTING
+            System.out.println("Number of axioms printed: "+count);
+            System.out.println("Number subclass: "+subClassCount);
+            System.out.println("Number disjoint: "+disjointCount);
+        
+            int numAxioms = o.getAxiomCount()-o.getAxiomCount(AxiomType.ANNOTATION_ASSERTION) - o.getAxiomCount(AxiomType.DECLARATION)-owlThingCount;
+            System.out.println("Number of axioms: "+numAxioms); //TEST
+            
+            Set<OWLAxiom> a = o.getAxioms();
+            for (OWLAxiom ax : a)
+            {
+                AxiomType type = ax.getAxiomType();
+                
+                if (!(type.getName().equals("SubClassOf")) && !(type.getName().equals("DisjointClasses")) && !(type.equals(AxiomType.ANNOTATION_ASSERTION)) && !(type.equals(AxiomType.DECLARATION)))
+                {
+                    System.out.println("!!!"+ax.toString());
+                }
+            }
+            
+            System.out.println("Number of subclass: "+(o.getAxiomCount(AxiomType.SUBCLASS_OF)-owlThingCount)); //TEST
+            System.out.println("Number of disjoint: "+o.getAxiomCount(AxiomType.DISJOINT_CLASSES)); //TEST
         }
         catch (OWLOntologyCreationException e)
         {
             System.out.println("EXCEPTION CAUGHT "+e);
-        }
+        }       
     }
     
     public static void relationsDL(OWLClassExpression superClassExpr, String subClass, String type)
@@ -181,6 +210,8 @@ public class Driver {
         }
         //if (intersection && all roles are the same)
         System.out.print(type+" ");
+        count++;
+        subClassCount++;
         printSentence(literals.split(";"),roles.split(";"),type, negation, union, intersection);
     }
     
@@ -215,11 +246,11 @@ public class Driver {
                 child = children.item(i);
                 switch (child.getNodeName()) {
                 case "Text":
-                    System.out.print(child.getTextContent()+" ");
+                    System.out.print(child.getTextContent());
                     break;
                 case "Object":
                     index = Integer.parseInt(child.getAttributes().getNamedItem("index").getTextContent());
-                    System.out.print(objects[index]+" ");
+                    System.out.print(objects[index]);
                     break;
                 case "Role":
                     index = Integer.parseInt(child.getAttributes().getNamedItem("index").getTextContent());
@@ -236,10 +267,10 @@ public class Driver {
                             switch (loopChild.getNodeName())
                             {
                             case "Text":
-                                System.out.print(loopChild.getTextContent()+" ");
+                                System.out.print(loopChild.getTextContent());
                                 break;
                             case "Object":
-                                System.out.print(objects[index]+" ");
+                                System.out.print(objects[index]);
                                 break;
                             case "Role":
                                 System.out.print(roles[index-1]+" ");
