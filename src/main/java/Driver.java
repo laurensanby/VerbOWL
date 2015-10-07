@@ -19,56 +19,177 @@ import org.xml.sax.SAXException;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Lauren
  */
 public class Driver {
-    
+
     static int count, subClassCount, disjointCount, owlThingCount;
+    static String globalRoles, globalLiterals, globalAndOr, globalNest;
     static NodeList constraints;
-    
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         // TODO code application logic here
-        count=0;
-        subClassCount=0;
-        disjointCount=0;
-        owlThingCount=0;
-        try
-        {
-            File f = new File("C:\\Users\\Lauren\\Documents\\UCT\\Honours\\project\\AfricanWildlifeOntology1.owl");
+        count = 0;
+        subClassCount = 0;
+        disjointCount = 0;
+        owlThingCount = 0;
+        try {
+            File f = new File("C:\\Users\\Lauren\\Documents\\UCT\\Honours\\project\\Ontologies\\wine.rdf");
             OWLOntologyManager m = OWLManager.createOWLOntologyManager();
             OWLOntology o = m.loadOntologyFromOntologyDocument(f);
             constraints = readXML("template_v1.xml");
-                       
+
             //walker
             OWLOntologyWalker walker = new OWLOntologyWalker(Collections.singleton(o));
             OWLOntologyWalkerVisitor visitor;
-            visitor = new OWLOntologyWalkerVisitor(walker){
+            visitor = new OWLOntologyWalkerVisitor(walker) {
                 @Override
                 public void visit(OWLEquivalentClassesAxiom axiom) {
-                    /*OWLAxiom axiom1 = getCurrentAxiom();
-                    System.out.println("!!-->"+axiom1);
-                    Set<OWLEquivalentClassesAxiom> s1 = axiom.asPairwiseAxioms();
-                    for (OWLEquivalentClassesAxiom e : s1)
-                    {
-                    System.out.println("--"+e);
-                    }
-                    Set<OWLClassExpression> s = axiom.getNestedClassExpressions();
-                    for (OWLClassExpression a : s)
-                    {
-                    
-                    System.out.println("!!"+a);
-                    }*/
+//                    OWLAxiom axiom1 = getCurrentAxiom();
+//                    System.out.println("!!-->" + axiom1);
+//
+//                    globalLiterals = getName(axiom.getNamedClasses() + "") + ";";
+//                    globalRoles = "";
+//                    globalAndOr = "";
+//                    globalNest = "";
+//                    Set<OWLClassExpression> s = axiom.getNestedClassExpressions();
+//                    for (OWLClassExpression a : s) {
+//
+//                        //System.out.println("!!"+a);
+//                        //Set<OWLClassExpression> conjunct;
+//
+//                        if (a.getClassExpressionType().equals(ClassExpressionType.OBJECT_INTERSECTION_OF)) //or union of
+//                        {
+//                            nestRecursion(a);
+//                            System.out.println("------------");
+//        System.out.println(globalLiterals);
+//        System.out.println(globalRoles);
+//        System.out.println(globalAndOr);
+//        System.out.println(globalNest);
+//        System.out.println("----------------");
+                            /*int setCount = 1;
+                            conjunct = a.asConjunctSet();
+                            for (OWLClassExpression b : conjunct) {
+                            System.out.println("-->" + b);
+                            Set<OWLClassExpression> s2 = b.getNestedClassExpressions();
+                            if (s2.size() == 2) {
+                            ClassExpressionType type = b.getClassExpressionType();
+                            switch (type) {
+                            case OBJECT_SOME_VALUES_FROM:
+                            roles += getName(b.getObjectPropertiesInSignature() + "") + ";";
+                            literals += getName(b.getClassesInSignature() + "") + ";";
+                            if (setCount < conjunct.size()) {
+                            andOr += "en;";
+                            }
+                            nest += "false;";
+                            System.out.println(getName(b.getObjectPropertiesInSignature() + ""));
+                            System.out.println(getName(b.getClassesInSignature() + ""));
+                            
+                            break;
+                            case OBJECT_ALL_VALUES_FROM:
+                            break;
+                            
+                            }
+                            } else {
+                            for (OWLClassExpression a2 : s2) {
+                            a2.asConjunctSet();
+                            //nest+="true;";
+                            //System.out.println("!!-"+a2);
+                            }
+                            }
+                            setCount++;
+                            }*/
+//                        }
+                        /*if (a.getClassExpressionType().equals(ClassExpressionType.OBJECT_UNION_OF))
+                         {
+                         conjunct = a.asDisjunctSet();
+                         for (OWLClassExpression b: conjunct)
+                         {
+                         System.out.println("-->"+b);
+                         }
+                         }*/
+
+//                    }
                 }
                 
                 @Override
-                public void visit(OWLObjectSomeValuesFrom desc) {
-                    OWLAxiom axiom = getCurrentAxiom();
-                    //System.out.println(axiom.toString().toUpperCase());
+                public void visit(OWLClassAssertionAxiom axiom) {
+                    count++;
+                    
+                    if (!axiom.getClassExpression().isOWLThing())
+                    {
+                        String[] objects = new String[2];
+                        objects[0] = getName(axiom.getIndividual()+"");
+                        objects[1] = getName(axiom.getClassExpression()+"");
+                        printSentence(objects, null, "ClassAssertion");
+                    }
                 }
                 
+                @Override
+                public void visit(OWLObjectPropertyAssertionAxiom axiom) {
+                    count++;
+                    axiom = axiom.getSimplified();
+                    String objects[] = {getName(axiom.getSubject()+""), getName(axiom.getObject()+"")}; 
+                    String roles[] = {getName(axiom.getProperty()+"")};
+                    printSentence(objects, roles, "ObjectPropertyAssertion");
+                }
+                
+                @Override
+                public void visit(OWLInverseObjectPropertiesAxiom axiom) {
+                    count++;
+                    String roles[] = {getName(axiom.getFirstProperty()+""), getName(axiom.getSecondProperty()+"")};
+                    printSentence(null, roles, "InverseObjectProperty");
+                }                
+                
+                @Override
+                public void visit(OWLTransitiveObjectPropertyAxiom axiom) {
+                    count++;
+                    printSentence(getName(axiom+""), "TransitiveObjectProperty");
+                }
+                
+                @Override
+                public void visit(OWLReflexiveObjectPropertyAxiom axiom) {
+                    count++;
+                    printSentence(getName(axiom+""), "ReflexiveObjectProperty");
+                }
+                
+                @Override
+                public void visit(OWLIrreflexiveObjectPropertyAxiom axiom) {
+                    count++;
+                    printSentence(getName(axiom+""), "IrreflexiveObjectProperty");
+                }
+                
+                @Override
+                public void visit(OWLFunctionalDataPropertyAxiom axiom)
+                {
+                    count++;
+                    String role = getName(axiom+"");
+                    printFunctional(role);
+                }
+                
+                @Override
+                public void visit(OWLFunctionalObjectPropertyAxiom axiom) {
+                    count++;
+                    String role = getName(axiom+"");
+                    printFunctional(role);
+                }
+                
+                 @Override
+                public void visit(OWLSymmetricObjectPropertyAxiom axiom) {
+                    count++;
+                    printSentence(getName(axiom+""), "SymmetricObjectProperty");
+                }
+                
+                 @Override
+                public void visit(OWLAsymmetricObjectPropertyAxiom axiom) {
+                    count++;                    
+                    String role = getName(axiom+"");
+                    role = role.replaceFirst("-", ";");                
+                    printSentence(null, role.split(";"), "AsymmetricObjectProperty");
+                }
+
                 @Override
                 public void visit(OWLDisjointClassesAxiom axiom) {
                     count++;
@@ -76,217 +197,467 @@ public class Driver {
                     Set<OWLDisjointClassesAxiom> classes = axiom.asPairwiseAxioms();
                     Set<OWLClassExpression> literals;
                     String[] objects = new String[2];
-                    int i=0;
-                    for (OWLDisjointClassesAxiom c : classes)
-                    {
-                        i=0;
+                    int i = 0;
+                    for (OWLDisjointClassesAxiom c : classes) {
+                        i = 0;
                         literals = c.getNestedClassExpressions();
-                        for (OWLClassExpression l : literals)
-                        {
-                            objects[i] = getName(l+"");
+                        for (OWLClassExpression l : literals) {
+                            objects[i] = getName(l + "");
                             i++;
                         }
                         System.out.print("Disjoint ");
-                        
+
                         printSentence(objects, null, "Disjoint");
                     }
                 }
-         
+                
+                @Override
+                public void visit(OWLDisjointObjectPropertiesAxiom axiom) {
+                    count++;
+                    disjointCount++;
+                    Set<OWLDisjointObjectPropertiesAxiom> classes = axiom.asPairwiseAxioms();
+                    Set<OWLClassExpression> literals;
+                    String[] objects = new String[2];
+                    int i = 0;
+                    for (OWLDisjointObjectPropertiesAxiom c : classes) {
+                        i = 0;
+                        literals = c.getNestedClassExpressions();
+                        for (OWLClassExpression l : literals) {
+                            objects[i] = getName(l + "");
+                            i++;
+                        }
+                        System.out.print("Disjoint ");
+
+                        printSentence(objects, null, "Disjoint");
+                    }
+                }
+                
+                @Override
+                public void visit(OWLDisjointDataPropertiesAxiom axiom) {
+                    count++;
+                    disjointCount++;
+                    Set<OWLDisjointDataPropertiesAxiom> classes = axiom.asPairwiseAxioms();
+                    Set<OWLClassExpression> literals;
+                    String[] objects = new String[2];
+                    int i = 0;
+                    for (OWLDisjointDataPropertiesAxiom c : classes) {
+                        i = 0;
+                        literals = c.getNestedClassExpressions();
+                        for (OWLClassExpression l : literals) {
+                            objects[i] = getName(l + "");
+                            i++;
+                        }
+                        System.out.print("Disjoint ");
+
+                        printSentence(objects, null, "Disjoint");
+                    }
+                }
+                
+                @Override
+                public void visit(OWLDisjointUnionAxiom axiom){
+                    count++;
+                    Set<OWLClassExpression> objects = axiom.getClassExpressions();
+                    String[] literals = new String[objects.size()+1];
+                    literals[0] = getName(axiom.getOWLClass()+"");
+                    int i=1;
+                    for (OWLClassExpression object : objects) {
+                        literals[i] = getName(object+"");
+                        i++;
+                    }
+                    printSentence(literals, null, "DisjointUnion");
+                }
+
                 @Override
                 public void visit(OWLSubClassOfAxiom sub) {
                     String subClass = sub.getSubClass().toString();
-                    OWLClassExpression superClassExpr = sub.getSuperClass();             
+                    OWLClassExpression superClassExpr = sub.getSuperClass();
                     String superClass = superClassExpr.toString();
-                    if(superClassExpr.isClassExpressionLiteral())
-                    {//CHECK FOR COMPLEMENTS!!
-                        if (!(superClassExpr.isOWLThing()))
-                        {
+                    if (superClassExpr.isClassExpressionLiteral()) {//CHECK FOR COMPLEMENTS!!
+                        if (!(superClassExpr.isOWLThing())) {
                             String[] objects = {
-                             getName(subClass),
-                             getName(superClass)
+                                getName(subClass),
+                                getName(superClass)
                             };
                             System.out.print("Subclass ");
                             count++;
                             subClassCount++;
                             printSentence(objects, null, "OWLSubClassOfAxiom");
-                        }
-                        else
-                        { //Not printing OWLThing
+                        } else { //Not printing OWLThing
                             owlThingCount++;
                         }
-                    }
-                          
-                    else if (superClassExpr.getClassExpressionType()==ClassExpressionType.OBJECT_SOME_VALUES_FROM)
-                    {
-                        relationsDL(superClassExpr, subClass+"", "OWLObjectSomeValuesFrom");                       
-                    }
-                    else if (superClassExpr.getClassExpressionType()==ClassExpressionType.OBJECT_ALL_VALUES_FROM)
-                    {
-                        relationsDL(superClassExpr, subClass+"", "OWLObjectAllValuesFrom");
+                    } else if (superClassExpr.getClassExpressionType() == ClassExpressionType.OBJECT_SOME_VALUES_FROM) {
+                        relationsDL(superClassExpr, subClass + "", "OWLObjectSomeValuesFrom");
+                    } else if (superClassExpr.getClassExpressionType() == ClassExpressionType.OBJECT_ALL_VALUES_FROM) {
+                        relationsDL(superClassExpr, subClass + "", "OWLObjectAllValuesFrom");
                         //System.out.println(sub.getNNF());
-                    }
-                    else if (superClassExpr.getClassExpressionType()==ClassExpressionType.OBJECT_INTERSECTION_OF)
-                    {
-                        relationsDL(superClassExpr, subClass+"", "OWLObjectIntersectionOf");
+                    } else if (superClassExpr.getClassExpressionType() == ClassExpressionType.OBJECT_INTERSECTION_OF) {
+                        relationsDL(superClassExpr, subClass + "", "OWLObjectIntersectionOf");
                     }
                 }
-            
+
             };
-        
+
             walker.walkStructure(visitor);
-         
+
             //TESTING
-            System.out.println("Number of axioms printed: "+count);
-            System.out.println("Number subclass: "+subClassCount);
-            System.out.println("Number disjoint: "+disjointCount);
-        
-            int numAxioms = o.getAxiomCount()-o.getAxiomCount(AxiomType.ANNOTATION_ASSERTION) - o.getAxiomCount(AxiomType.DECLARATION)-owlThingCount;
-            System.out.println("Number of axioms: "+numAxioms); //TEST
-            
+            System.out.println("Number of axioms printed: " + count);
+            System.out.println("Number subclass: " + subClassCount);
+            System.out.println("Number disjoint: " + disjointCount);
+
+            int numAxioms = o.getAxiomCount() - o.getAxiomCount(AxiomType.ANNOTATION_ASSERTION) - o.getAxiomCount(AxiomType.DECLARATION) - owlThingCount;
+            System.out.println("Number of axioms: " + numAxioms); //TEST
+
             Set<OWLAxiom> a = o.getAxioms();
-            for (OWLAxiom ax : a)
-            {
+            for (OWLAxiom ax : a) {
                 AxiomType type = ax.getAxiomType();
-                
-                if (!(type.getName().equals("SubClassOf")) && !(type.getName().equals("DisjointClasses")) && !(type.equals(AxiomType.ANNOTATION_ASSERTION)) && !(type.equals(AxiomType.DECLARATION)))
-                {
-                    System.out.println("!!!"+ax.toString());
+
+                if (!(type.getName().equals("SubClassOf")) && !(type.getName().equals("DisjointClasses")) && !(type.equals(AxiomType.ANNOTATION_ASSERTION)) && !(type.equals(AxiomType.DECLARATION)) && !(type.equals(AxiomType.CLASS_ASSERTION)) && !(type.equals(AxiomType.FUNCTIONAL_DATA_PROPERTY)) && !(type.equals(AxiomType.FUNCTIONAL_OBJECT_PROPERTY)) && !(type.equals(AxiomType.OBJECT_PROPERTY_ASSERTION))) {
+                    System.out.println("!!!" + ax.toString());
                 }
             }
-            
-            System.out.println("Number of subclass: "+(o.getAxiomCount(AxiomType.SUBCLASS_OF)-owlThingCount)); //TEST
-            System.out.println("Number of disjoint: "+o.getAxiomCount(AxiomType.DISJOINT_CLASSES)); //TEST
+
+            System.out.println("Number of subclass: " + (o.getAxiomCount(AxiomType.SUBCLASS_OF) - owlThingCount)); //TEST
+            System.out.println("Number of disjoint: " + o.getAxiomCount(AxiomType.DISJOINT_CLASSES)); //TEST
+        } catch (OWLOntologyCreationException e) {
+            System.out.println("EXCEPTION CAUGHT " + e);
         }
-        catch (OWLOntologyCreationException e)
-        {
-            System.out.println("EXCEPTION CAUGHT "+e);
-        }       
     }
     
-    public static void relationsDL(OWLClassExpression superClassExpr, String subClass, String type)
-    {
+    public static void printFunctional(String role)
+                {
+                    role = role.replaceFirst("-", ";");
+                    String roles[] = role.split(";");
+                    if (roles[0].equals("het"))
+                    {
+                        roles[0] = "h"+(char)234;                        
+                    }
+                    if (roles.length==1)
+                    {
+                        String newRoles[] = {roles[0], "objek"};
+                        roles= newRoles;
+                    }
+                    
+                    printSentence(null, roles, "FunctionalProperty"); 
+                }
+    
+    public static void nestRecursion(OWLClassExpression a) {
+        int setCount = 1;
+        Set<OWLClassExpression> conjunct = a.asConjunctSet();
+        if (conjunct.size()==1)
+        {
+            System.out.println("-_____"+conjunct);
+            conjunct=a.asDisjunctSet();
+            System.out.println("_______"+conjunct);
+        }
+        
+        for (OWLClassExpression b : conjunct) {
+            
+            System.out.println("-->" + b);
+            Set<OWLClassExpression> s2 = b.getNestedClassExpressions();
+            if (s2.size() == 2) {
+                ClassExpressionType type = b.getClassExpressionType();
+                if (setCount < conjunct.size()) {
+                    globalAndOr += "en;";
+                }
+                
+                switch (type) {
+                    case OBJECT_SOME_VALUES_FROM:
+                        globalRoles += getName(b.getObjectPropertiesInSignature() + "") + ";";
+                        globalLiterals += getName(b.getClassesInSignature() + "") + ";";
+
+                        System.out.println(getName(b.getObjectPropertiesInSignature() + ""));
+                        System.out.println(getName(b.getClassesInSignature() + ""));
+                        globalNest += "false;";
+                        break;
+                    case OBJECT_ALL_VALUES_FROM:
+                        break;
+
+                }
+            } else if (s2.size()>2) {
+                for (OWLClassExpression a2 : s2) {
+                    ClassExpressionType type = a2.getClassExpressionType();
+                
+                    System.out.println("++++--"+a2);
+                    System.out.println(b.getObjectPropertiesInSignature()+"");
+                    switch (type) {
+                        case OBJECT_INTERSECTION_OF:
+                            break;
+                        case OBJECT_UNION_OF:
+                            globalRoles+= "VREET;";
+                            globalNest+="true;";
+                            globalAndOr+="of;";
+                            Set<OWLObjectProperty> set1 = b.getObjectPropertiesInSignature();
+                            Set<OWLObjectProperty> set2 = a2.getObjectPropertiesInSignature();
+                            for (OWLObjectProperty o : set2)
+                            {
+                                set1.remove(o);
+                            }
+                            System.out.println(set1);
+                            nestRecursion(a2);
+                            break;
+                    }
+                    //nestRecursion(a2, roles, literals, andOr, nest);
+                }
+            }
+            setCount++;
+        }
+        
+    }
+
+    public static void relationsDL(OWLClassExpression superClassExpr, String subClass, String type) {
         Set<OWLObjectProperty> objProp;
         Set<OWLClassExpression> nested = superClassExpr.getNestedClassExpressions();
         boolean negation = false;
         boolean union = false;
         boolean intersection = false;
-        String literals = getName(subClass)+";";
+        String literals = getName(subClass) + ";";
         String roles = "";
-        for (OWLClassExpression c : nested)
-        {
+        for (OWLClassExpression c : nested) {
             c = c.getNNF();
             ClassExpressionType cet = c.getClassExpressionType();
-            switch(cet)
-            {
-            case OBJECT_COMPLEMENT_OF:
-                negation = true;
-                break;
-            case OBJECT_UNION_OF:
-                union = true;
-                break;
-            case OBJECT_INTERSECTION_OF:
-                intersection = true;
-                break;
-            default:
-                if (c.isClassExpressionLiteral())
-                    literals+=getName(c+"")+";";
-                else{
-                    objProp = c.getObjectPropertiesInSignature();
-                    for (OWLObjectProperty o : objProp)
-                    {
-                        roles+=getName(o+"")+";";
+            switch (cet) {
+                case OBJECT_COMPLEMENT_OF:
+                    negation = true;
+                    break;
+                case OBJECT_UNION_OF:
+                    union = true;
+                    break;
+                case OBJECT_INTERSECTION_OF:
+                    intersection = true;
+                    break;
+                default:
+                    if (c.isClassExpressionLiteral()) {
+                        literals += getName(c + "") + ";";
+                    } else {
+                        objProp = c.getObjectPropertiesInSignature();
+                        for (OWLObjectProperty o : objProp) {
+                            roles += getName(o + "") + ";";
+                        }
                     }
-                }
-                break;
+                    break;
             }
         }
-        if (type.equals("OWLObjectAllValuesFrom"))
-        {
+        if (type.equals("OWLObjectAllValuesFrom")) {
             roles = roles.replaceFirst("-", ";");
         }
-        if (type.equals("OWLObjectIntersectionOf"))
-        {
+        if (type.equals("OWLObjectIntersectionOf")) {
             type = "OWLObjectSomeValuesFrom";
         }
         //if (intersection && all roles are the same)
-        System.out.print(type+" ");
+        System.out.print(type + " ");
         count++;
         subClassCount++;
-        printSentence(literals.split(";"),roles.split(";"),type, negation, union, intersection);
+        printSentence(literals.split(";"), roles.split(";"), type, negation, union, intersection);
+    }
+
+    public static void printSentence(String[] objects, String[] roles, String type, boolean negation, boolean union, boolean intersection)
+    {
+        printSentence(objects, roles, null, type, negation, union, intersection);
     }
     
-    public static void printSentence(String[] objects, String[] roles, String type)
-    {
-        printSentence(objects, roles, type, false, false, false);
+    public static void printSentence(String[] objects, String[] roles, String type) {
+        printSentence(objects, roles, null, type, false, false, false);
     }
-     
-     public static void printSentence(String[] objects, String[] roles, String type, boolean negation, boolean union, boolean intersection)
-     {
+    
+    public static int checkIfInt(String strIndex, int index)
+    {
+        if (!Character.isDigit(strIndex.charAt(0)))
+        {
+            strIndex = strIndex.replace("n", index+"");
+            char ch;
+            int num = Integer.parseInt(strIndex.charAt(0)+"");
+            for (int i=1; i < strIndex.length(); i++)
+            {
+                ch = strIndex.charAt(i);
+                if (ch=='-')
+                {
+                   i++;
+                   ch = strIndex.charAt(i);
+                   num -= Integer.parseInt(ch+"");
+                }
+                else if (ch=='+')
+                {
+                   i++;
+                   ch = strIndex.charAt(i);
+                   num += Integer.parseInt(ch+""); 
+                }
+            }
+            return num;
+        }
+        else
+        {
+            return Integer.parseInt(strIndex);
+        }
+    }
+    
+    public static String iterateNodes(String printString, NodeList children, int index, String[] objects, String[] roles)
+    {
+        int thisIndex;
+        Node child;
+        if (null != children) {
+            for (int i = 0; i < children.getLength(); i++) {
+                child = children.item(i);
+                switch (child.getNodeName()) {
+                    case "Text":
+                        printString += (child.getTextContent())+" ";
+                        break;
+                    case "Object":
+                        thisIndex = checkIfInt(child.getAttributes().getNamedItem("index").getTextContent(), index);  
+                        if (thisIndex<objects.length)
+                        {printString += (objects[thisIndex])+" ";}
+                        break;
+                    case "Role":
+                        thisIndex = checkIfInt(child.getAttributes().getNamedItem("index").getTextContent(), index);
+                        if (thisIndex < roles.length
+                                && (thisIndex==0 || (thisIndex > 0 && !(roles[thisIndex].equals(roles[thisIndex-1]))))) {
+                            printString += (roles[thisIndex] + " ");
+                        }
+                        break;
+                    case "Loop":
+                        thisIndex = checkIfInt(child.getAttributes().getNamedItem("index").getTextContent(), index);
+                        NodeList loopChildren = child.getChildNodes();
+                        while (thisIndex < objects.length) {
+                            printString = iterateNodes(printString, loopChildren, thisIndex, objects, roles);
+                            thisIndex++;
+                        }
+                        break;
+                        
+                        /*Node loopChild;
+                        while (index < objects.length) {
+                        for (int j = 0; j < loopChildren.getLength(); j++) {
+                        loopChild = loopChildren.item(j);
+                        switch (loopChild.getNodeName()) {
+                        case "Text":
+                        printString += (loopChild.getTextContent());
+                        break;
+                        case "Object":
+                        printString += (objects[index]);
+                        break;
+                        case "Role":
+                        if (index > 0 && !(roles[index - 1].equals(roles[index - 2]))) {
+                        printString += (roles[index - 1] + " ");
+                        }
+                        break;
+                        case "Nest"://Rename loop?
+                        if (nest[index-1].equals("true"))
+                        {
+                        //look at children of Nest
+                        }
+                        break;
+                        case "Else":
+                        if (nest[index-1].equals("false"))
+                        {
+                        //print object
+                        }
+                        break;
+                        case "AndOr":
+                        //printString+=(andOr[index-1]+" ");
+                        break;
+                        }
+                        }
+                        index++;
+                        }*/
+                }
+            }
+        }
+        return printString;
+    }
+    
+    public static void printSentence(String role, String type)
+    {
+        String[] roles = new String[1]; 
+        roles[0] = role;
+        printSentence(null, roles, null, type, false, false, false);
+    }
+
+    public static void printSentence(String[] objects, String[] roles, String[] nest, String type, boolean negation, boolean union, boolean intersection) {
         //Choose constraint based on type
         //FIND MORE GENERIC WAY TO DO THIS??
+        String printString = "";
         Node prop = null;
-        String cType="";
-        for (int j=0; j<constraints.getLength(); j++){
+        String cType = "";
+        for (int j = 0; j < constraints.getLength(); j++) {
             cType = constraints.item(j).getAttributes().getNamedItem("type").toString();
-            if (!negation && !union && !intersection && cType.equals("type=\""+type+"\"") 
-                    || (negation && cType.equals("type=\""+type+" negation\""))
-                    || (union && cType.equals("type=\""+type+" union\""))
-                    || (intersection && cType.equals("type=\""+type+" intersection\"")))
-            {
+            if (!negation && !union && !intersection && cType.equals("type=\"" + type + "\"")
+                    || (negation && cType.equals("type=\"" + type + " negation\""))
+                    || (union && cType.equals("type=\"" + type + " union\""))
+                    || (intersection && cType.equals("type=\"" + type + " intersection\""))) {
                 prop = constraints.item(j);
                 break;
             }
         }
         int index;
         NodeList children = prop.getChildNodes();
-        Node child;
+        printString = iterateNodes(printString, children, 0, objects, roles);
+        /*Node child;
         if (null != children) {
-            for (int i=0; i<children.getLength(); i++)
-            {
-                child = children.item(i);
-                switch (child.getNodeName()) {
-                case "Text":
-                    System.out.print(child.getTextContent());
-                    break;
-                case "Object":
-                    index = Integer.parseInt(child.getAttributes().getNamedItem("index").getTextContent());
-                    System.out.print(objects[index]);
-                    break;
-                case "Role":
-                    index = Integer.parseInt(child.getAttributes().getNamedItem("index").getTextContent());
-                    if (index<roles.length)
-                    {    System.out.print(roles[index]+" ");    }
-                    break;
-                case "Loop":
-                    index = Integer.parseInt(child.getAttributes().getNamedItem("index").getTextContent());
-                    NodeList loopChildren = child.getChildNodes();
-                    Node loopChild;
-                    while (index<objects.length) {
-                        for (int j=0; j<loopChildren.getLength(); j++) {
-                            loopChild = loopChildren.item(j);
-                            switch (loopChild.getNodeName())
-                            {
-                            case "Text":
-                                System.out.print(loopChild.getTextContent());
-                                break;
-                            case "Object":
-                                System.out.print(objects[index]);
-                                break;
-                            case "Role":
-                                System.out.print(roles[index-1]+" ");
-                                break;
-                            }
-                        }
-                        index++;
-                    }
-                }
-            }
+        for (int i = 0; i < children.getLength(); i++) {
+        child = children.item(i);
+        switch (child.getNodeName()) {
+        case "Text":
+        printString += (child.getTextContent());
+        break;
+        case "Object":
+        index = Integer.parseInt(child.getAttributes().getNamedItem("index").getTextContent());
+        printString += (objects[index]);
+        break;
+        case "Role":
+        index = Integer.parseInt(child.getAttributes().getNamedItem("index").getTextContent());
+        if (index < roles.length) {
+        printString += (roles[index] + " ");
         }
-        System.out.println();
-     }
-     
-     public static NodeList readXML(String xml) {
-        
+        break;
+        case "Loop":
+        //make separate method
+        index = Integer.parseInt(child.getAttributes().getNamedItem("index").getTextContent());
+        NodeList loopChildren = child.getChildNodes();
+        Node loopChild;
+        while (index < objects.length) {
+        for (int j = 0; j < loopChildren.getLength(); j++) {
+        loopChild = loopChildren.item(j);
+        switch (loopChild.getNodeName()) {
+        case "Text":
+        printString += (loopChild.getTextContent());
+        break;
+        case "Object":
+        printString += (objects[index]);
+        break;
+        case "Role":
+        if (index > 0 && !(roles[index - 1].equals(roles[index - 2]))) {
+        printString += (roles[index - 1] + " ");
+        }
+        break;
+        case "Nest"://Rename loop?
+        if (nest[index-1].equals("true"))
+        {
+        //look at children of Nest
+        }
+        break;
+        case "Else":
+        if (nest[index-1].equals("false"))
+        {
+        //print object
+        }
+        break;
+        case "AndOr":
+        //printString+=(andOr[index-1]+" ");
+        break;
+        }
+        }
+        index++;
+        }
+        }
+        }
+        }*/
+        printString = printString.trim()+".";
+        printString = printString.replace("-"," ");
+        printString = printString.replace("? ","");
+        printString = printString.replace(" ?","");
+        System.out.println(printString);
+    }
+
+    public static NodeList readXML(String xml) {
+
         Document dom;
         // Make an  instance of the DocumentBuilderFactory
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -307,10 +678,9 @@ public class Driver {
 
         return null;
     }
-     
-     private static String getName(String literal)
-     {
-         return literal.substring(literal.indexOf("#")+1,literal.indexOf(">"));
-     }
-    
+
+    private static String getName(String literal) {
+        return literal.substring(literal.indexOf("#") + 1, literal.indexOf(">"));
+    }
+
 }

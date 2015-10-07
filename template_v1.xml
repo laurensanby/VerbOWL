@@ -4,116 +4,231 @@
 
 <VerbOwlBody>
 
-<Constraint type="OWLSubClassOfAxiom">
-	<Text>Elke </Text>
-	<Object index="0"/>
-	<Text> is 'n </Text>
-	<Object index="1"/>
-	<Text>.</Text>
-</Constraint>
+	<Constraint type="ClassAssertion">
+		<Object index="0"/>
+		<Text>is 'n</Text>
+		<Object index="1"/>
+	</Constraint>
 
-<Constraint type="OWLSubClassOfAxiom negation">
-	<Text>Elke </Text>
-	<Object index="0"/>
-	<Text> is nie 'n </Text>
-	<Object index="1"/>
-	<Text> nie.</Text>
-</Constraint>
+	<Constraint type="ObjectPropertyAssertion">
+		<Object index="0"/>
+		<Role index="0"/>
+		<Object index="1"/>
+	</Constraint>
 
-<Constraint type="OWLObjectSomeValuesFrom">
-	<Text>Elke </Text>
-	<Object index="0"/>
-	<Text> </Text>
-	<Role index="0"/>
-	<Text>ten minste een </Text>
-	<Object index="1"/>
-	<Text>.</Text>
-</Constraint>
+	<Constraint type="OWLSubClassOfAxiom">
+		<Text>Elke</Text>
+		<Object index="0"/>
+		<Text>is 'n</Text>
+		<Object index="1"/>
+	</Constraint>
 
-<Constraint type="OWLObjectSomeValuesFrom negation">
-	<Text>Elke </Text>
-	<Object index="0"/>
-	<Text> </Text>
-	<Role index="0"/>
-	<Text>ten minste een van iets wat nie 'n </Text>
-	<Object index="1"/>
-	<Text> is nie.</Text>
-</Constraint>
+	<Constraint type="OWLSubClassOfAxiom negation">
+		<Text>Elke</Text>
+		<Object index="0"/>
+		<Text>is nie 'n</Text>
+		<Object index="1"/>
+		<Text>nie</Text>
+	</Constraint>
 
-<Constraint type="OWLObjectSomeValuesFrom union">
-	<Text>Elke </Text>
-	<Object index="0"/>
-	<Text> </Text>
-	<Role index="0"/>
-	<Text>ten minste een </Text>
-	<Object index="1"/>
- 	<Loop index="2" >
- 		<Text> of </Text>
- 		<Object index="n"/>
- 	</Loop>
- 	<Text>.</Text>
-</Constraint>
+	<Constraint type="OWLObjectSomeValuesFrom">
+		<Text>Elke</Text>
+		<Object index="0"/>
+		<Role index="0"/>
+		<Text>ten minste een</Text>
+		<Object index="1"/>
+	</Constraint>
 
-<Constraint type="OWLObjectSomeValuesFrom intersection">
-	<Text>Elke </Text>
-	<Object index="0"/>
-	<Text> </Text>
-	<Role index="0"/>
-	<Text>ten minste een </Text>
-	<Object index="1"/>
- 	<Loop index="2" >
- 		<Text> en </Text>
- 		<Role index="n-1"/>
-		<Text>ten minste een </Text>
- 		<Object index="n"/>
- 	</Loop>
- 	<Text>.</Text>
-</Constraint>
+	<Constraint type="OWLObjectSomeValuesFrom negation">
+		<Text>Elke</Text>
+		<Object index="0"/>
+		<Role index="0"/>
+		<Text>ten minste een van iets wat nie 'n</Text>
+		<Object index="1"/>
+		<Text>is nie</Text>
+	</Constraint>
 
-<Constraint type="Disjoint">
-	<Text>'n </Text>
-	<Object index="0"/>
-	<Text> is nie 'n </Text>
-	<Object index="1"/>
-	<Text> nie.</Text>
-</Constraint>
+	<Constraint type="OWLObjectSomeValuesFrom union">
+		<Text>Elke</Text>
+		<Object index="0"/>
+		<Role index="0"/>
+		<Text>ten minste een</Text>
+		<Object index="1"/>
+	 	<Loop index="2" >
+	 		<Text>of</Text>
+	 		<Object index="n"/>
+	 	</Loop>
+	</Constraint>
 
+	<Constraint type="OWLObjectSomeValuesFrom intersection">
+		<Text>Elke</Text>
+		<Object index="0"/>
+		<Role index="0"/>
+		<Text>ten minste een</Text>
+		<Object index="1"/>
+	 	<Loop index="2" >
+	 		<Text>en</Text>
+	 		<Role index="n-1"/>
+			<Text>ten minste een</Text>
+	 		<Object index="n"/>
+	 	</Loop>
+	</Constraint>
 
-<Constraint type="OWLObjectAllValuesFrom">
-	<Text>Elke </Text>
-	<Object index="0"/> <!--blaar-->
-	<Text> </Text>
-	<Role index="0"/> <!--is-->
-	<Text>net </Text> <!--net-->
-	<Role index="1"/> <!--deel van 'n-->
-	<Object index="1"/> <!--boom-->
-	<Text>.</Text>
-</Constraint>
+	<Constraint type="OWLObjectSomeValuesFrom nested">
+		<Text>Elke</Text>
+		<Object index="0"/>	
+		<Role index="0"/>
+		<Loop index="1">
+			<Nest index="n-1">
+				<Text>ten minste een van iets wat</Text>
+				<Role index="n"/>
+				<Text>ten minste een</Text>
+				<Object index="n"/>
+			</Nest>
+			<Else>
+				<Role index="n"/>
+				<Text>ten minste een</Text>
+				<Object index="n"/>
+			</Else>
+			<AndOr index="n-1"/>
+	 	</Loop>
+	</Constraint>
 
-<Constraint type="OWLObjectAllValuesFrom negation">
-	<Text>Elke </Text>
-	<Object index="0"/>
-	<Text> </Text>
-	<Role index="0"/>
-	<Text>net iets wat nie 'n </Text>
-	<Object index="1"/>
-	<Text> is nie.</Text>
-</Constraint>
+	<Constraint type="Disjoint">
+		<Text>'n</Text>
+		<Object index="0"/>
+		<Text>is nie 'n</Text>
+		<Object index="1"/>
+		<Text>nie</Text>
+	</Constraint>
 
-<Constraint type="OWLObjectAllValuesFrom union">
-	<Text>Elke </Text>
-	<Object index="0"/>
-	<Text> </Text>
-	<Role index="0"/>
-	<Text>net </Text>
-	<Role index="1"/>
-	<Object index="1"/>
- 	<Loop index="2" >
- 		<Text> of </Text>
- 		<Object index="n"/>
- 	</Loop>
- 	<Text>.</Text>
-</Constraint>
+	<Constraint type="DisjointUnion">
+		<Text>Elke</Text>
+		<Object index="0"/>
+		<Text>is of 'n</Text>
+		<Object index="1"/>
+		<Loop index="2">
+			<Text>of 'n</Text>
+			<Object index="n"/>
+		</Loop>
+		<Text>?; elke</Text>
+		<Object index="1"/>
+		<Text>is 'n</Text>
+		<Object index="0"/>
+		<Loop index="2">
+			<Text>?, elke</Text>
+			<Object index="n"/>
+			<Text>is 'n</Text>
+		</Loop>
+		<Text>?; en niks kan 'n</Text>
+		<Object index="1"/>
+		<Loop index="2">
+			<Text>en 'n</Text>
+			<Object index="n"/>
+		</Loop>
+		<Text>wees nie</Text>
+	</Constraint>
+
+	<Constraint type="OWLObjectAllValuesFrom">
+		<Text>Elke</Text>
+		<Object index="0"/> <!--blaar-->
+		<Role index="0"/> <!--is-->
+		<Text>net</Text> <!--net-->
+		<Role index="1"/> <!--deel van 'n-->
+		<Object index="1"/> <!--boom-->
+	</Constraint>
+
+	<Constraint type="OWLObjectAllValuesFrom negation">
+		<Text>Elke</Text>
+		<Object index="0"/>
+		<Role index="0"/>
+		<Text>net iets wat nie 'n</Text>
+		<Object index="1"/>
+		<Text>is nie</Text>
+	</Constraint>
+
+	<Constraint type="OWLObjectAllValuesFrom union">
+		<Text>Elke</Text>
+		<Object index="0"/>
+		<Role index="0"/>
+		<Text>net</Text>
+		<Role index="1"/>
+		<Object index="1"/>
+	 	<Loop index="2" >
+	 		<Text>of</Text>
+	 		<Object index="n"/>
+	 	</Loop>
+	</Constraint>
+
+	<Constraint type="TransitiveObjectProperty">
+		<Text>"?</Text>
+		<Role index="0"/>
+		<Text>?" is Oorganklike (As X</Text>
+		<Role index="0"/>
+		<Text>Y, en Y</Text>
+		<Role index="0"/>
+		<Text>Z; dit beteken dat X</Text>
+		<Role index="0"/>
+		<Text>Z.)</Text>
+	</Constraint>
+
+	<Constraint type="IrreflexiveObjectProperty">
+		<Text>Niks</Text>
+		<Role index="0"/>
+		<Text>homself nie</Text>
+	</Constraint>
+
+	<Constraint type="ReflexiveObjectProperty">
+		<Text>Alles</Text>
+		<Role index="0"/>
+		<Text>homself</Text>
+	</Constraint>
+
+	<Constraint type="InverseObjectProperty">
+		<Text>"?</Text>
+		<Role index="0"/>
+		<Text>?" is die teenoorgestelde van "?</Text>
+		<Role index="1"/>
+		<Text>?" (As X</Text>
+		<Role index="0"/>
+		<Text>Y; Y</Text>
+		<Role index="1"/>
+		<Text>X.)</Text>
+	</Constraint>
+
+	<Constraint type="FunctionalProperty">
+		<Text>Elke objek kan net een</Text>
+		<Role index="1"/>
+		<Role index="0"/>
+	</Constraint>
+
+	<Constraint type="SymmetricObjectProperty">
+		<Text>"?</Text>
+		<Role index="0"/>
+		<Text>?" is simmetriese (As X</Text>
+		<Role index="0"/>
+		<Text>Y; Y</Text>
+		<Role index="0"/>
+		<Text>X.)</Text>
+	</Constraint>
+
+	<Constraint type="AsymmetricObjectProperty">
+		<Text>"?</Text>	
+		<Role index="0"/>
+		<Role index="1"/>
+		<Text>?" is asimmetriese (As X</Text>
+		<Role index="0"/>
+		<Role index="1"/>
+		<Text>Y; Y</Text>
+		<Role index="0"/>
+		<Text>nie</Text>
+		<Role index="1"/>
+		<Text>X nie.)</Text>
+	</Constraint>
+
+	<Constraint type="InverseFunctionalObjectProperty">
+		<Text>Net een individuele kan fatherOf 'n objek wees.</Text>
+	</Constraint>
 
 </VerbOwlBody>
 
