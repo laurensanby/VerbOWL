@@ -230,6 +230,94 @@
 		<Text>Net een individuele kan fatherOf 'n objek wees.</Text>
 	</Constraint>
 
+	<!-- ..................... -->
+	<!-- FOR NESTED STATEMENTS -->
+	<!-- ..................... -->
+	<!-- Object is an individual. ClassExpression is a placeholder for what could be a more complicated nested class -->
+
+	<!-- Boolean Connectives and Enumerations of Individuals -->
+	<Constraint type="PartObject">
+		<Text>Elke</Text>
+		<Object index="0"/>
+	</Constraint>
+
+	<Constraint type="PartObjectIntersectionOf">
+		<ClassExpression index="0"/>
+		<Loop index="1">
+			<Text>en</Text>
+			<ClassExpression index="n"/>
+		</Loop>
+	</Constraint>
+
+	<Constraint type="PartObjectUnionOf">
+		<ClassExpression index="0"/>
+		<Loop index="1">
+			<Text>of</Text>
+			<ClassExpression index="n"/>
+		</Loop>
+	</Constraint>
+
+	<Constraint type="PartObjectComplementOf">
+		<Text>iets wat nie 'n</Text>
+		<Object index="0"/>
+		<Text>is nie</Text>
+	</Constraint>
+
+	<Constraint type="PartObjectOneOf">
+		<Object index="0"/>
+		<Loop index="1">
+			<Text>of</Text>
+			<Object index="0"/>
+		</Loop>
+	</Constraint>
+
+	<!-- Object Property Restrictio -->
+
+	<Constraint type="PartObjectAllValuesFrom">
+		<Role index="0"/>
+		<Text>net</Text>
+		<Role index="1"/>
+		<ClassExpression index="n"/>
+	</Constraint>
+
+	<Constraint type="PartObjectSomeValuesFrom">
+		<Role index="0"/>
+		<Text>ten minste een</Text>
+		<ClassExpression index="n"/>
+	</Constraint>
+
+	<Constraint type="PartObjectHasValue">
+		<Role index="0"/>
+		<ClassExpression index="n"/>
+	</Constraint>
+
+	<Constraint type="PartObjectHasSelf">
+		<Role index="0"/>
+		<Text>homself</Text>
+	</Constraint>
+
+	<Constraint type="PartObjectExactCardinality">
+		<Role index="0"/>
+		<Text>presies</Text>
+		<Cardinality index="0"/>
+		<ClassExpresion index="n"/>
+	</Constraint>
+
+	<Constraint type="PartObjectMaxCardinality">
+		<Role index="0"/>
+		<Text>by die meeste</Text>
+		<Cardinality index="0"/>
+		<ClassExpresion index="n"/>
+	</Constraint>
+
+	<Constraint type="PartObjectMinCardinality">
+		<Role index="0"/>
+		<Text>ten minste</Text>
+		<Cardinality index="0"/>
+		<Text>van</Text>
+		<ClassExpresion index="n"/>
+	</Constraint>
+
 </VerbOwlBody>
 
 

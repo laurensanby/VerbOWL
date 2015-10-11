@@ -36,7 +36,7 @@ public class Driver {
         disjointCount = 0;
         owlThingCount = 0;
         try {
-            File f = new File("C:\\Users\\Lauren\\Documents\\UCT\\Honours\\project\\Ontologies\\wine.rdf");
+            File f = new File("C:\\Users\\Lauren\\Documents\\UCT\\Honours\\project\\AfricanWildlifeOntology1.owl");
             OWLOntologyManager m = OWLManager.createOWLOntologyManager();
             OWLOntology o = m.loadOntologyFromOntologyDocument(f);
             constraints = readXML("template_v1.xml");
@@ -47,6 +47,22 @@ public class Driver {
             visitor = new OWLOntologyWalkerVisitor(walker) {
                 @Override
                 public void visit(OWLEquivalentClassesAxiom axiom) {
+                    String printString = getPartSentence("", getName(axiom.getNamedClasses()+"").split(";"), null, "PartObject", null);
+                    Set<OWLSubClassOfAxiom> subClasses = axiom.asOWLSubClassOfAxioms();
+                    OWLClassExpression ce = null;
+                    for (OWLSubClassOfAxiom subClassOfAxiom : subClasses)
+                    {
+                        if (subClassOfAxiom.getSubClass().isClassExpressionLiteral())
+                        {
+                            ce = subClassOfAxiom.getSuperClass();
+                        }
+                        else
+                        {
+                            ce = subClassOfAxiom.getSubClass();
+                        }
+                        break;
+                    }
+                    printClassExpression(ce, printString);
 //                    OWLAxiom axiom1 = getCurrentAxiom();
 //                    System.out.println("!!-->" + axiom1);
 //
@@ -114,6 +130,11 @@ public class Driver {
 //                    }
                 }
                 
+                
+                //------------------
+                //----ASSERTIONS----
+                //------------------
+                
                 @Override
                 public void visit(OWLClassAssertionAxiom axiom) {
                     count++;
@@ -135,6 +156,10 @@ public class Driver {
                     String roles[] = {getName(axiom.getProperty()+"")};
                     printSentence(objects, roles, "ObjectPropertyAssertion");
                 }
+                
+                //-----------------------
+                //---OBJECT PROPERTIES---
+                //-----------------------
                 
                 @Override
                 public void visit(OWLInverseObjectPropertiesAxiom axiom) {
@@ -159,15 +184,7 @@ public class Driver {
                 public void visit(OWLIrreflexiveObjectPropertyAxiom axiom) {
                     count++;
                     printSentence(getName(axiom+""), "IrreflexiveObjectProperty");
-                }
-                
-                @Override
-                public void visit(OWLFunctionalDataPropertyAxiom axiom)
-                {
-                    count++;
-                    String role = getName(axiom+"");
-                    printFunctional(role);
-                }
+                }               
                 
                 @Override
                 public void visit(OWLFunctionalObjectPropertyAxiom axiom) {
@@ -190,6 +207,22 @@ public class Driver {
                     printSentence(null, role.split(";"), "AsymmetricObjectProperty");
                 }
 
+                //---------------------
+                //---DATA PROPERTIES---
+                //---------------------
+                
+                @Override
+                public void visit(OWLFunctionalDataPropertyAxiom axiom)
+                {
+                    count++;
+                    String role = getName(axiom+"");
+                    printFunctional(role);
+                }
+                
+                //----------------
+                //----DISJOINT----
+                //----------------
+                
                 @Override
                 public void visit(OWLDisjointClassesAxiom axiom) {
                     count++;
@@ -267,6 +300,10 @@ public class Driver {
                     printSentence(literals, null, "DisjointUnion");
                 }
 
+                //--------------
+                //---SUBCLASS---
+                //--------------
+                
                 @Override
                 public void visit(OWLSubClassOfAxiom sub) {
                     String subClass = sub.getSubClass().toString();
@@ -285,14 +322,19 @@ public class Driver {
                         } else { //Not printing OWLThing
                             owlThingCount++;
                         }
-                    } else if (superClassExpr.getClassExpressionType() == ClassExpressionType.OBJECT_SOME_VALUES_FROM) {
-                        relationsDL(superClassExpr, subClass + "", "OWLObjectSomeValuesFrom");
-                    } else if (superClassExpr.getClassExpressionType() == ClassExpressionType.OBJECT_ALL_VALUES_FROM) {
-                        relationsDL(superClassExpr, subClass + "", "OWLObjectAllValuesFrom");
-                        //System.out.println(sub.getNNF());
-                    } else if (superClassExpr.getClassExpressionType() == ClassExpressionType.OBJECT_INTERSECTION_OF) {
-                        relationsDL(superClassExpr, subClass + "", "OWLObjectIntersectionOf");
+                    } 
+                    else {
+                        String printString = getPartSentence("", getName(subClass+"").split(";"), null, "PartObject", null);
+                        printClassExpression(superClassExpr, printString);
                     }
+                    /*else if (superClassExpr.getClassExpressionType() == ClassExpressionType.OBJECT_SOME_VALUES_FROM) {
+                    relationsDL(superClassExpr, subClass + "", "OWLObjectSomeValuesFrom");
+                    } else if (superClassExpr.getClassExpressionType() == ClassExpressionType.OBJECT_ALL_VALUES_FROM) {
+                    relationsDL(superClassExpr, subClass + "", "OWLObjectAllValuesFrom");
+                    //System.out.println(sub.getNNF());
+                    } else if (superClassExpr.getClassExpressionType() == ClassExpressionType.OBJECT_INTERSECTION_OF) {
+                    relationsDL(superClassExpr, subClass + "", "OWLObjectIntersectionOf");
+                    }*/
                 }
 
             };
@@ -449,16 +491,103 @@ public class Driver {
         subClassCount++;
         printSentence(literals.split(";"), roles.split(";"), type, negation, union, intersection);
     }
-
-    public static void printSentence(String[] objects, String[] roles, String type, boolean negation, boolean union, boolean intersection)
+    
+    public static Set<OWLObjectProperty> getTopLevelObjectProperty(OWLClassExpression ce)
     {
-        printSentence(objects, roles, null, type, negation, union, intersection);
+        Set<OWLObjectProperty> set1 = ce.getObjectPropertiesInSignature();
+        Set<OWLClassExpression> nestedCEs = ce.getNestedClassExpressions();
+        ClassExpressionType type = null;
+        Set<OWLObjectProperty> set2 = null;
+        for (OWLClassExpression nestedCE : nestedCEs)
+        {
+            type = nestedCE.getClassExpressionType();
+            if (type==ClassExpressionType.OBJECT_UNION_OF
+                    || type==ClassExpressionType.OBJECT_INTERSECTION_OF)
+            {
+                set2 = nestedCE.getObjectPropertiesInSignature();
+                for (OWLObjectProperty o : set2)
+                {
+                    set1.remove(o);
+                }
+            }
+        }         
+        return set1;
     }
     
-    public static void printSentence(String[] objects, String[] roles, String type) {
-        printSentence(objects, roles, null, type, false, false, false);
+    public static OWLClassExpression getNextClassExpression(OWLClassExpression ce)
+    {
+        Set<OWLClassExpression> nested = ce.getNestedClassExpressions();
+        int size1 = nested.size();
+        int maxSize = 0;
+        OWLClassExpression nextCE = null;
+        int size2;
+        for (OWLClassExpression nestedCE : nested)
+        {
+            size2 = nestedCE.getNestedClassExpressions().size();
+            if (size2<size1 && size2>maxSize)
+            {
+                maxSize = size2;
+                nextCE = nestedCE;
+            }
+        }
+        return nextCE;
     }
-    
+
+    public static void printClassExpression(OWLClassExpression ce, String printString)
+    {
+        //System.out.println("PRINTCLASSEXP "+printString+" "+ce);
+        switch (ce.getClassExpressionType())   {
+            case OWL_CLASS:
+                printString+=getName(ce+"");
+                break;
+            case OBJECT_SOME_VALUES_FROM:
+                System.out.print("SOME ");
+                OWLClassExpression nextCE[] = {getNextClassExpression(ce)};
+                printString = getPartSentence(printString, null, getName(getTopLevelObjectProperty(ce)+"").split(";"), "PartObjectSomeValuesFrom", nextCE);
+                break;
+            case OBJECT_ALL_VALUES_FROM:
+                System.out.print("ALL ");
+                getTopLevelObjectProperty(ce);
+                break;
+            case OBJECT_MIN_CARDINALITY:
+                break;
+            case OBJECT_MAX_CARDINALITY:
+                break;
+            case OBJECT_EXACT_CARDINALITY:
+                break;
+            case OBJECT_HAS_VALUE:
+                break;
+            case OBJECT_HAS_SELF:
+                break;
+            case DATA_SOME_VALUES_FROM:
+                break;
+            case DATA_ALL_VALUES_FROM:
+                break;
+            case DATA_MIN_CARDINALITY:
+                break;
+            case DATA_MAX_CARDINALITY:
+                break;
+            case DATA_EXACT_CARDINALITY:
+                break;
+            case DATA_HAS_VALUE:
+                break;
+            case OBJECT_INTERSECTION_OF:
+                Set<OWLClassExpression> expressions = ce.asConjunctSet();
+                OWLClassExpression[] ceArray = expressions.toArray(new OWLClassExpression[0]);
+                printString = getPartSentence(printString, null, null, "PartObjectIntersectionOf", ceArray);
+                break;
+            case OBJECT_UNION_OF:
+                break;
+            case OBJECT_COMPLEMENT_OF:
+                break;
+            case OBJECT_ONE_OF:
+                break;
+            default:
+                throw new AssertionError(ce.getClassExpressionType().name());       
+        }
+        //System.out.println("PRINTCLASSEXPR "+printString);
+    }      
+   
     public static int checkIfInt(String strIndex, int index)
     {
         if (!Character.isDigit(strIndex.charAt(0)))
@@ -490,7 +619,7 @@ public class Driver {
         }
     }
     
-    public static String iterateNodes(String printString, NodeList children, int index, String[] objects, String[] roles)
+    public static String iterateNodes(String printString, NodeList children, int index, String[] objects, String[] roles, OWLClassExpression[] ce)
     {
         int thisIndex;
         Node child;
@@ -516,9 +645,26 @@ public class Driver {
                     case "Loop":
                         thisIndex = checkIfInt(child.getAttributes().getNamedItem("index").getTextContent(), index);
                         NodeList loopChildren = child.getChildNodes();
-                        while (thisIndex < objects.length) {
-                            printString = iterateNodes(printString, loopChildren, thisIndex, objects, roles);
+                        if (objects!=null)
+                        {while (thisIndex < objects.length) {
+                            printString = iterateNodes(printString, loopChildren, thisIndex, objects, roles, ce);
                             thisIndex++;
+                        }}
+                        else if (ce!=null)
+                        {while (thisIndex < ce.length) {
+                            printString = iterateNodes(printString, loopChildren, thisIndex, objects, roles, ce);
+                            thisIndex++;
+                        }}
+                        else
+                        {
+                            System.out.println("LOGIC ERROR IN LOOP");
+                        }
+                        break;
+                    case "ClassExpression":
+                        thisIndex = checkIfInt(child.getAttributes().getNamedItem("index").getTextContent(), index);
+                        if (thisIndex<ce.length)
+                        {
+                            printClassExpression(ce[thisIndex], printString);
                         }
                         break;
                         
@@ -563,6 +709,39 @@ public class Driver {
         return printString;
     }
     
+    public static String getPartSentence(String printString, String[] objects, String[] roles, String type, OWLClassExpression[] ce)
+    {
+        Node prop = null;
+        String cType = "";
+        for (int j = 0; j < constraints.getLength(); j++) {
+            cType = constraints.item(j).getAttributes().getNamedItem("type").toString();
+            if (cType.equals("type=\"" + type + "\"")){
+                prop = constraints.item(j);
+                break;
+            }
+        }
+        NodeList children = prop.getChildNodes();
+        return iterateNodes(printString, children, 0, objects, roles, ce);
+    }
+    
+    public static void printFullSentence(String printString)
+    {
+        printString = printString.trim()+".";
+        printString = printString.replace("-"," ");
+        printString = printString.replace("? ","");
+        printString = printString.replace(" ?","");
+        System.out.println(printString);
+    }
+    
+    public static void printSentence(String[] objects, String[] roles, String type, boolean negation, boolean union, boolean intersection)
+    {
+        printSentence(objects, roles, null, type, negation, union, intersection);
+    }
+    
+    public static void printSentence(String[] objects, String[] roles, String type) {
+        printSentence(objects, roles, null, type, false, false, false);
+    }
+    
     public static void printSentence(String role, String type)
     {
         String[] roles = new String[1]; 
@@ -586,9 +765,8 @@ public class Driver {
                 break;
             }
         }
-        int index;
         NodeList children = prop.getChildNodes();
-        printString = iterateNodes(printString, children, 0, objects, roles);
+        printString = iterateNodes(printString, children, 0, objects, roles, null);
         /*Node child;
         if (null != children) {
         for (int i = 0; i < children.getLength(); i++) {
