@@ -271,7 +271,7 @@
 		</Loop>
 	</Constraint>
 
-	<!-- Object Property Restrictio -->
+	<!-- Object Property Restriction -->
 
 	<Constraint type="PartObjectAllValuesFrom">
 		<Role index="0"/>
@@ -300,14 +300,14 @@
 		<Role index="0"/>
 		<Text>presies</Text>
 		<Cardinality index="0"/>
-		<ClassExpresion index="n"/>
+		<ClassExpression index="n"/>
 	</Constraint>
 
 	<Constraint type="PartObjectMaxCardinality">
 		<Role index="0"/>
 		<Text>by die meeste</Text>
 		<Cardinality index="0"/>
-		<ClassExpresion index="n"/>
+		<ClassExpression index="n"/>
 	</Constraint>
 
 	<Constraint type="PartObjectMinCardinality">
@@ -315,7 +315,15 @@
 		<Text>ten minste</Text>
 		<Cardinality index="0"/>
 		<Text>van</Text>
-		<ClassExpresion index="n"/>
+		<ClassExpression index="n"/>
+	</Constraint>
+
+	<Constraint type="SomeReferringExpression">
+		<Text>van iets wat</Text>
+	</Constraint>
+
+	<Constraint type="AllReferringExpression">
+		<Text>iets wat</Text>
 	</Constraint>
 
 </VerbOwlBody>
