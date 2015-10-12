@@ -314,7 +314,6 @@
 		<Role index="0"/>
 		<Text>ten minste</Text>
 		<Cardinality index="0"/>
-		<Text>van</Text>
 		<ClassExpression index="n"/>
 	</Constraint>
 

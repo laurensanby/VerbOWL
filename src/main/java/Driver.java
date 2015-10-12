@@ -45,6 +45,10 @@ public class Driver {
             OWLOntologyWalker walker = new OWLOntologyWalker(Collections.singleton(o));
             OWLOntologyWalkerVisitor visitor;
             visitor = new OWLOntologyWalkerVisitor(walker) {
+
+                //------------------------
+                //---EQUIVALENT CLASSES---
+                //------------------------
                 @Override
                 public void visit(OWLEquivalentClassesAxiom axiom) {
                     String printString = getPartSentence(getName(axiom.getNamedClasses() + "").split(";"), null, "PartObject", null);
@@ -61,71 +65,6 @@ public class Driver {
                     count++;
                     printString += getClassExpression(ce.getNNF());
                     printFullSentence(printString);
-//                    OWLAxiom axiom1 = getCurrentAxiom();
-//                    System.out.println("!!-->" + axiom1);
-//
-//                    globalLiterals = getName(axiom.getNamedClasses() + "") + ";";
-//                    globalRoles = "";
-//                    globalAndOr = "";
-//                    globalNest = "";
-//                    Set<OWLClassExpression> s = axiom.getNestedClassExpressions();
-//                    for (OWLClassExpression a : s) {
-//
-//                        //System.out.println("!!"+a);
-//                        //Set<OWLClassExpression> conjunct;
-//
-//                        if (a.getClassExpressionType().equals(ClassExpressionType.OBJECT_INTERSECTION_OF)) //or union of
-//                        {
-//                            nestRecursion(a);
-//                            System.out.println("------------");
-//        System.out.println(globalLiterals);
-//        System.out.println(globalRoles);
-//        System.out.println(globalAndOr);
-//        System.out.println(globalNest);
-//        System.out.println("----------------");
-                            /*int setCount = 1;
-                     conjunct = a.asConjunctSet();
-                     for (OWLClassExpression b : conjunct) {
-                     System.out.println("-->" + b);
-                     Set<OWLClassExpression> s2 = b.getNestedClassExpressions();
-                     if (s2.size() == 2) {
-                     ClassExpressionType type = b.getClassExpressionType();
-                     switch (type) {
-                     case OBJECT_SOME_VALUES_FROM:
-                     roles += getName(b.getObjectPropertiesInSignature() + "") + ";";
-                     literals += getName(b.getClassesInSignature() + "") + ";";
-                     if (setCount < conjunct.size()) {
-                     andOr += "en;";
-                     }
-                     nest += "false;";
-                     System.out.println(getName(b.getObjectPropertiesInSignature() + ""));
-                     System.out.println(getName(b.getClassesInSignature() + ""));
-                            
-                     break;
-                     case OBJECT_ALL_VALUES_FROM:
-                     break;
-                            
-                     }
-                     } else {
-                     for (OWLClassExpression a2 : s2) {
-                     a2.asConjunctSet();
-                     //nest+="true;";
-                     //System.out.println("!!-"+a2);
-                     }
-                     }
-                     setCount++;
-                     }*/
-//                        }
-                        /*if (a.getClassExpressionType().equals(ClassExpressionType.OBJECT_UNION_OF))
-                     {
-                     conjunct = a.asDisjunctSet();
-                     for (OWLClassExpression b: conjunct)
-                     {
-                     System.out.println("-->"+b);
-                     }
-                     }*/
-
-//                    }
                 }
 
                 //------------------
@@ -319,14 +258,6 @@ public class Driver {
                         printString += getClassExpression(superClassExpr.getNNF());
                         printFullSentence(printString);
                     }
-                    /*else if (superClassExpr.getClassExpressionType() == ClassExpressionType.OBJECT_SOME_VALUES_FROM) {
-                     relationsDL(superClassExpr, subClass + "", "OWLObjectSomeValuesFrom");
-                     } else if (superClassExpr.getClassExpressionType() == ClassExpressionType.OBJECT_ALL_VALUES_FROM) {
-                     relationsDL(superClassExpr, subClass + "", "OWLObjectAllValuesFrom");
-                     //System.out.println(sub.getNNF());
-                     } else if (superClassExpr.getClassExpressionType() == ClassExpressionType.OBJECT_INTERSECTION_OF) {
-                     relationsDL(superClassExpr, subClass + "", "OWLObjectIntersectionOf");
-                     }*/
                 }
 
             };
@@ -371,114 +302,6 @@ public class Driver {
         printSentence(null, roles, "FunctionalProperty");
     }
 
-    public static void nestRecursion(OWLClassExpression a) {
-        int setCount = 1;
-        Set<OWLClassExpression> conjunct = a.asConjunctSet();
-        if (conjunct.size() == 1) {
-            System.out.println("-_____" + conjunct);
-            conjunct = a.asDisjunctSet();
-            System.out.println("_______" + conjunct);
-        }
-
-        for (OWLClassExpression b : conjunct) {
-
-            System.out.println("-->" + b);
-            Set<OWLClassExpression> s2 = b.getNestedClassExpressions();
-            if (s2.size() == 2) {
-                ClassExpressionType type = b.getClassExpressionType();
-                if (setCount < conjunct.size()) {
-                    globalAndOr += "en;";
-                }
-
-                switch (type) {
-                    case OBJECT_SOME_VALUES_FROM:
-                        globalRoles += getName(b.getObjectPropertiesInSignature() + "") + ";";
-                        globalLiterals += getName(b.getClassesInSignature() + "") + ";";
-
-                        System.out.println(getName(b.getObjectPropertiesInSignature() + ""));
-                        System.out.println(getName(b.getClassesInSignature() + ""));
-                        globalNest += "false;";
-                        break;
-                    case OBJECT_ALL_VALUES_FROM:
-                        break;
-
-                }
-            } else if (s2.size() > 2) {
-                for (OWLClassExpression a2 : s2) {
-                    ClassExpressionType type = a2.getClassExpressionType();
-
-                    System.out.println("++++--" + a2);
-                    System.out.println(b.getObjectPropertiesInSignature() + "");
-                    switch (type) {
-                        case OBJECT_INTERSECTION_OF:
-                            break;
-                        case OBJECT_UNION_OF:
-                            globalRoles += "VREET;";
-                            globalNest += "true;";
-                            globalAndOr += "of;";
-                            Set<OWLObjectProperty> set1 = b.getObjectPropertiesInSignature();
-                            Set<OWLObjectProperty> set2 = a2.getObjectPropertiesInSignature();
-                            for (OWLObjectProperty o : set2) {
-                                set1.remove(o);
-                            }
-                            System.out.println(set1);
-                            nestRecursion(a2);
-                            break;
-                    }
-                    //nestRecursion(a2, roles, literals, andOr, nest);
-                }
-            }
-            setCount++;
-        }
-
-    }
-
-    public static void relationsDL(OWLClassExpression superClassExpr, String subClass, String type) {
-        Set<OWLObjectProperty> objProp;
-        Set<OWLClassExpression> nested = superClassExpr.getNestedClassExpressions();
-        boolean negation = false;
-        boolean union = false;
-        boolean intersection = false;
-        String literals = getName(subClass) + ";";
-        String roles = "";
-        for (OWLClassExpression c : nested) {
-            c = c.getNNF();
-            ClassExpressionType cet = c.getClassExpressionType();
-            switch (cet) {
-                case OBJECT_COMPLEMENT_OF:
-                    negation = true;
-                    break;
-                case OBJECT_UNION_OF:
-                    union = true;
-                    break;
-                case OBJECT_INTERSECTION_OF:
-                    intersection = true;
-                    break;
-                default:
-                    if (c.isClassExpressionLiteral()) {
-                        literals += getName(c + "") + ";";
-                    } else {
-                        objProp = c.getObjectPropertiesInSignature();
-                        for (OWLObjectProperty o : objProp) {
-                            roles += getName(o + "") + ";";
-                        }
-                    }
-                    break;
-            }
-        }
-        if (type.equals("OWLObjectAllValuesFrom")) {
-            roles = roles.replaceFirst("-", ";");
-        }
-        if (type.equals("OWLObjectIntersectionOf")) {
-            type = "OWLObjectSomeValuesFrom";
-        }
-        //if (intersection && all roles are the same)
-        System.out.print(type + " ");
-        count++;
-        subClassCount++;
-        printSentence(literals.split(";"), roles.split(";"), type, negation, union, intersection);
-    }
-
     public static Set<OWLObjectProperty> getTopLevelObjectProperty(OWLClassExpression ce) {
         Set<OWLObjectProperty> set1 = ce.getObjectPropertiesInSignature();
         Set<OWLClassExpression> nestedCEs = ce.getNestedClassExpressions();
@@ -510,6 +333,7 @@ public class Driver {
                 nextCE = nestedCE;
             }
         }
+
         OWLClassExpression ceArray[] = {nextCE};
         return ceArray;
     }
@@ -525,9 +349,13 @@ public class Driver {
         switch (ce.getClassExpressionType()) {
             case OWL_CLASS:
                 if (ce.isOWLThing()) {
-                    printSentence = "ding ";
+                    printSentence = "tipe ";
                 } else {
-                    printSentence = getName(ce + "") + " ";
+                    if (prevType.equals("PartObjectSomeValuesFrom") || prevType.equals("PartObjectAllValuesFrom")) {
+                        printSentence = getName(ce + "") + " ";
+                    } else {
+                        printSentence = "is " + getName(ce + "") + " ";
+                    }
                 }
                 break;
             case OBJECT_SOME_VALUES_FROM:
@@ -769,7 +597,6 @@ public class Driver {
 
     public static void printSentence(String[] objects, String[] roles, String[] nest, String type, boolean negation, boolean union, boolean intersection) {
         //Choose constraint based on type
-        //FIND MORE GENERIC WAY TO DO THIS??
         String printString = "";
         Node prop = null;
         String cType = "";
@@ -785,71 +612,7 @@ public class Driver {
         }
         NodeList children = prop.getChildNodes();
         printString = iterateNodes(printString, children, 0, objects, roles, null);
-        /*Node child;
-         if (null != children) {
-         for (int i = 0; i < children.getLength(); i++) {
-         child = children.item(i);
-         switch (child.getNodeName()) {
-         case "Text":
-         printString += (child.getTextContent());
-         break;
-         case "Object":
-         index = Integer.parseInt(child.getAttributes().getNamedItem("index").getTextContent());
-         printString += (objects[index]);
-         break;
-         case "Role":
-         index = Integer.parseInt(child.getAttributes().getNamedItem("index").getTextContent());
-         if (index < roles.length) {
-         printString += (roles[index] + " ");
-         }
-         break;
-         case "Loop":
-         //make separate method
-         index = Integer.parseInt(child.getAttributes().getNamedItem("index").getTextContent());
-         NodeList loopChildren = child.getChildNodes();
-         Node loopChild;
-         while (index < objects.length) {
-         for (int j = 0; j < loopChildren.getLength(); j++) {
-         loopChild = loopChildren.item(j);
-         switch (loopChild.getNodeName()) {
-         case "Text":
-         printString += (loopChild.getTextContent());
-         break;
-         case "Object":
-         printString += (objects[index]);
-         break;
-         case "Role":
-         if (index > 0 && !(roles[index - 1].equals(roles[index - 2]))) {
-         printString += (roles[index - 1] + " ");
-         }
-         break;
-         case "Nest"://Rename loop?
-         if (nest[index-1].equals("true"))
-         {
-         //look at children of Nest
-         }
-         break;
-         case "Else":
-         if (nest[index-1].equals("false"))
-         {
-         //print object
-         }
-         break;
-         case "AndOr":
-         //printString+=(andOr[index-1]+" ");
-         break;
-         }
-         }
-         index++;
-         }
-         }
-         }
-         }*/
-        printString = printString.trim() + ".";
-        printString = printString.replace("-", " ");
-        printString = printString.replace("? ", "");
-        printString = printString.replace(" ?", "");
-        System.out.println(printString);
+        printFullSentence(printString);
     }
 
     public static NodeList readXML(String xml) {
