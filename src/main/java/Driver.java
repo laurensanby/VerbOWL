@@ -1,7 +1,10 @@
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -25,21 +28,41 @@ import org.xml.sax.SAXException;
  */
 public class Driver {
 
-    static int count, subClassCount, disjointCount, owlThingCount;
+    static int count, subClassCount, disjointCount, owlThingCount, sentenceCount, equivalentCount, equivalentSentCount, disjointSentCount, subPropertyCount, subPropertySentCount, assertionCount, assertionSentCount;
     static String globalRoles, globalLiterals, globalAndOr, globalNest;
     static NodeList constraints;
+    static final String fileName = "stuff.owl";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
         count = 0;
+        sentenceCount = 0;
+        equivalentCount = 0;
+        equivalentSentCount = 0;
         subClassCount = 0;
         disjointCount = 0;
+        disjointSentCount = 0;
         owlThingCount = 0;
+        subPropertyCount = 0;
+        subPropertySentCount = 0;
+        assertionCount = assertionSentCount = 0;
+
         try {
-            File f = new File("C:\\Users\\Lauren\\Documents\\UCT\\Honours\\project\\Ontologies\\wine.rdf");
+            File f = new File("C:\\Users\\Lauren\\Documents\\UCT\\Honours\\project\\Ontologies\\" + fileName);
             OWLOntologyManager m = OWLManager.createOWLOntologyManager();
             OWLOntology o = m.loadOntologyFromOntologyDocument(f);
             constraints = readXML("template_v1.xml");
+
+            File outputF = new File("output-" + fileName.substring(0, fileName.indexOf(".")) + ".txt");
+
+            // if file doesnt exists, then create it
+            if (!outputF.exists()) {
+                outputF.createNewFile();
+            }
+            //ensure file starts empty
+            BufferedWriter bw = new BufferedWriter(new FileWriter(outputF));
+            bw.write("");
+            bw.close();
 
             //walker
             OWLOntologyWalker walker = new OWLOntologyWalker(Collections.singleton(o));
@@ -51,7 +74,7 @@ public class Driver {
                 //------------------------
                 @Override
                 public void visit(OWLEquivalentClassesAxiom axiom) {
-                    String printString = getPartSentence(getName(axiom.getNamedClasses() + "").split(";"), null, "PartObject", null);
+                    String printString = "EquivalentClass " + getPartSentence(getName(axiom.getNamedClasses() + "").split(";"), null, "PartObject", null);
                     Set<OWLSubClassOfAxiom> subClasses = axiom.asOWLSubClassOfAxioms();
                     OWLClassExpression ce = null;
                     for (OWLSubClassOfAxiom subClassOfAxiom : subClasses) {
@@ -63,6 +86,7 @@ public class Driver {
                         break;
                     }
                     count++;
+                    equivalentCount++;
                     printString += getClassExpression(ce.getNNF());
                     printFullSentence(printString);
                 }
@@ -70,25 +94,86 @@ public class Driver {
                 //------------------
                 //----ASSERTIONS----
                 //------------------
+                //Same Individuals
+                @Override
+                public void visit(OWLSameIndividualAxiom axiom) {
+
+                    Set<OWLIndividual> ind = axiom.getIndividuals();
+                    String objects = "";
+                    for (OWLIndividual i : ind) {
+                        objects += getName(i + "") + ";";
+                    }
+                    count++;
+                    assertionCount++;
+                    printSentence(objects.split(";"), null, "SameIndividual");
+                }
+
+                //Different Individuals
+                @Override
+                public void visit(OWLDifferentIndividualsAxiom axiom) {
+                    count++;
+                    assertionCount++;
+                    Set<OWLIndividual> ind = axiom.getIndividuals();
+                    String objects = "";
+                    for (OWLIndividual i : ind) {
+                        objects += getName(i + "") + ";";
+                    }
+                    printSentence(objects.split(";"), null, "DifferentIndividual");
+                }
+
                 @Override
                 public void visit(OWLClassAssertionAxiom axiom) {
-                    count++;
-
                     if (!axiom.getClassExpression().isOWLThing()) {
+                        count++;
+                        assertionCount++;
                         String[] objects = new String[2];
                         objects[0] = getName(axiom.getIndividual() + "");
                         objects[1] = getName(axiom.getClassExpression() + "");
                         printSentence(objects, null, "ClassAssertion");
+                    } else {
+                        owlThingCount++;
                     }
                 }
 
                 @Override
                 public void visit(OWLObjectPropertyAssertionAxiom axiom) {
                     count++;
+                    assertionCount++;
                     axiom = axiom.getSimplified();
                     String objects[] = {getName(axiom.getSubject() + ""), getName(axiom.getObject() + "")};
                     String roles[] = {getName(axiom.getProperty() + "")};
                     printSentence(objects, roles, "ObjectPropertyAssertion");
+                }
+
+                //DataPropertyAssertion
+                @Override
+                public void visit(OWLDataPropertyAssertionAxiom axiom) {
+                    count++;
+                    assertionCount++;
+                    String objects[] = {getName(axiom.getSubject() + ""), getLiteralName(axiom.getObject() + "")};
+                    String roles[] = {getName(axiom.getProperty() + "")};
+                    printSentence(objects, roles, "DataPropertyAssertion");
+                }
+
+                //NegativeObjectPropertyAssertion
+                @Override
+                public void visit(OWLNegativeObjectPropertyAssertionAxiom axiom) {
+                    count++;
+                    assertionCount++;
+                    String objects[] = {getName(axiom.getSubject() + ""), getName(axiom.getObject() + "")};
+                    String roles = getName(axiom.getProperty() + "");
+                    roles = roles.replace("-", ";");
+                    printSentence(objects, roles.split(";"), "NegativeObjectPropertyAssertion");
+                }
+
+                //NegativeDataPropertyAssertion
+                @Override
+                public void visit(OWLNegativeDataPropertyAssertionAxiom axiom) {
+                    count++;
+                    assertionCount++;
+                    String objects[] = {getName(axiom.getSubject() + ""), getLiteralName(axiom.getObject() + "")};
+                    String roles[] = {getName(axiom.getProperty() + "")};
+                    printSentence(objects, roles, "NegativeDataPropertyAssertion");
                 }
 
                 //-----------------------
@@ -127,6 +212,12 @@ public class Driver {
                 }
 
                 @Override
+                public void visit(OWLInverseFunctionalObjectPropertyAxiom axiom) {
+                    count++;
+                    printSentence(getName(axiom + ""), "InverseFunctionalObjectProperty");
+                }
+
+                @Override
                 public void visit(OWLSymmetricObjectPropertyAxiom axiom) {
                     count++;
                     printSentence(getName(axiom + ""), "SymmetricObjectProperty");
@@ -140,9 +231,97 @@ public class Driver {
                     printSentence(null, role.split(";"), "AsymmetricObjectProperty");
                 }
 
+                @Override
+                public void visit(OWLSubObjectPropertyOfAxiom axiom) {
+                    String role = getName(axiom.getSubProperty() + "") + ";";
+                    OWLObjectPropertyExpression ope = axiom.getSuperProperty();
+                    if (!ope.isOWLTopObjectProperty()) {
+                        count++;
+                        subPropertyCount++;
+                        role += getName(ope + "");
+                        printSentence(null, role.split(";"), "SubObjectProperty");
+                    }
+                }
+
+                @Override
+                public void visit(OWLSubPropertyChainOfAxiom axiom) {
+                    count++;
+                    String role = getName(axiom.getSuperProperty() + "") + ";";
+                    List<OWLObjectPropertyExpression> ope = axiom.getPropertyChain();
+                    for (OWLObjectPropertyExpression ope1 : ope) {
+                        role += getName(ope1 + "") + ";";
+                    }
+                    role = role.substring(0, role.length() - 1);
+                    printSentence(null, role.split(";"), "SubObjectProperty");
+                }
+
+                @Override
+                public void visit(OWLObjectPropertyDomainAxiom axiom) {
+                    if (!axiom.getDomain().isOWLThing()) {
+                        count++;
+                        OWLClassExpression ce[] = {axiom.getDomain()};
+                        String printString = "ObjectPropertyDomain " + getPartSentence(null, getName(axiom.getObjectPropertiesInSignature() + "").split(";"), "ObjectPropertyDomain", ce, "ObjectPropertyDomain");
+                        printFullSentence(printString);
+                    } else {
+                        owlThingCount++;
+                    }
+                }
+
+                @Override
+                public void visit(OWLObjectPropertyRangeAxiom axiom) {
+                    if (!axiom.getRange().isOWLThing()) {
+                        count++;
+                        OWLClassExpression ce[] = {axiom.getRange()};
+                        String roles = getName(axiom.getObjectPropertiesInSignature() + "");
+                        roles = roles.replaceFirst("-", ";");
+                        String printString = "ObjectPropertyRange " + getPartSentence(null, roles.split(";"), "ObjectPropertyRange", ce, "ObjectPropertyRange");
+                        printFullSentence(printString);
+                    } else {
+                        owlThingCount++;
+                    }
+                }
+
                 //---------------------
                 //---DATA PROPERTIES---
                 //---------------------
+                @Override
+                public void visit(OWLSubDataPropertyOfAxiom axiom) {
+                    String role = getName(axiom.getSubProperty() + "") + ";";
+                    OWLDataPropertyExpression ode = axiom.getSuperProperty();
+                    if (!ode.isOWLTopDataProperty()) {
+                        count++;
+                        subPropertyCount++;
+                        role += getName(ode + "");
+                        printSentence(null, role.split(";"), "SubObjectProperty");
+                    }
+                }
+
+                @Override
+                public void visit(OWLDataPropertyDomainAxiom axiom) {
+                    if (!axiom.getDomain().isOWLThing()) {
+                        count++;
+                        OWLClassExpression ce[] = {axiom.getDomain()};
+                        String printString = "DataPropertyDomain " + getPartSentence(null, getName(axiom.getDataPropertiesInSignature() + "").split(";"), "DataPropertyDomain", ce, "ObjectPropertyDomain");
+                        printFullSentence(printString);
+                    } else {
+                        owlThingCount++;
+                    }
+                }
+
+                @Override
+                public void visit(OWLDataPropertyRangeAxiom axiom) {
+                    OWLDataRange dr = axiom.getRange();
+                    if (!dr.isTopDatatype()) {
+                        if (dr.isDatatype()) {
+                            count++;
+                            OWLDatatype dt = dr.asOWLDatatype();
+                            String objects[] = {getDataName(dt.getIRI() + "")};
+                            String roles[] = {getName(axiom.getDataPropertiesInSignature() + "")};
+                            printSentence(objects, roles, "DataPropertyRange");
+                        }
+                    }
+                }
+
                 @Override
                 public void visit(OWLFunctionalDataPropertyAxiom axiom) {
                     count++;
@@ -168,7 +347,6 @@ public class Driver {
                             objects[i] = getName(l + "");
                             i++;
                         }
-                        System.out.print("Disjoint ");
 
                         printSentence(objects, null, "Disjoint");
                     }
@@ -189,7 +367,6 @@ public class Driver {
                             objects[i] = getName(l + "");
                             i++;
                         }
-                        System.out.print("Disjoint ");
 
                         printSentence(objects, null, "Disjoint");
                     }
@@ -210,7 +387,6 @@ public class Driver {
                             objects[i] = getName(l + "");
                             i++;
                         }
-                        System.out.print("Disjoint ");
 
                         printSentence(objects, null, "Disjoint");
                     }
@@ -244,7 +420,6 @@ public class Driver {
                                 getName(subClass),
                                 getName(superClass)
                             };
-                            System.out.print("Subclass ");
                             count++;
                             subClassCount++;
                             printSentence(objects, null, "OWLSubClassOfAxiom");
@@ -254,7 +429,7 @@ public class Driver {
                     } else {
                         count++;
                         subClassCount++;
-                        String printString = getPartSentence(getName(subClass + "").split(";"), null, "PartObject", null);
+                        String printString = "Complex SubClass " + getPartSentence(getName(subClass + "").split(";"), null, "PartObject", null);
                         printString += getClassExpression(superClassExpr.getNNF());
                         printFullSentence(printString);
                     }
@@ -265,24 +440,30 @@ public class Driver {
             walker.walkStructure(visitor);
 
             //TESTING
-            System.out.println("Number of axioms printed: " + count);
-            System.out.println("Number subclass: " + subClassCount);
-            System.out.println("Number disjoint: " + disjointCount);
+            int numAxioms = o.getAxiomCount() - o.getAxiomCount(AxiomType.ANNOTATION_ASSERTION) - o.getAxiomCount(AxiomType.DECLARATION);
+            int numDisjoint = o.getAxiomCount(AxiomType.DISJOINT_CLASSES) + o.getAxiomCount(AxiomType.DISJOINT_UNION) + o.getAxiomCount(AxiomType.DISJOINT_DATA_PROPERTIES) + o.getAxiomCount(AxiomType.DISJOINT_OBJECT_PROPERTIES);
+            int numSubProperty = o.getAxiomCount(AxiomType.SUB_DATA_PROPERTY) + o.getAxiomCount(AxiomType.SUB_OBJECT_PROPERTY);
+            int numAssertions = o.getAxiomCount(AxiomType.CLASS_ASSERTION) + o.getAxiomCount(AxiomType.OBJECT_PROPERTY_ASSERTION) + o.getAxiomCount(AxiomType.DATA_PROPERTY_ASSERTION) + o.getAxiomCount(AxiomType.NEGATIVE_DATA_PROPERTY_ASSERTION) + o.getAxiomCount(AxiomType.NEGATIVE_OBJECT_PROPERTY_ASSERTION) + o.getAxiomCount(AxiomType.SAME_INDIVIDUAL) + o.getAxiomCount(AxiomType.DIFFERENT_INDIVIDUALS);
+            try {
+                File testFile = new File(fileName.substring(0, fileName.indexOf(".")) + "TestData.csv");
 
-            int numAxioms = o.getAxiomCount() - o.getAxiomCount(AxiomType.ANNOTATION_ASSERTION) - o.getAxiomCount(AxiomType.DECLARATION) - owlThingCount;
-            System.out.println("Number of axioms: " + numAxioms); //TEST
-
-            Set<OWLAxiom> a = o.getAxioms();
-            for (OWLAxiom ax : a) {
-                AxiomType type = ax.getAxiomType();
-
-                /*if (!(type.getName().equals("SubClassOf")) && !(type.getName().equals("DisjointClasses")) && !(type.equals(AxiomType.ANNOTATION_ASSERTION)) && !(type.equals(AxiomType.DECLARATION)) && !(type.equals(AxiomType.CLASS_ASSERTION)) && !(type.equals(AxiomType.FUNCTIONAL_DATA_PROPERTY)) && !(type.equals(AxiomType.FUNCTIONAL_OBJECT_PROPERTY)) && !(type.equals(AxiomType.OBJECT_PROPERTY_ASSERTION))) {
-                 System.out.println("!!!" + ax.toString());
-                 }*/
+                // if file doesnt exists, then create it
+                if (!testFile.exists()) {
+                    testFile.createNewFile();
+                }
+                bw = new BufferedWriter(new FileWriter(testFile));
+                bw.write(";Num axioms in ontology;Num axioms verbalised;Num sentences written\n");
+                bw.write("Total;" + numAxioms + ";" + count + ";" + sentenceCount + "\n");
+                bw.write("EquivalentClass;" + o.getAxiomCount(AxiomType.EQUIVALENT_CLASSES) + ";" + equivalentCount + ";" + equivalentSentCount + "\n");
+                bw.write("Disjoint;" + numDisjoint + ";" + disjointCount + ";" + disjointSentCount + "\n");
+                bw.write("SubProperty;" + numSubProperty + ";" + subPropertyCount + ";" + subPropertySentCount + "\n");
+                bw.write("Assertions;" + numAssertions + ";" + assertionCount + ";" + assertionSentCount + "\n");
+                bw.write("OwlThing;" + owlThingCount);
+                bw.close();
+                //subClassCount, disjointCount, owlThingCount, sentenceCount, equivalentCount, sameIndividualCount
+            } catch (IOException e) {
             }
 
-            System.out.println("Number of subclass: " + (o.getAxiomCount(AxiomType.SUBCLASS_OF) - owlThingCount)); //TEST
-            System.out.println("Number of disjoint: " + o.getAxiomCount(AxiomType.DISJOINT_CLASSES)); //TEST
         } catch (OWLOntologyCreationException e) {
             System.out.println("EXCEPTION CAUGHT " + e);
         }
@@ -302,24 +483,6 @@ public class Driver {
         printSentence(null, roles, "FunctionalProperty");
     }
 
-    public static Set<OWLObjectProperty> getTopLevelObjectProperty(OWLClassExpression ce) {
-        Set<OWLObjectProperty> set1 = ce.getObjectPropertiesInSignature();
-        Set<OWLClassExpression> nestedCEs = ce.getNestedClassExpressions();
-        ClassExpressionType type = null;
-        Set<OWLObjectProperty> set2 = null;
-        for (OWLClassExpression nestedCE : nestedCEs) {
-            type = nestedCE.getClassExpressionType();
-            if (type == ClassExpressionType.OBJECT_UNION_OF
-                    || type == ClassExpressionType.OBJECT_INTERSECTION_OF) {
-                set2 = nestedCE.getObjectPropertiesInSignature();
-                for (OWLObjectProperty o : set2) {
-                    set1.remove(o);
-                }
-            }
-        }
-        return set1;
-    }
-
     public static OWLClassExpression[] getNextClassExpression(OWLClassExpression ce) {
         Set<OWLClassExpression> nested = ce.getNestedClassExpressions();
         int size1 = nested.size();
@@ -333,7 +496,6 @@ public class Driver {
                 nextCE = nestedCE;
             }
         }
-
         OWLClassExpression ceArray[] = {nextCE};
         return ceArray;
     }
@@ -346,124 +508,183 @@ public class Driver {
         String printSentence = "";
         OWLCardinalityRestriction cr;
         String roles;
-        switch (ce.getClassExpressionType()) {
-            case OWL_CLASS:
-                if (ce.isOWLThing()) {
-                    printSentence = "tipe ";
-                } else {
-                    if (prevType.equals("PartObjectSomeValuesFrom") || prevType.equals("PartObjectAllValuesFrom")) {
-                        printSentence = getName(ce + "") + " ";
+        if (ce != null) {
+            switch (ce.getClassExpressionType()) {
+                case OWL_CLASS:
+                    if (ce.isOWLThing()) {
+                        printSentence = "tipe ";
                     } else {
-                        printSentence = "is " + getName(ce + "") + " ";
+                        if (prevType.equals("PartObjectSomeValuesFrom") || prevType.equals("PartObjectAllValuesFrom") || prevType.equals("ObjectPropertyDomain") || prevType.equals("ObjectPropertyRange") || prevType.contains("Cardinality")) {
+                            printSentence = getName(ce + "") + " ";
+                        } else {
+                            printSentence = "is " + getName(ce + "") + " ";
+                        }
                     }
-                }
-                break;
-            case OBJECT_SOME_VALUES_FROM:
-                switch (prevType) {
-                    case "PartObjectSomeValuesFrom":
-                        printSentence = getPartSentence(null, null, "SomeReferringExpression", null);
-                        break;
-                    case "PartObjectAllValuesFrom":
-                        printSentence = getPartSentence(null, null, "AllReferringExpression", null);
-                        break;
-                }
-                printSentence += getPartSentence(null, getName(getTopLevelObjectProperty(ce) + "").split(";"), "PartObjectSomeValuesFrom", getNextClassExpression(ce), "PartObjectSomeValuesFrom");
-                break;
-            case OBJECT_ALL_VALUES_FROM:
-                switch (prevType) {
-                    case "PartObjectSomeValuesFrom":
-                        printSentence = getPartSentence(null, null, "SomeReferringExpression", null);
-                        break;
-                    case "PartObjectAllValuesFrom":
-                        printSentence = getPartSentence(null, null, "AllReferringExpression", null);
-                        break;
-                }
-                roles = getName(getTopLevelObjectProperty(ce) + "");
-                roles = roles.replaceFirst("-", ";");
-                printSentence += getPartSentence(null, roles.split(";"), "PartObjectAllValuesFrom", getNextClassExpression(ce), "PartObjectAllValuesFrom");
-                break;
-            case OBJECT_MIN_CARDINALITY:
-                cr = (OWLCardinalityRestriction) ce;
-                printSentence = getPartSentence(cr.getCardinality(), getName(ce.getObjectPropertiesInSignature() + "").split(";"), "PartObjectMinCardinality", getNextClassExpression(ce));
-                break;
-            case OBJECT_MAX_CARDINALITY:
-                cr = (OWLCardinalityRestriction) ce;
-                printSentence = getPartSentence(cr.getCardinality(), getName(ce.getObjectPropertiesInSignature() + "").split(";"), "PartObjectMaxCardinality", getNextClassExpression(ce));
-                break;
-            case OBJECT_EXACT_CARDINALITY:
-                cr = (OWLCardinalityRestriction) ce;
-                printSentence = getPartSentence(cr.getCardinality(), getName(ce.getObjectPropertiesInSignature() + "").split(";"), "PartObjectExactCardinality", getNextClassExpression(ce));
-                break;
-            case OBJECT_HAS_VALUE:
-                printSentence = getPartSentence(null, getName(getTopLevelObjectProperty(ce) + "").split(";"), "PartObjectHasValue", getNextClassExpression(ce));
-                break;
-            case OBJECT_HAS_SELF:
-                printSentence = getPartSentence(null, getName(getTopLevelObjectProperty(ce) + "").split(";"), "PartObjectHasSelf", null);
-                break;
-            case DATA_SOME_VALUES_FROM:
-                switch (prevType) {
-                    case "PartObjectSomeValuesFrom":
-                        printSentence = getPartSentence(null, null, "SomeReferringExpression", null);
-                        break;
-                    case "PartObjectAllValuesFrom":
-                        printSentence = getPartSentence(null, null, "AllReferringExpression", null);
-                        break;
-                }
-                printSentence += getPartSentence(null, getName(getTopLevelObjectProperty(ce) + "").split(";"), "PartObjectSomeValuesFrom", getNextClassExpression(ce), "PartObjectSomeValuesFrom");
-                break;
-            case DATA_ALL_VALUES_FROM:
-                switch (prevType) {
-                    case "PartObjectSomeValuesFrom":
-                        printSentence = getPartSentence(null, null, "SomeReferringExpression", null);
-                        break;
-                    case "PartObjectAllValuesFrom":
-                        printSentence = getPartSentence(null, null, "AllReferringExpression", null);
-                        break;
-                }
-                roles = getName(getTopLevelObjectProperty(ce) + "");
-                roles = roles.replaceFirst("-", ";");
-                printSentence += getPartSentence(null, roles.split(";"), "PartObjectAllValuesFrom", getNextClassExpression(ce), "PartObjectAllValuesFrom");
-                break;
-            case DATA_MIN_CARDINALITY:
-                cr = (OWLCardinalityRestriction) ce;
-                printSentence = getPartSentence(cr.getCardinality(), getName(ce.getObjectPropertiesInSignature() + "").split(";"), "PartObjectMinCardinality", getNextClassExpression(ce));
-                break;
-            case DATA_MAX_CARDINALITY:
-                cr = (OWLCardinalityRestriction) ce;
-                printSentence = getPartSentence(cr.getCardinality(), getName(ce.getObjectPropertiesInSignature() + "").split(";"), "PartObjectMaxCardinality", getNextClassExpression(ce));
-                break;
-            case DATA_EXACT_CARDINALITY:
-                cr = (OWLCardinalityRestriction) ce;
-                printSentence = getPartSentence(cr.getCardinality(), getName(ce.getObjectPropertiesInSignature() + "").split(";"), "PartObjectExactCardinality", getNextClassExpression(ce));
-                break;
-            case DATA_HAS_VALUE:
-                printSentence = getPartSentence(null, getName(getTopLevelObjectProperty(ce) + "").split(";"), "PartObjectHasValue", getNextClassExpression(ce));
-                break;
-            case OBJECT_INTERSECTION_OF:
-                Set<OWLClassExpression> expressions = ce.asConjunctSet();
-                OWLClassExpression[] ceArray = expressions.toArray(new OWLClassExpression[0]);
-                printSentence = getPartSentence(null, null, "PartObjectIntersectionOf", ceArray, prevType);
-                break;
-            case OBJECT_UNION_OF:
-                Set<OWLClassExpression> disjuncts = ce.asDisjunctSet();
-                printSentence = getPartSentence(null, null, "PartObjectUnionOf", disjuncts.toArray(new OWLClassExpression[0]), prevType);
-                break;
-            case OBJECT_COMPLEMENT_OF:
-                String objects[] = {getName(ce.getClassesInSignature() + "")};
-                printSentence = getPartSentence(objects, null, "PartObjectComplementOf", null);
-                break;
-            case OBJECT_ONE_OF:
-                Set<OWLNamedIndividual> tempSet = ce.getIndividualsInSignature();
-                String[] objects2 = new String[tempSet.size()];
-                int i = 0;
-                for (OWLNamedIndividual c : tempSet) {
-                    objects2[i] = getName(c + "");
-                    i++;
-                }
-                printSentence = getPartSentence(objects2, null, "PartObjectOneOf", null);
-                break;
-            default:
-                throw new AssertionError(ce.getClassExpressionType().name());
+                    break;
+                case OBJECT_SOME_VALUES_FROM:
+                    switch (prevType) {
+                        case "PartObjectSomeValuesFrom":
+                            printSentence = getPartSentence(null, null, "SomeReferringExpression", null);
+                            break;
+                        case "PartObjectAllValuesFrom":
+                            printSentence = getPartSentence(null, null, "AllReferringExpression", null);
+                            break;
+                    }
+                    OWLObjectPropertyExpression someProp = ((OWLObjectSomeValuesFrom) ce).getProperty();
+                    String somePropStr = getName(someProp + "");
+                    if (someProp.isAnonymous()) {
+                        OWLObjectInverseOf inverse = (OWLObjectInverseOf) someProp;
+                        String inverseStr = getName(inverse.getInverse() + "");
+                        if ((inverseStr).equals(somePropStr)) {
+                            somePropStr = "die inverse van " + somePropStr;
+                        } else {
+                            somePropStr = inverseStr;
+                        }
+                    }
+                    printSentence += getPartSentence(null, somePropStr.split(";"), "PartObjectSomeValuesFrom", getNextClassExpression(ce), "PartObjectSomeValuesFrom");
+                    break;
+                case OBJECT_ALL_VALUES_FROM:
+                    switch (prevType) {
+                        case "PartObjectSomeValuesFrom":
+                            printSentence = getPartSentence(null, null, "SomeReferringExpression", null);
+                            break;
+                        case "PartObjectAllValuesFrom":
+                            printSentence = getPartSentence(null, null, "AllReferringExpression", null);
+                            break;
+                    }
+                    OWLObjectPropertyExpression allProp = ((OWLObjectAllValuesFrom) ce).getProperty();
+                    roles = getName(allProp + "");
+                    if (allProp.isAnonymous()) {
+                        OWLObjectInverseOf inverse = (OWLObjectInverseOf) allProp;
+                        String inverseStr = getName(inverse.getInverse() + "");
+                        if (inverseStr.equals(roles)) {
+                            roles = "die inverse van " + roles;
+                        } else {
+                            roles = inverseStr;
+                        }
+                    }
+                    roles = roles.replaceFirst("-", ";");
+                    printSentence += getPartSentence(null, roles.split(";"), "PartObjectAllValuesFrom", getNextClassExpression(ce), "PartObjectAllValuesFrom");
+                    break;
+                case OBJECT_MIN_CARDINALITY:
+                    cr = (OWLCardinalityRestriction) ce;
+                    printSentence = getPartSentence((cr.getCardinality() + "").split(";"), getName(ce.getObjectPropertiesInSignature() + "").split(";"), "PartObjectMinCardinality", getNextClassExpression(ce), "Cardinality");
+                    break;
+                case OBJECT_MAX_CARDINALITY:
+                    cr = (OWLCardinalityRestriction) ce;
+                    printSentence = getPartSentence((cr.getCardinality() + "").split(";"), getName(ce.getObjectPropertiesInSignature() + "").split(";"), "PartObjectMaxCardinality", getNextClassExpression(ce), "Cardinality");
+                    break;
+                case OBJECT_EXACT_CARDINALITY:
+                    cr = (OWLCardinalityRestriction) ce;
+                    printSentence = getPartSentence((cr.getCardinality() + "").split(";"), getName(ce.getObjectPropertiesInSignature() + "").split(";"), "PartObjectExactCardinality", getNextClassExpression(ce), "Cardinality");
+                    break;
+                case OBJECT_HAS_VALUE:
+                    printSentence = getPartSentence(null, (((OWLObjectHasValue) ce).getProperty() + "").split(";"), "PartObjectHasValue", getNextClassExpression(ce));
+                    break;
+                case OBJECT_HAS_SELF:
+                    printSentence = getPartSentence(null, (((OWLObjectHasSelf) ce).getProperty() + "").split(";"), "PartObjectHasSelf", null);
+                    break;
+                case DATA_SOME_VALUES_FROM:
+                    switch (prevType) {
+                        case "PartObjectSomeValuesFrom":
+                            printSentence = getPartSentence(null, null, "SomeReferringExpression", null);
+                            break;
+                        case "PartObjectAllValuesFrom":
+                            printSentence = getPartSentence(null, null, "AllReferringExpression", null);
+                            break;
+                    }
+                    String[] dataName = new String[1];
+                    OWLClassExpression[] nextCE = getNextClassExpression(ce);
+                    String role = getName(((OWLDataSomeValuesFrom) ce).getProperty() + "");
+                    if (nextCE[0] == null) {
+                        OWLDataSomeValuesFrom dsvf = (OWLDataSomeValuesFrom) ce;
+                        OWLDatatypeRestriction dtr = null;
+                        OWLDataRange dr = dsvf.getFiller();
+                        try {
+                            dtr = (OWLDatatypeRestriction) dr;
+                        } catch (Exception e) {
+                        }
+                        if (dtr != null) {
+                            Set<OWLFacetRestriction> facetsR = dtr.getFacetRestrictions();
+                            for (OWLFacetRestriction facetR : facetsR) {
+                                String facet = (facetR.getFacet() + "");
+                                String fValue = facetR.getFacetValue().getLiteral();
+                                switch (facet) {
+                                    case "maxInclusive":
+                                        printSentence += getPartSentence(fValue.split(";"), role.split(";"), "PartDataSomeValuesFromMax", null, "PartObjectSomeValuesFrom");
+                                        break;
+                                    case "minInclusive":
+                                        printSentence += getPartSentence(fValue.split(";"), role.split(";"), "PartDataSomeValuesFromMin", null, "PartObjectSomeValuesFrom");
+                                        break;
+                                }
+                                break;
+                            }
+                        } else {
+                            dataName[0] = getName(dr + "");
+                            printSentence += getPartSentence(dataName, role.split(";"), "PartDataSomeValuesFrom", null, "PartObjectSomeValuesFrom");
+                        }
+                    } else {
+                        printSentence += getPartSentence(null, role.split(";"), "PartObjectSomeValuesFrom", nextCE, "PartObjectSomeValuesFrom");
+                    }
+                    break;
+                case DATA_ALL_VALUES_FROM:
+                    switch (prevType) {
+                        case "PartObjectSomeValuesFrom":
+                            printSentence = getPartSentence(null, null, "SomeReferringExpression", null);
+                            break;
+                        case "PartObjectAllValuesFrom":
+                            printSentence = getPartSentence(null, null, "AllReferringExpression", null);
+                            break;
+                    }
+                    roles = getName(((OWLDataAllValuesFrom) ce).getProperty() + "");
+                    roles = roles.replaceFirst("-", ";");
+                    printSentence += getPartSentence(null, roles.split(";"), "PartObjectAllValuesFrom", getNextClassExpression(ce), "PartObjectAllValuesFrom");
+                    break;
+                case DATA_MIN_CARDINALITY:
+                    cr = (OWLCardinalityRestriction) ce;
+                    printSentence = getPartSentence((cr.getCardinality() + "").split(";"), getName(ce.getObjectPropertiesInSignature() + "").split(";"), "PartObjectMinCardinality", getNextClassExpression(ce), "Cardinality");
+                    break;
+                case DATA_MAX_CARDINALITY:
+                    cr = (OWLCardinalityRestriction) ce;
+                    printSentence = getPartSentence((cr.getCardinality() + "").split(";"), getName(ce.getObjectPropertiesInSignature() + "").split(";"), "PartObjectMaxCardinality", getNextClassExpression(ce), "Cardinality");
+                    break;
+                case DATA_EXACT_CARDINALITY:
+                    cr = (OWLCardinalityRestriction) ce;
+                    printSentence = getPartSentence((cr.getCardinality() + "").split(";"), getName(ce.getObjectPropertiesInSignature() + "").split(";"), "PartObjectExactCardinality", getNextClassExpression(ce), "Cardinality");
+                    break;
+                case DATA_HAS_VALUE:
+                    printSentence = getPartSentence(null, getName(((OWLDataHasValue) ce).getProperty() + "").split(";"), "PartObjectHasValue", getNextClassExpression(ce));
+                    break;
+                case OBJECT_INTERSECTION_OF:
+                    Set<OWLClassExpression> expressions = ce.asConjunctSet();
+                    OWLClassExpression[] ceArray = expressions.toArray(new OWLClassExpression[0]);
+                    printSentence = getPartSentence(null, null, "PartObjectIntersectionOf", ceArray, prevType);
+                    break;
+                case OBJECT_UNION_OF:
+                    Set<OWLClassExpression> disjuncts = ce.asDisjunctSet();
+                    printSentence = getPartSentence(null, null, "PartObjectUnionOf", disjuncts.toArray(new OWLClassExpression[0]), prevType);
+                    break;
+                case OBJECT_COMPLEMENT_OF:
+                    String objects[] = {getName(ce.getClassesInSignature() + "")};
+                    printSentence = getPartSentence(objects, null, "PartObjectComplementOf", null);
+                    break;
+                case OBJECT_ONE_OF:
+                    Set<OWLNamedIndividual> tempSet = ce.getIndividualsInSignature();
+                    String[] objects2 = new String[tempSet.size()];
+                    int i = 0;
+                    for (OWLNamedIndividual c : tempSet) {
+                        objects2[i] = getName(c + "");
+                        i++;
+                    }
+                    printSentence = getPartSentence(objects2, null, "PartObjectOneOf", null);
+                    break;
+                default:
+                    System.out.println("!!!" + ce.getClassExpressionType().name());
+                    throw new AssertionError(ce.getClassExpressionType().name());
+            }
+        }
+        if (printSentence.equals("[]")) {
+            System.out.println(ce + "");
         }
         return printSentence;
     }
@@ -528,11 +749,16 @@ public class Driver {
                             }
                         } else if (ce != null) {
                             while (thisIndex < ce.length) {
+                                printString = iterateNodes(printString, loopChildren, thisIndex, objects, roles, ce, prevType);
+                                thisIndex++;
+                            }
+                        } else if (roles != null) {
+                            while (thisIndex < roles.length) {
                                 printString = iterateNodes(printString, loopChildren, thisIndex, objects, roles, ce);
                                 thisIndex++;
                             }
                         } else {
-                            System.out.println("LOGIC ERROR IN LOOP");
+                            System.out.println("LOGIC ERROR IN LOOP " + printString);
                         }
                         break;
                     case "Cardinality":
@@ -548,11 +774,6 @@ public class Driver {
             }
         }
         return printString;
-    }
-
-    public static String getPartSentence(int cardinality, String[] roles, String type, OWLClassExpression[] ce) {
-        String objects[] = {cardinality + ""};
-        return getPartSentence(objects, roles, type, ce);
     }
 
     public static String getPartSentence(String[] objects, String[] roles, String type, OWLClassExpression[] ce) {
@@ -573,46 +794,56 @@ public class Driver {
         return iterateNodes("", children, 0, objects, roles, ce, prevType);
     }
 
-    public static void printFullSentence(String printString) {
-        printString = printString.trim() + ".";
-        printString = printString.replace("-", " ");
-        printString = printString.replace("? ", "");
-        printString = printString.replace(" ?", "");
-        System.out.println(printString);
-    }
-
-    public static void printSentence(String[] objects, String[] roles, String type, boolean negation, boolean union, boolean intersection) {
-        printSentence(objects, roles, null, type, negation, union, intersection);
-    }
-
-    public static void printSentence(String[] objects, String[] roles, String type) {
-        printSentence(objects, roles, null, type, false, false, false);
-    }
-
     public static void printSentence(String role, String type) {
         String[] roles = new String[1];
         roles[0] = role;
-        printSentence(null, roles, null, type, false, false, false);
+        printSentence(null, roles, type);
     }
 
-    public static void printSentence(String[] objects, String[] roles, String[] nest, String type, boolean negation, boolean union, boolean intersection) {
+    public static void printSentence(String[] objects, String[] roles, String type) {
         //Choose constraint based on type
         String printString = "";
         Node prop = null;
         String cType = "";
         for (int j = 0; j < constraints.getLength(); j++) {
             cType = constraints.item(j).getAttributes().getNamedItem("type").toString();
-            if (!negation && !union && !intersection && cType.equals("type=\"" + type + "\"")
-                    || (negation && cType.equals("type=\"" + type + " negation\""))
-                    || (union && cType.equals("type=\"" + type + " union\""))
-                    || (intersection && cType.equals("type=\"" + type + " intersection\""))) {
+            if (cType.equals("type=\"" + type + "\"")) {
                 prop = constraints.item(j);
                 break;
             }
         }
         NodeList children = prop.getChildNodes();
-        printString = iterateNodes(printString, children, 0, objects, roles, null);
+        printString = type + " " + iterateNodes(printString, children, 0, objects, roles, null);
         printFullSentence(printString);
+    }
+
+    public static void printFullSentence(String printString) {
+        printString = printString.trim() + ".";
+        printString = printString.replace("-", " ");
+        printString = printString.replace("? ", "");
+        printString = printString.replace(" ?", "");
+        //add writer to append to new line of file
+
+        try {
+            File outputF = new File("output-" + fileName.substring(0, fileName.indexOf(".")) + ".txt");
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter(outputF, true));
+            bw.append(printString + "\n");
+            sentenceCount++;
+            if (printString.contains("EquivalentClass")) {
+                equivalentSentCount++;
+            } else if (printString.contains("Disjoint")) {
+                disjointSentCount++;
+            } else if (printString.contains("SubObjectProperty")) {
+                subPropertySentCount++;
+            } else if (printString.contains("Assertion") || (printString.contains("DifferentIndividual")) || (printString.contains("SameIndividual"))) {
+                assertionSentCount++;
+            }
+            bw.close();
+        } catch (IOException e) {
+            System.out.println(printString);
+        }
+        //System.out.println(printString);
     }
 
     public static NodeList readXML(String xml) {
@@ -639,7 +870,23 @@ public class Driver {
     }
 
     private static String getName(String literal) {
-        return literal.substring(literal.indexOf("#") + 1, literal.indexOf(">"));
+        if (literal.contains("#") && literal.contains(">")) {
+            return literal.substring(literal.indexOf("#") + 1, literal.indexOf(">"));
+        } else {
+            return literal;
+        }
     }
 
+    private static String getDataName(String literal) {
+        if (literal.contains("#")) {
+            return literal.substring(literal.indexOf("#") + 1);
+        } else {
+            return literal.substring(literal.indexOf(":") + 1);
+        }
+    }
+
+    private static String getLiteralName(String literal) {
+        literal = literal.substring(1);
+        return literal.substring(0, literal.indexOf("\""));
+    }
 }

@@ -1,0 +1,707 @@
+Complex SubClass Elke Fiorentina hasTopping ten minste een GarlicTopping.
+OWLSubClassOfAxiom Elke MixedSeafoodTopping is 'n FishTopping.
+Complex SubClass Elke Cajun hasTopping net MozzarellaTopping of is TomatoTopping of is PeperonataTopping of is TobascoPepperSauce of is OnionTopping of is PrawnsTopping.
+Complex SubClass Elke Capricciosa hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke Giardiniera hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke JalapenoPepperTopping hasSpiciness ten minste een Hot.
+OWLSubClassOfAxiom Elke ThinAndCrispyBase is 'n PizzaBase.
+Complex SubClass Elke FourSeasons hasTopping ten minste een MozzarellaTopping.
+OWLSubClassOfAxiom Elke Spiciness is 'n ValuePartition.
+Complex SubClass Elke Capricciosa hasTopping net HamTopping of is CaperTopping of is MozzarellaTopping of is OliveTopping of is TomatoTopping of is PeperonataTopping of is AnchoviesTopping.
+Complex SubClass Elke CajunSpiceTopping hasSpiciness ten minste een Hot.
+Complex SubClass Elke FruttiDiMare hasTopping net MixedSeafoodTopping of is GarlicTopping of is TomatoTopping.
+OWLSubClassOfAxiom Elke GarlicTopping is 'n VegetableTopping.
+OWLSubClassOfAxiom Elke MozzarellaTopping is 'n CheeseTopping.
+Complex SubClass Elke Veneziana hasCountryOfOrigin ten minste een Italy.
+Complex SubClass Elke Giardiniera hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke Caprina hasTopping ten minste een GoatsCheeseTopping.
+Complex SubClass Elke PrinceCarlo hasTopping net RosemaryTopping of is LeekTopping of is MozzarellaTopping of is TomatoTopping of is ParmesanTopping.
+Complex SubClass Elke FourSeasons hasTopping ten minste een TomatoTopping.
+OWLSubClassOfAxiom Elke Medium is 'n Spiciness.
+OWLSubClassOfAxiom Elke PizzaTopping is 'n Food.
+Complex SubClass Elke Siciliana hasTopping ten minste een HamTopping.
+OWLSubClassOfAxiom Elke HerbSpiceTopping is 'n PizzaTopping.
+Complex SubClass Elke MozzarellaTopping hasCountryOfOrigin ten minste een Italy.
+OWLSubClassOfAxiom Elke NamedPizza is 'n Pizza.
+OWLSubClassOfAxiom Elke CheeseTopping is 'n PizzaTopping.
+Complex SubClass Elke Mushroom hasTopping ten minste een MozzarellaTopping.
+OWLSubClassOfAxiom Elke ParmaHamTopping is 'n HamTopping.
+Complex SubClass Elke PolloAdAstra hasTopping ten minste een GarlicTopping.
+Complex SubClass Elke Caprina hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke LeekTopping hasSpiciness ten minste een Mild.
+Complex SubClass Elke Soho hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke Soho hasTopping ten minste een OliveTopping.
+Complex SubClass Elke Rosa hasTopping ten minste een GorgonzolaTopping.
+Complex SubClass Elke American hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke PrinceCarlo hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke Mushroom hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke Caprina hasTopping ten minste een TomatoTopping.
+OWLSubClassOfAxiom Elke RedOnionTopping is 'n OnionTopping.
+OWLSubClassOfAxiom Elke PeperoniSausageTopping is 'n MeatTopping.
+OWLSubClassOfAxiom Elke SweetPepperTopping is 'n PepperTopping.
+Complex SubClass Elke RocketTopping hasSpiciness ten minste een Medium.
+Complex SubClass Elke FruttiDiMare hasTopping ten minste een GarlicTopping.
+OWLSubClassOfAxiom Elke ArtichokeTopping is 'n VegetableTopping.
+Complex SubClass Elke Parmense hasTopping ten minste een AsparagusTopping.
+OWLSubClassOfAxiom Elke AnchoviesTopping is 'n FishTopping.
+OWLSubClassOfAxiom Elke RosemaryTopping is 'n HerbSpiceTopping.
+Complex SubClass Elke RosemaryTopping hasSpiciness ten minste een Mild.
+OWLSubClassOfAxiom Elke Giardiniera is 'n NamedPizza.
+Complex SubClass Elke SloppyGiuseppe hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke Fiorentina hasTopping ten minste een SpinachTopping.
+OWLSubClassOfAxiom Elke Fiorentina is 'n NamedPizza.
+Complex SubClass Elke PeperonataTopping hasSpiciness ten minste een Medium.
+OWLSubClassOfAxiom Elke CajunSpiceTopping is 'n HerbSpiceTopping.
+OWLSubClassOfAxiom Elke SloppyGiuseppe is 'n NamedPizza.
+OWLSubClassOfAxiom Elke Parmense is 'n NamedPizza.
+Complex SubClass Elke SloppyGiuseppe hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke Siciliana hasTopping ten minste een AnchoviesTopping.
+Complex SubClass Elke FourSeasons hasTopping ten minste een OliveTopping.
+Complex SubClass Elke Siciliana hasTopping ten minste een GarlicTopping.
+OWLSubClassOfAxiom Elke LeekTopping is 'n VegetableTopping.
+Complex SubClass Elke NutTopping hasSpiciness ten minste een Mild.
+OWLSubClassOfAxiom Elke Food is 'n DomainConcept.
+Complex SubClass Elke PeperoniSausageTopping hasSpiciness ten minste een Medium.
+OWLSubClassOfAxiom Elke MeatTopping is 'n PizzaTopping.
+OWLSubClassOfAxiom Elke Mushroom is 'n NamedPizza.
+OWLSubClassOfAxiom Elke FishTopping is 'n PizzaTopping.
+OWLSubClassOfAxiom Elke VegetableTopping is 'n PizzaTopping.
+OWLSubClassOfAxiom Elke Caprina is 'n NamedPizza.
+Complex SubClass Elke Fiorentina hasTopping net GarlicTopping of is MozzarellaTopping of is OliveTopping of is TomatoTopping of is ParmesanTopping of is SpinachTopping.
+OWLSubClassOfAxiom Elke Soho is 'n NamedPizza.
+Complex SubClass Elke Parmense hasTopping ten minste een ParmesanTopping.
+Complex SubClass Elke QuattroFormaggi hasTopping ten minste een FourCheesesTopping.
+Complex SubClass Elke FourSeasons hasTopping ten minste een MushroomTopping.
+Complex SubClass Elke Giardiniera hasTopping net LeekTopping of is MushroomTopping of is PetitPoisTopping of is MozzarellaTopping of is OliveTopping of is SlicedTomatoTopping of is TomatoTopping of is PeperonataTopping.
+OWLSubClassOfAxiom Elke American is 'n NamedPizza.
+Complex SubClass Elke FourSeasons hasTopping ten minste een PeperoniSausageTopping.
+Complex SubClass Elke Giardiniera hasTopping ten minste een PetitPoisTopping.
+OWLSubClassOfAxiom Elke MushroomTopping is 'n VegetableTopping.
+Complex SubClass Elke Margherita hasTopping net MozzarellaTopping of is TomatoTopping.
+Complex SubClass Elke SloppyGiuseppe hasTopping ten minste een HotSpicedBeefTopping.
+OWLSubClassOfAxiom Elke RocketTopping is 'n VegetableTopping.
+Complex SubClass Elke Siciliana hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke Cajun hasTopping ten minste een PeperonataTopping.
+Complex SubClass Elke QuattroFormaggi hasTopping net FourCheesesTopping of is TomatoTopping.
+OWLSubClassOfAxiom Elke HamTopping is 'n MeatTopping.
+Complex SubClass Elke PolloAdAstra hasTopping ten minste een TomatoTopping.
+OWLSubClassOfAxiom Elke SpinachTopping is 'n VegetableTopping.
+Complex SubClass Elke LaReine hasTopping ten minste een MushroomTopping.
+Complex SubClass Elke Mushroom hasTopping ten minste een MushroomTopping.
+OWLSubClassOfAxiom Elke SlicedTomatoTopping is 'n TomatoTopping.
+Complex SubClass Elke GorgonzolaTopping hasSpiciness ten minste een Mild.
+OWLSubClassOfAxiom Elke ChickenTopping is 'n MeatTopping.
+Complex SubClass Elke PrinceCarlo hasTopping ten minste een LeekTopping.
+OWLSubClassOfAxiom Elke NutTopping is 'n PizzaTopping.
+OWLSubClassOfAxiom Elke DeepPanBase is 'n PizzaBase.
+Complex SubClass Elke ArtichokeTopping hasSpiciness ten minste een Mild.
+Complex SubClass Elke Giardiniera hasTopping ten minste een PeperonataTopping.
+Complex SubClass Elke SweetPepperTopping hasSpiciness ten minste een Mild.
+Complex SubClass Elke Capricciosa hasTopping ten minste een HamTopping.
+Complex SubClass Elke Cajun hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke Giardiniera hasTopping ten minste een OliveTopping.
+Complex SubClass Elke Pizza hasBase ten minste een PizzaBase.
+Complex SubClass Elke Napoletana hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke Napoletana hasTopping ten minste een OliveTopping.
+OWLSubClassOfAxiom Elke QuattroFormaggi is 'n NamedPizza.
+OWLSubClassOfAxiom Elke Pizza is 'n Food.
+OWLSubClassOfAxiom Elke SundriedTomatoTopping is 'n TomatoTopping.
+Complex SubClass Elke PolloAdAstra hasTopping net CajunSpiceTopping of is GarlicTopping of is ChickenTopping of is MozzarellaTopping of is TomatoTopping of is RedOnionTopping of is SweetPepperTopping.
+OWLSubClassOfAxiom Elke CaperTopping is 'n VegetableTopping.
+Complex SubClass Elke Capricciosa hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke Capricciosa hasTopping ten minste een OliveTopping.
+Complex SubClass Elke AmericanHot hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke LaReine hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke LaReine hasTopping ten minste een OliveTopping.
+Complex SubClass Elke Parmense hasTopping ten minste een HamTopping.
+Complex SubClass Elke Caprina hasTopping ten minste een SundriedTomatoTopping.
+Complex SubClass Elke Veneziana hasTopping net CaperTopping of is PineKernels of is MozzarellaTopping of is OliveTopping of is TomatoTopping of is SultanaTopping of is OnionTopping.
+Complex SubClass Elke Napoletana hasTopping net CaperTopping of is MozzarellaTopping of is OliveTopping of is TomatoTopping of is AnchoviesTopping.
+Complex SubClass Elke MozzarellaTopping hasSpiciness ten minste een Mild.
+Complex SubClass Elke TomatoTopping hasSpiciness ten minste een Mild.
+Complex SubClass Elke Fiorentina hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke AmericanHot hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke LaReine hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke SloppyGiuseppe hasTopping net HotSpicedBeefTopping of is MozzarellaTopping of is TomatoTopping of is GreenPepperTopping of is OnionTopping.
+Complex SubClass Elke Capricciosa hasTopping ten minste een AnchoviesTopping.
+Complex SubClass Elke Siciliana hasTopping ten minste een ArtichokeTopping.
+Complex SubClass Elke ChickenTopping hasSpiciness ten minste een Mild.
+OWLSubClassOfAxiom Elke PineKernels is 'n NutTopping.
+OWLSubClassOfAxiom Elke GorgonzolaTopping is 'n CheeseTopping.
+OWLSubClassOfAxiom Elke PizzaBase is 'n Food.
+Complex SubClass Elke Soho hasTopping net RocketTopping of is GarlicTopping of is MozzarellaTopping of is OliveTopping of is TomatoTopping of is ParmesanTopping.
+OWLSubClassOfAxiom Elke PrawnsTopping is 'n FishTopping.
+Complex SubClass Elke Fiorentina hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke Siciliana hasTopping net HamTopping of is ArtichokeTopping of is GarlicTopping of is MozzarellaTopping of is OliveTopping of is TomatoTopping of is AnchoviesTopping.
+OWLSubClassOfAxiom Elke CheeseyVegetableTopping is 'n VegetableTopping.
+Complex SubClass Elke Napoletana hasTopping ten minste een CaperTopping.
+OWLSubClassOfAxiom Elke GoatsCheeseTopping is 'n CheeseTopping.
+Complex SubClass Elke PrinceCarlo hasTopping ten minste een TomatoTopping.
+OWLSubClassOfAxiom Elke IceCream is 'n Food.
+OWLSubClassOfAxiom Elke Cajun is 'n NamedPizza.
+Complex SubClass Elke CaperTopping hasSpiciness ten minste een Mild.
+Complex SubClass Elke Fiorentina hasTopping ten minste een ParmesanTopping.
+Complex SubClass Elke Capricciosa hasTopping ten minste een CaperTopping.
+Complex SubClass Elke PrinceCarlo hasTopping ten minste een ParmesanTopping.
+OWLSubClassOfAxiom Elke HotSpicedBeefTopping is 'n MeatTopping.
+Complex SubClass Elke Veneziana hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke Veneziana hasTopping ten minste een OliveTopping.
+Complex SubClass Elke Napoletana hasTopping ten minste een AnchoviesTopping.
+OWLSubClassOfAxiom Elke PeperonataTopping is 'n PepperTopping.
+Complex SubClass Elke Soho hasTopping ten minste een ParmesanTopping.
+Complex SubClass Elke RealItalianPizza hasBase net ThinAndCrispyBase.
+OWLSubClassOfAxiom Elke SultanaTopping is 'n FruitTopping.
+OWLSubClassOfAxiom Elke ParmesanTopping is 'n CheeseTopping.
+OWLSubClassOfAxiom Elke Capricciosa is 'n NamedPizza.
+Complex SubClass Elke Mushroom hasTopping net MushroomTopping of is MozzarellaTopping of is TomatoTopping.
+OWLSubClassOfAxiom Elke AmericanHot is 'n NamedPizza.
+OWLSubClassOfAxiom Elke TomatoTopping is 'n VegetableTopping.
+OWLSubClassOfAxiom Elke JalapenoPepperTopping is 'n PepperTopping.
+Complex SubClass Elke Cajun hasTopping ten minste een OnionTopping.
+OWLSubClassOfAxiom Elke AsparagusTopping is 'n VegetableTopping.
+Complex SubClass Elke AmericanHot hasCountryOfOrigin ten minste een America.
+Complex SubClass Elke PetitPoisTopping hasSpiciness ten minste een Mild.
+Complex SubClass Elke FourSeasons hasTopping ten minste een CaperTopping.
+Complex SubClass Elke IceCream hasTopping ten minste een FruitTopping.
+OWLSubClassOfAxiom Elke FruttiDiMare is 'n NamedPizza.
+OWLSubClassOfAxiom Elke OliveTopping is 'n VegetableTopping.
+Complex SubClass Elke Siciliana hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke Siciliana hasTopping ten minste een OliveTopping.
+OWLSubClassOfAxiom Elke SauceTopping is 'n PizzaTopping.
+Complex SubClass Elke SultanaTopping hasSpiciness ten minste een Medium.
+Complex SubClass Elke FourSeasons hasTopping ten minste een AnchoviesTopping.
+Complex SubClass Elke Parmense hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke PolloAdAstra hasTopping ten minste een CajunSpiceTopping.
+Complex SubClass Elke Rosa hasTopping ten minste een MozzarellaTopping.
+OWLSubClassOfAxiom Elke OnionTopping is 'n VegetableTopping.
+Complex SubClass Elke FourCheesesTopping hasSpiciness ten minste een Mild.
+Complex SubClass Elke Rosa hasTopping net GorgonzolaTopping of is MozzarellaTopping of is TomatoTopping.
+Complex SubClass Elke SlicedTomatoTopping hasSpiciness ten minste een Mild.
+Complex SubClass Elke AmericanHot hasTopping ten minste een PeperoniSausageTopping.
+Complex SubClass Elke AsparagusTopping hasSpiciness ten minste een Mild.
+Complex SubClass Elke TobascoPepperSauce hasSpiciness ten minste een Hot.
+Complex SubClass Elke American hasTopping net MozzarellaTopping of is TomatoTopping of is PeperoniSausageTopping.
+Complex SubClass Elke Veneziana hasTopping ten minste een PineKernels.
+OWLSubClassOfAxiom Elke TobascoPepperSauce is 'n SauceTopping.
+Complex SubClass Elke Giardiniera hasTopping ten minste een MushroomTopping.
+Complex SubClass Elke Rosa hasTopping ten minste een TomatoTopping.
+OWLSubClassOfAxiom Elke FourCheesesTopping is 'n CheeseTopping.
+Complex SubClass Elke Fiorentina hasTopping ten minste een OliveTopping.
+OWLSubClassOfAxiom Elke GreenPepperTopping is 'n PepperTopping.
+OWLSubClassOfAxiom Elke Veneziana is 'n NamedPizza.
+Complex SubClass Elke Margherita hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke MushroomTopping hasSpiciness ten minste een Mild.
+OWLSubClassOfAxiom Elke Hot is 'n Spiciness.
+Complex SubClass Elke Parmense hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke SpinachTopping hasSpiciness ten minste een Mild.
+OWLSubClassOfAxiom Elke PolloAdAstra is 'n NamedPizza.
+OWLSubClassOfAxiom Elke PrinceCarlo is 'n NamedPizza.
+Complex SubClass Elke OliveTopping hasSpiciness ten minste een Mild.
+OWLSubClassOfAxiom Elke HotGreenPepperTopping is 'n GreenPepperTopping.
+Complex SubClass Elke PolloAdAstra hasTopping ten minste een ChickenTopping.
+Complex SubClass Elke UnclosedPizza hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke American hasTopping ten minste een PeperoniSausageTopping.
+Complex SubClass Elke Margherita hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke American hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke AmericanHot hasTopping net MozzarellaTopping of is TomatoTopping of is JalapenoPepperTopping of is PeperoniSausageTopping of is HotGreenPepperTopping.
+Complex SubClass Elke Capricciosa hasTopping ten minste een PeperonataTopping.
+Complex SubClass Elke QuattroFormaggi hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke Veneziana hasTopping ten minste een OnionTopping.
+Complex SubClass Elke AmericanHot hasTopping ten minste een HotGreenPepperTopping.
+Complex SubClass Elke Cajun hasTopping ten minste een TobascoPepperSauce.
+Complex SubClass Elke Giardiniera hasTopping ten minste een LeekTopping.
+Complex SubClass Elke American hasCountryOfOrigin ten minste een America.
+Complex SubClass Elke FruttiDiMare hasTopping ten minste een MixedSeafoodTopping.
+OWLSubClassOfAxiom Elke LaReine is 'n NamedPizza.
+Complex SubClass Elke LaReine hasTopping ten minste een HamTopping.
+Complex SubClass Elke FruttiDiMare hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke ParmesanTopping hasSpiciness ten minste een Mild.
+OWLSubClassOfAxiom Elke Siciliana is 'n NamedPizza.
+Complex SubClass Elke Napoletana hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke Cajun hasTopping ten minste een PrawnsTopping.
+Complex SubClass Elke GarlicTopping hasSpiciness ten minste een Medium.
+Complex SubClass Elke HotSpicedBeefTopping hasSpiciness ten minste een Hot.
+OWLSubClassOfAxiom Elke FourSeasons is 'n NamedPizza.
+Complex SubClass Elke Napoletana hasCountryOfOrigin ten minste een Italy.
+Complex SubClass Elke Soho hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke SloppyGiuseppe hasTopping ten minste een OnionTopping.
+OWLSubClassOfAxiom Elke Rosa is 'n NamedPizza.
+Complex SubClass Elke Soho hasTopping ten minste een GarlicTopping.
+Complex SubClass Elke HotGreenPepperTopping hasSpiciness ten minste een Hot.
+Complex SubClass Elke PolloAdAstra hasTopping ten minste een MozzarellaTopping.
+Complex SubClass Elke SloppyGiuseppe hasTopping ten minste een GreenPepperTopping.
+Complex SubClass Elke PrinceCarlo hasTopping ten minste een RosemaryTopping.
+Complex SubClass Elke PolloAdAstra hasTopping ten minste een RedOnionTopping.
+OWLSubClassOfAxiom Elke PepperTopping is 'n VegetableTopping.
+Complex SubClass Elke ParmaHamTopping hasSpiciness ten minste een Mild.
+OWLSubClassOfAxiom Elke FruitTopping is 'n PizzaTopping.
+Complex SubClass Elke Veneziana hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke FishTopping hasSpiciness ten minste een Mild.
+Complex SubClass Elke Cajun hasTopping ten minste een TomatoTopping.
+Complex SubClass Elke Soho hasTopping ten minste een RocketTopping.
+Complex SubClass Elke GoatsCheeseTopping hasSpiciness ten minste een Mild.
+Complex SubClass Elke OnionTopping hasSpiciness ten minste een Medium.
+Complex SubClass Elke Veneziana hasTopping ten minste een CaperTopping.
+OWLSubClassOfAxiom Elke Margherita is 'n NamedPizza.
+Complex SubClass Elke Parmense hasTopping net HamTopping of is AsparagusTopping of is MozzarellaTopping of is TomatoTopping of is ParmesanTopping.
+Complex SubClass Elke Veneziana hasTopping ten minste een SultanaTopping.
+Complex SubClass Elke FourSeasons hasTopping net CaperTopping of is MushroomTopping of is MozzarellaTopping of is OliveTopping of is TomatoTopping of is PeperoniSausageTopping of is AnchoviesTopping.
+Complex SubClass Elke PolloAdAstra hasTopping ten minste een SweetPepperTopping.
+Complex SubClass Elke AmericanHot hasTopping ten minste een JalapenoPepperTopping.
+Complex SubClass Elke SundriedTomatoTopping hasSpiciness ten minste een Mild.
+Complex SubClass Elke Caprina hasTopping net GoatsCheeseTopping of is MozzarellaTopping of is TomatoTopping of is SundriedTomatoTopping.
+OWLSubClassOfAxiom Elke PetitPoisTopping is 'n VegetableTopping.
+OWLSubClassOfAxiom Elke Mild is 'n Spiciness.
+OWLSubClassOfAxiom Elke UnclosedPizza is 'n NamedPizza.
+OWLSubClassOfAxiom Elke CheeseyVegetableTopping is 'n CheeseTopping.
+OWLSubClassOfAxiom Elke Napoletana is 'n NamedPizza.
+Complex SubClass Elke Giardiniera hasTopping ten minste een SlicedTomatoTopping.
+Complex SubClass Elke LaReine hasTopping net HamTopping of is MushroomTopping of is MozzarellaTopping of is OliveTopping of is TomatoTopping.
+SubObjectProperty As iets hasIngredient, dit hasBase.
+SubObjectProperty As iets isIngredientOf, dit isToppingOf.
+SubObjectProperty As iets isIngredientOf, dit isBaseOf.
+SubObjectProperty As iets hasIngredient, dit hasTopping.
+EquivalentClass Elke VegetarianPizzaEquivalent1 hasTopping net VegetarianTopping en is Pizza.
+EquivalentClass Elke RealItalianPizza hasCountryOfOrigin ten minste een Italy en is Pizza.
+EquivalentClass Elke VegetarianPizza hasTopping net iets wat nie 'n MeatTopping is nie en hasTopping net iets wat nie 'n FishTopping is nie en is Pizza.
+EquivalentClass Elke VegetarianPizzaEquivalent2 hasTopping net FruitTopping of is HerbSpiceTopping of is VegetableTopping of is SauceTopping of is NutTopping of is CheeseTopping en is Pizza.
+EquivalentClass Elke InterestingPizza is Pizza en hasTopping ten minste 3 tipe.
+EquivalentClass Elke NonVegetarianPizza is Pizza en iets wat nie 'n VegetarianPizza is nie.
+EquivalentClass Elke SpicyPizzaEquivalent hasTopping ten minste een van iets wat hasSpiciness ten minste een Hot en is PizzaTopping en is Pizza.
+EquivalentClass Elke ThinAndCrispyPizza hasBase net ThinAndCrispyBase en is Pizza.
+EquivalentClass Elke Spiciness is Hot of is Medium of is Mild.
+EquivalentClass Elke SpicyTopping hasSpiciness ten minste een Hot en is PizzaTopping.
+EquivalentClass Elke MeatyPizza hasTopping ten minste een MeatTopping en is Pizza.
+EquivalentClass Elke CheeseyPizza hasTopping ten minste een CheeseTopping en is Pizza.
+EquivalentClass Elke SpicyPizza hasTopping ten minste een SpicyTopping en is Pizza.
+EquivalentClass Elke VegetarianTopping is PizzaTopping en is FruitTopping of is HerbSpiceTopping of is VegetableTopping of is SauceTopping of is NutTopping of is CheeseTopping.
+EquivalentClass Elke Country England of Italy of America of France of Germany en is DomainConcept.
+ClassAssertion France is 'n Country.
+ClassAssertion Germany is 'n Country.
+ClassAssertion Italy is 'n Country.
+ClassAssertion America is 'n Country.
+ClassAssertion England is 'n Country.
+ObjectPropertyDomain Net Food isIngredientOf iets.
+ObjectPropertyDomain Net Pizza hasBase iets.
+ObjectPropertyDomain Net PizzaTopping isToppingOf iets.
+ObjectPropertyDomain Net Pizza hasTopping iets.
+ObjectPropertyDomain Net PizzaBase isBaseOf iets.
+ObjectPropertyDomain Net Food hasIngredient iets.
+ObjectPropertyRange Iets hasSpiciness net Spiciness.
+ObjectPropertyRange Iets isToppingOf net Pizza.
+ObjectPropertyRange Iets hasIngredient net Food.
+ObjectPropertyRange Iets hasTopping net PizzaTopping.
+ObjectPropertyRange Iets hasBase net PizzaBase.
+ObjectPropertyRange Iets isIngredientOf net Food.
+ObjectPropertyRange Iets isBaseOf net Pizza.
+FunctionalProperty Elke objek kan net een objek hasSpiciness.
+FunctionalProperty Elke objek kan net een objek isBaseOf.
+FunctionalProperty Elke objek kan net een objek hasBase.
+FunctionalProperty Elke objek kan net een objek isToppingOf.
+TransitiveObjectProperty "hasIngredient" is Oorganklike (As X hasIngredient Y, en Y hasIngredient Z; dit beteken dat X hasIngredient Z.).
+TransitiveObjectProperty "isIngredientOf" is Oorganklike (As X isIngredientOf Y, en Y isIngredientOf Z; dit beteken dat X isIngredientOf Z.).
+DifferentIndividual America en England en France en Germany en Italy is almal verskillend.
+InverseObjectProperty "hasBase" is die teenoorgestelde van "isBaseOf" (As X hasBase Y; Y isBaseOf X.).
+InverseObjectProperty "hasTopping" is die teenoorgestelde van "isToppingOf" (As X hasTopping Y; Y isToppingOf X.).
+InverseObjectProperty "hasIngredient" is die teenoorgestelde van "isIngredientOf" (As X hasIngredient Y; Y isIngredientOf X.).
+Disjoint 'n AmericanHot is nie 'n PrinceCarlo nie.
+Disjoint 'n Parmense is nie 'n FruttiDiMare nie.
+Disjoint 'n TomatoTopping is nie 'n SpinachTopping nie.
+Disjoint 'n Napoletana is nie 'n PolloAdAstra nie.
+Disjoint 'n LaReine is nie 'n FourSeasons nie.
+Disjoint 'n Fiorentina is nie 'n Caprina nie.
+Disjoint 'n Mushroom is nie 'n Napoletana nie.
+Disjoint 'n Soho is nie 'n Giardiniera nie.
+Disjoint 'n Veneziana is nie 'n Caprina nie.
+Disjoint 'n FruitTopping is nie 'n NutTopping nie.
+Disjoint 'n Soho is nie 'n Parmense nie.
+Disjoint 'n AmericanHot is nie 'n FourSeasons nie.
+Disjoint 'n AsparagusTopping is nie 'n TomatoTopping nie.
+Disjoint 'n Caprina is nie 'n FruttiDiMare nie.
+Disjoint 'n UnclosedPizza is nie 'n Rosa nie.
+Disjoint 'n SloppyGiuseppe is nie 'n FourSeasons nie.
+Disjoint 'n MeatTopping is nie 'n CheeseTopping nie.
+Disjoint 'n Cajun is nie 'n Caprina nie.
+Disjoint 'n MushroomTopping is nie 'n RocketTopping nie.
+Disjoint 'n AnchoviesTopping is nie 'n PrawnsTopping nie.
+Disjoint 'n LeekTopping is nie 'n OnionTopping nie.
+Disjoint 'n MushroomTopping is nie 'n ArtichokeTopping nie.
+Disjoint 'n American is nie 'n Capricciosa nie.
+Disjoint 'n Siciliana is nie 'n Caprina nie.
+Disjoint 'n Mushroom is nie 'n PolloAdAstra nie.
+Disjoint 'n Rosa is nie 'n FruttiDiMare nie.
+Disjoint 'n UnclosedPizza is nie 'n Veneziana nie.
+Disjoint 'n AmericanHot is nie 'n Rosa nie.
+Disjoint 'n GorgonzolaTopping is nie 'n ParmesanTopping nie.
+Disjoint 'n NutTopping is nie 'n CheeseTopping nie.
+Disjoint 'n Soho is nie 'n Capricciosa nie.
+Disjoint 'n ThinAndCrispyBase is nie 'n DeepPanBase nie.
+Disjoint 'n Giardiniera is nie 'n Napoletana nie.
+Disjoint 'n Veneziana is nie 'n PolloAdAstra nie.
+Disjoint 'n Rosa is nie 'n PolloAdAstra nie.
+Disjoint 'n Siciliana is nie 'n Capricciosa nie.
+Disjoint 'n Mushroom is nie 'n Soho nie.
+Disjoint 'n Mushroom is nie 'n Cajun nie.
+Disjoint 'n Fiorentina is nie 'n Soho nie.
+Disjoint 'n SloppyGiuseppe is nie 'n Giardiniera nie.
+Disjoint 'n LaReine is nie 'n PrinceCarlo nie.
+Disjoint 'n Fiorentina is nie 'n Giardiniera nie.
+Disjoint 'n Cajun is nie 'n PrinceCarlo nie.
+Disjoint 'n Mushroom is nie 'n Caprina nie.
+Disjoint 'n QuattroFormaggi is nie 'n American nie.
+Disjoint 'n GoatsCheeseTopping is nie 'n ParmesanTopping nie.
+Disjoint 'n FruitTopping is nie 'n VegetableTopping nie.
+Disjoint 'n MushroomTopping is nie 'n PepperTopping nie.
+Disjoint 'n Soho is nie 'n Margherita nie.
+Disjoint 'n LeekTopping is nie 'n SpinachTopping nie.
+Disjoint 'n LaReine is nie 'n Margherita nie.
+Disjoint 'n PetitPoisTopping is nie 'n OliveTopping nie.
+Disjoint 'n SloppyGiuseppe is nie 'n Soho nie.
+Disjoint 'n Mushroom is nie 'n LaReine nie.
+Disjoint 'n Cajun is nie 'n FourSeasons nie.
+Disjoint 'n CaperTopping is nie 'n PetitPoisTopping nie.
+Disjoint 'n RocketTopping is nie 'n OliveTopping nie.
+Disjoint 'n Cajun is nie 'n Parmense nie.
+Disjoint 'n CaperTopping is nie 'n RocketTopping nie.
+Disjoint 'n Soho is nie 'n FruttiDiMare nie.
+Disjoint 'n QuattroFormaggi is nie 'n Soho nie.
+Disjoint 'n Margherita is nie 'n Caprina nie.
+Disjoint 'n FishTopping is nie 'n CheeseTopping nie.
+Disjoint 'n Giardiniera is nie 'n Capricciosa nie.
+Disjoint 'n FourSeasons is nie 'n Parmense nie.
+Disjoint 'n CajunSpiceTopping is nie 'n RosemaryTopping nie.
+Disjoint 'n Fiorentina is nie 'n American nie.
+Disjoint 'n SloppyGiuseppe is nie 'n Capricciosa nie.
+Disjoint 'n Siciliana is nie 'n American nie.
+Disjoint 'n LaReine is nie 'n Siciliana nie.
+Disjoint 'n SloppyGiuseppe is nie 'n Fiorentina nie.
+Disjoint 'n Cajun is nie 'n Siciliana nie.
+Disjoint 'n Veneziana is nie 'n Napoletana nie.
+Disjoint 'n QuattroFormaggi is nie 'n Giardiniera nie.
+Disjoint 'n Mushroom is nie 'n Siciliana nie.
+Disjoint 'n FourCheesesTopping is nie 'n ParmesanTopping nie.
+Disjoint 'n QuattroFormaggi is nie 'n Parmense nie.
+Disjoint 'n Mushroom is nie 'n Capricciosa nie.
+Disjoint 'n GoatsCheeseTopping is nie 'n GorgonzolaTopping nie.
+Disjoint 'n QuattroFormaggi is nie 'n Margherita nie.
+Disjoint 'n Margherita is nie 'n FruttiDiMare nie.
+Disjoint 'n FishTopping is nie 'n SauceTopping nie.
+Disjoint 'n QuattroFormaggi is nie 'n PrinceCarlo nie.
+Disjoint 'n MushroomTopping is nie 'n GarlicTopping nie.
+Disjoint 'n AmericanHot is nie 'n Margherita nie.
+Disjoint 'n FourCheesesTopping is nie 'n GorgonzolaTopping nie.
+Disjoint 'n UnclosedPizza is nie 'n FourSeasons nie.
+Disjoint 'n SloppyGiuseppe is nie 'n Margherita nie.
+Disjoint 'n PrinceCarlo is nie 'n Capricciosa nie.
+Disjoint 'n Pizza is nie 'n PizzaBase nie.
+Disjoint 'n ArtichokeTopping is nie 'n OliveTopping nie.
+Disjoint 'n CaperTopping is nie 'n PepperTopping nie.
+Disjoint 'n HerbSpiceTopping is nie 'n NutTopping nie.
+Disjoint 'n AmericanHot is nie 'n Soho nie.
+Disjoint 'n Giardiniera is nie 'n Parmense nie.
+Disjoint 'n IceCream is nie 'n Pizza nie.
+Disjoint 'n Mushroom is nie 'n Veneziana nie.
+Disjoint 'n PolloAdAstra is nie 'n American nie.
+Disjoint 'n SloppyGiuseppe is nie 'n QuattroFormaggi nie.
+Disjoint 'n Soho is nie 'n Veneziana nie.
+Disjoint 'n FourSeasons is nie 'n Capricciosa nie.
+Disjoint 'n Soho is nie 'n PolloAdAstra nie.
+Disjoint 'n SpinachTopping is nie 'n OnionTopping nie.
+Disjoint 'n FishTopping is nie 'n MeatTopping nie.
+Disjoint 'n CaperTopping is nie 'n MushroomTopping nie.
+Disjoint 'n Veneziana is nie 'n Capricciosa nie.
+Disjoint 'n LaReine is nie 'n American nie.
+Disjoint 'n Siciliana is nie 'n PolloAdAstra nie.
+Disjoint 'n American is nie 'n FruttiDiMare nie.
+Disjoint 'n Fiorentina is nie 'n QuattroFormaggi nie.
+Disjoint 'n GarlicTopping is nie 'n PepperTopping nie.
+Disjoint 'n AsparagusTopping is nie 'n OnionTopping nie.
+Disjoint 'n Rosa is nie 'n Parmense nie.
+Disjoint 'n PolloAdAstra is nie 'n FourSeasons nie.
+Disjoint 'n AmericanHot is nie 'n Fiorentina nie.
+Disjoint 'n OliveTopping is nie 'n TomatoTopping nie.
+Disjoint 'n AsparagusTopping is nie 'n SpinachTopping nie.
+Disjoint 'n FourCheesesTopping is nie 'n GoatsCheeseTopping nie.
+Disjoint 'n LaReine is nie 'n FruttiDiMare nie.
+Disjoint 'n CaperTopping is nie 'n TomatoTopping nie.
+Disjoint 'n IceCream is nie 'n PizzaTopping nie.
+Disjoint 'n UnclosedPizza is nie 'n Parmense nie.
+Disjoint 'n RocketTopping is nie 'n OnionTopping nie.
+Disjoint 'n AmericanHot is nie 'n LaReine nie.
+Disjoint 'n Parmense is nie 'n Capricciosa nie.
+Disjoint 'n Veneziana is nie 'n American nie.
+Disjoint 'n NutTopping is nie 'n MeatTopping nie.
+Disjoint 'n LeekTopping is nie 'n TomatoTopping nie.
+Disjoint 'n HotSpicedBeefTopping is nie 'n ChickenTopping nie.
+Disjoint 'n SloppyGiuseppe is nie 'n FruttiDiMare nie.
+Disjoint 'n Mushroom is nie 'n PrinceCarlo nie.
+Disjoint 'n QuattroFormaggi is nie 'n PolloAdAstra nie.
+Disjoint 'n Fiorentina is nie 'n Margherita nie.
+Disjoint 'n AmericanHot is nie 'n SloppyGiuseppe nie.
+Disjoint 'n PeperonataTopping is nie 'n GreenPepperTopping nie.
+Disjoint 'n PizzaTopping is nie 'n PizzaBase nie.
+Disjoint 'n Giardiniera is nie 'n FourSeasons nie.
+Disjoint 'n PolloAdAstra is nie 'n Capricciosa nie.
+Disjoint 'n Napoletana is nie 'n FourSeasons nie.
+Disjoint 'n Rosa is nie 'n American nie.
+Disjoint 'n Medium is nie 'n Mild nie.
+Disjoint 'n SloppyGiuseppe is nie 'n PolloAdAstra nie.
+Disjoint 'n AsparagusTopping is nie 'n OliveTopping nie.
+Disjoint 'n Giardiniera is nie 'n PrinceCarlo nie.
+Disjoint 'n Veneziana is nie 'n FruttiDiMare nie.
+Disjoint 'n AmericanHot is nie 'n Capricciosa nie.
+Disjoint 'n UnclosedPizza is nie 'n Soho nie.
+Disjoint 'n UnclosedPizza is nie 'n Capricciosa nie.
+Disjoint 'n FruitTopping is nie 'n MeatTopping nie.
+Disjoint 'n FourSeasons is nie 'n Caprina nie.
+Disjoint 'n Cajun is nie 'n Giardiniera nie.
+Disjoint 'n PolloAdAstra is nie 'n Parmense nie.
+Disjoint 'n TomatoTopping is nie 'n OnionTopping nie.
+Disjoint 'n Cajun is nie 'n Napoletana nie.
+Disjoint 'n IceCream is nie 'n PizzaBase nie.
+Disjoint 'n AmericanHot is nie 'n Napoletana nie.
+Disjoint 'n AmericanHot is nie 'n Cajun nie.
+Disjoint 'n OnionTopping is nie 'n PepperTopping nie.
+Disjoint 'n LaReine is nie 'n Rosa nie.
+Disjoint 'n LeekTopping is nie 'n OliveTopping nie.
+Disjoint 'n Margherita is nie 'n Parmense nie.
+Disjoint 'n PetitPoisTopping is nie 'n OnionTopping nie.
+Disjoint 'n PrinceCarlo is nie 'n Caprina nie.
+Disjoint 'n ArtichokeTopping is nie 'n RocketTopping nie.
+Disjoint 'n GarlicTopping is nie 'n OliveTopping nie.
+Disjoint 'n Mushroom is nie 'n Rosa nie.
+Disjoint 'n PrinceCarlo is nie 'n PolloAdAstra nie.
+Disjoint 'n Rosa is nie 'n FourSeasons nie.
+Disjoint 'n UnclosedPizza is nie 'n Margherita nie.
+Disjoint 'n SloppyGiuseppe is nie 'n PrinceCarlo nie.
+Disjoint 'n FruitTopping is nie 'n FishTopping nie.
+Disjoint 'n Fiorentina is nie 'n Rosa nie.
+Disjoint 'n MixedSeafoodTopping is nie 'n PrawnsTopping nie.
+Disjoint 'n MushroomTopping is nie 'n AsparagusTopping nie.
+Disjoint 'n LaReine is nie 'n Capricciosa nie.
+Disjoint 'n Cajun is nie 'n LaReine nie.
+Disjoint 'n Capricciosa is nie 'n FruttiDiMare nie.
+Disjoint 'n OliveTopping is nie 'n SpinachTopping nie.
+Disjoint 'n AmericanHot is nie 'n Caprina nie.
+Disjoint 'n FourSeasons is nie 'n FruttiDiMare nie.
+Disjoint 'n UnclosedPizza is nie 'n QuattroFormaggi nie.
+Disjoint 'n HerbSpiceTopping is nie 'n SauceTopping nie.
+Disjoint 'n Hot is nie 'n Medium nie.
+Disjoint 'n RocketTopping is nie 'n GarlicTopping nie.
+Disjoint 'n Fiorentina is nie 'n FruttiDiMare nie.
+Disjoint 'n Napoletana is nie 'n Rosa nie.
+Disjoint 'n GarlicTopping is nie 'n TomatoTopping nie.
+Disjoint 'n Parmense is nie 'n American nie.
+Disjoint 'n RocketTopping is nie 'n SpinachTopping nie.
+Disjoint 'n Margherita is nie 'n PolloAdAstra nie.
+Disjoint 'n FishTopping is nie 'n VegetableTopping nie.
+Disjoint 'n AmericanHot is nie 'n Parmense nie.
+Disjoint 'n FruitTopping is nie 'n HerbSpiceTopping nie.
+Disjoint 'n QuattroFormaggi is nie 'n Capricciosa nie.
+Disjoint 'n Napoletana is nie 'n Capricciosa nie.
+Disjoint 'n PetitPoisTopping is nie 'n SpinachTopping nie.
+Disjoint 'n Rosa is nie 'n PrinceCarlo nie.
+Disjoint 'n Cajun is nie 'n Veneziana nie.
+Disjoint 'n Giardiniera is nie 'n PolloAdAstra nie.
+Disjoint 'n Margherita is nie 'n American nie.
+Disjoint 'n LeekTopping is nie 'n ArtichokeTopping nie.
+Disjoint 'n GarlicTopping is nie 'n AsparagusTopping nie.
+Disjoint 'n Mushroom is nie 'n American nie.
+Disjoint 'n UnclosedPizza is nie 'n PolloAdAstra nie.
+Disjoint 'n PetitPoisTopping is nie 'n ArtichokeTopping nie.
+Disjoint 'n ArtichokeTopping is nie 'n SpinachTopping nie.
+Disjoint 'n AmericanHot is nie 'n American nie.
+Disjoint 'n SlicedTomatoTopping is nie 'n SundriedTomatoTopping nie.
+Disjoint 'n QuattroFormaggi is nie 'n FourSeasons nie.
+Disjoint 'n LaReine is nie 'n Parmense nie.
+Disjoint 'n Fiorentina is nie 'n Napoletana nie.
+Disjoint 'n FruitTopping is nie 'n CheeseTopping nie.
+Disjoint 'n UnclosedPizza is nie 'n FruttiDiMare nie.
+Disjoint 'n Soho is nie 'n American nie.
+Disjoint 'n OliveTopping is nie 'n OnionTopping nie.
+Disjoint 'n Caprina is nie 'n American nie.
+Disjoint 'n AmericanHot is nie 'n UnclosedPizza nie.
+Disjoint 'n Siciliana is nie 'n FourSeasons nie.
+Disjoint 'n FruitTopping is nie 'n SauceTopping nie.
+Disjoint 'n QuattroFormaggi is nie 'n Napoletana nie.
+Disjoint 'n GoatsCheeseTopping is nie 'n MozzarellaTopping nie.
+Disjoint 'n QuattroFormaggi is nie 'n Cajun nie.
+Disjoint 'n Rosa is nie 'n Siciliana nie.
+Disjoint 'n SauceTopping is nie 'n MeatTopping nie.
+Disjoint 'n PeperonataTopping is nie 'n SweetPepperTopping nie.
+Disjoint 'n Veneziana is nie 'n Siciliana nie.
+Disjoint 'n LaReine is nie 'n Soho nie.
+Disjoint 'n LeekTopping is nie 'n PetitPoisTopping nie.
+Disjoint 'n Giardiniera is nie 'n Margherita nie.
+Disjoint 'n Soho is nie 'n PrinceCarlo nie.
+Disjoint 'n Mushroom is nie 'n Giardiniera nie.
+Disjoint 'n LeekTopping is nie 'n RocketTopping nie.
+Disjoint 'n LaReine is nie 'n Napoletana nie.
+Disjoint 'n AmericanHot is nie 'n FruttiDiMare nie.
+Disjoint 'n LeekTopping is nie 'n MushroomTopping nie.
+Disjoint 'n Fiorentina is nie 'n PolloAdAstra nie.
+Disjoint 'n Veneziana is nie 'n FourSeasons nie.
+Disjoint 'n Mushroom is nie 'n Fiorentina nie.
+Disjoint 'n MushroomTopping is nie 'n SpinachTopping nie.
+Disjoint 'n Giardiniera is nie 'n FruttiDiMare nie.
+Disjoint 'n SauceTopping is nie 'n CheeseTopping nie.
+Disjoint 'n PrinceCarlo is nie 'n FourSeasons nie.
+Disjoint 'n ArtichokeTopping is nie 'n OnionTopping nie.
+Disjoint 'n AmericanHot is nie 'n PolloAdAstra nie.
+Disjoint 'n Fiorentina is nie 'n Cajun nie.
+Disjoint 'n LeekTopping is nie 'n AsparagusTopping nie.
+Disjoint 'n HamTopping is nie 'n ChickenTopping nie.
+Disjoint 'n Napoletana is nie 'n Caprina nie.
+Disjoint 'n AmericanHot is nie 'n QuattroFormaggi nie.
+Disjoint 'n Giardiniera is nie 'n Siciliana nie.
+Disjoint 'n Napoletana is nie 'n Margherita nie.
+Disjoint 'n PolloAdAstra is nie 'n FruttiDiMare nie.
+Disjoint 'n SloppyGiuseppe is nie 'n American nie.
+Disjoint 'n Siciliana is nie 'n Parmense nie.
+Disjoint 'n MushroomTopping is nie 'n PetitPoisTopping nie.
+Disjoint 'n UnclosedPizza is nie 'n Cajun nie.
+Disjoint 'n CaperTopping is nie 'n OliveTopping nie.
+Disjoint 'n AmericanHot is nie 'n Veneziana nie.
+Disjoint 'n Soho is nie 'n Napoletana nie.
+Disjoint 'n QuattroFormaggi is nie 'n Rosa nie.
+Disjoint 'n SauceTopping is nie 'n NutTopping nie.
+Disjoint 'n ChickenTopping is nie 'n PeperoniSausageTopping nie.
+Disjoint 'n Fiorentina is nie 'n Parmense nie.
+Disjoint 'n Fiorentina is nie 'n LaReine nie.
+Disjoint 'n Napoletana is nie 'n Siciliana nie.
+Disjoint 'n UnclosedPizza is nie 'n Napoletana nie.
+Disjoint 'n Napoletana is nie 'n FruttiDiMare nie.
+Disjoint 'n AmericanHot is nie 'n Giardiniera nie.
+Disjoint 'n SpinachTopping is nie 'n PepperTopping nie.
+Disjoint 'n LeekTopping is nie 'n GarlicTopping nie.
+Disjoint 'n HerbSpiceTopping is nie 'n MeatTopping nie.
+Disjoint 'n LeekTopping is nie 'n PepperTopping nie.
+Disjoint 'n LaReine is nie 'n Caprina nie.
+Disjoint 'n RocketTopping is nie 'n TomatoTopping nie.
+Disjoint 'n UnclosedPizza is nie 'n Siciliana nie.
+Disjoint 'n LaReine is nie 'n Giardiniera nie.
+Disjoint 'n Cajun is nie 'n American nie.
+Disjoint 'n Mushroom is nie 'n FourSeasons nie.
+Disjoint 'n PrinceCarlo is nie 'n Siciliana nie.
+Disjoint 'n SloppyGiuseppe is nie 'n LaReine nie.
+Disjoint 'n PetitPoisTopping is nie 'n TomatoTopping nie.
+Disjoint 'n SloppyGiuseppe is nie 'n Cajun nie.
+Disjoint 'n VegetableTopping is nie 'n SauceTopping nie.
+Disjoint 'n FourCheesesTopping is nie 'n MozzarellaTopping nie.
+Disjoint 'n PetitPoisTopping is nie 'n PepperTopping nie.
+Disjoint 'n SloppyGiuseppe is nie 'n Caprina nie.
+Disjoint 'n SweetPepperTopping is nie 'n GreenPepperTopping nie.
+Disjoint 'n PetitPoisTopping is nie 'n RocketTopping nie.
+Disjoint 'n Mushroom is nie 'n Margherita nie.
+Disjoint 'n RocketTopping is nie 'n PepperTopping nie.
+Disjoint 'n FourSeasons is nie 'n American nie.
+Disjoint 'n Fiorentina is nie 'n Siciliana nie.
+Disjoint 'n PrinceCarlo is nie 'n American nie.
+Disjoint 'n JalapenoPepperTopping is nie 'n PeperonataTopping nie.
+Disjoint 'n SloppyGiuseppe is nie 'n Rosa nie.
+Disjoint 'n Fiorentina is nie 'n Capricciosa nie.
+Disjoint 'n Veneziana is nie 'n Margherita nie.
+Disjoint 'n HerbSpiceTopping is nie 'n VegetableTopping nie.
+Disjoint 'n Cajun is nie 'n PolloAdAstra nie.
+Disjoint 'n MixedSeafoodTopping is nie 'n AnchoviesTopping nie.
+Disjoint 'n SloppyGiuseppe is nie 'n Napoletana nie.
+Disjoint 'n Soho is nie 'n Rosa nie.
+Disjoint 'n PetitPoisTopping is nie 'n AsparagusTopping nie.
+Disjoint 'n Siciliana is nie 'n Margherita nie.
+Disjoint 'n Veneziana is nie 'n Giardiniera nie.
+Disjoint 'n Giardiniera is nie 'n Caprina nie.
+Disjoint 'n RocketTopping is nie 'n AsparagusTopping nie.
+Disjoint 'n CaperTopping is nie 'n GarlicTopping nie.
+Disjoint 'n QuattroFormaggi is nie 'n LaReine nie.
+Disjoint 'n Caprina is nie 'n Capricciosa nie.
+Disjoint 'n ArtichokeTopping is nie 'n AsparagusTopping nie.
+Disjoint 'n UnclosedPizza is nie 'n Caprina nie.
+Disjoint 'n MushroomTopping is nie 'n OliveTopping nie.
+Disjoint 'n PrinceCarlo is nie 'n Parmense nie.
+Disjoint 'n LeekTopping is nie 'n CaperTopping nie.
+Disjoint 'n Mushroom is nie 'n QuattroFormaggi nie.
+Disjoint 'n QuattroFormaggi is nie 'n Siciliana nie.
+Disjoint 'n Hot is nie 'n Mild nie.
+Disjoint 'n ValuePartition is nie 'n DomainConcept nie.
+Disjoint 'n QuattroFormaggi is nie 'n Caprina nie.
+Disjoint 'n LaReine is nie 'n Veneziana nie.
+Disjoint 'n PizzaTopping is nie 'n Pizza nie.
+Disjoint 'n Soho is nie 'n Siciliana nie.
+Disjoint 'n ArtichokeTopping is nie 'n TomatoTopping nie.
+Disjoint 'n Napoletana is nie 'n PrinceCarlo nie.
+Disjoint 'n Veneziana is nie 'n Parmense nie.
+Disjoint 'n HerbSpiceTopping is nie 'n CheeseTopping nie.
+Disjoint 'n CaperTopping is nie 'n SpinachTopping nie.
+Disjoint 'n SloppyGiuseppe is nie 'n Veneziana nie.
+Disjoint 'n Mushroom is nie 'n FruttiDiMare nie.
+Disjoint 'n MushroomTopping is nie 'n TomatoTopping nie.
+Disjoint 'n HamTopping is nie 'n HotSpicedBeefTopping nie.
+Disjoint 'n AmericanHot is nie 'n Mushroom nie.
+Disjoint 'n ArtichokeTopping is nie 'n GarlicTopping nie.
+Disjoint 'n UnclosedPizza is nie 'n American nie.
+Disjoint 'n QuattroFormaggi is nie 'n FruttiDiMare nie.
+Disjoint 'n Mushroom is nie 'n Parmense nie.
+Disjoint 'n VegetableTopping is nie 'n MeatTopping nie.
+Disjoint 'n SloppyGiuseppe is nie 'n Siciliana nie.
+Disjoint 'n AsparagusTopping is nie 'n PepperTopping nie.
+Disjoint 'n Caprina is nie 'n Parmense nie.
+Disjoint 'n Margherita is nie 'n Capricciosa nie.
+Disjoint 'n MushroomTopping is nie 'n OnionTopping nie.
+Disjoint 'n Giardiniera is nie 'n Rosa nie.
+Disjoint 'n Cajun is nie 'n Soho nie.
+Disjoint 'n CaperTopping is nie 'n ArtichokeTopping nie.
+Disjoint 'n Siciliana is nie 'n FruttiDiMare nie.
+Disjoint 'n Veneziana is nie 'n PrinceCarlo nie.
+Disjoint 'n Fiorentina is nie 'n FourSeasons nie.
+Disjoint 'n Fiorentina is nie 'n PrinceCarlo nie.
+Disjoint 'n TomatoTopping is nie 'n PepperTopping nie.
+Disjoint 'n AmericanHot is nie 'n Siciliana nie.
+Disjoint 'n Soho is nie 'n Caprina nie.
+Disjoint 'n UnclosedPizza is nie 'n LaReine nie.
+Disjoint 'n Cajun is nie 'n Capricciosa nie.
+Disjoint 'n JalapenoPepperTopping is nie 'n GreenPepperTopping nie.
+Disjoint 'n Napoletana is nie 'n Parmense nie.
+Disjoint 'n PrinceCarlo is nie 'n Margherita nie.
+Disjoint 'n Mushroom is nie 'n UnclosedPizza nie.
+Disjoint 'n HamTopping is nie 'n PeperoniSausageTopping nie.
+Disjoint 'n GorgonzolaTopping is nie 'n MozzarellaTopping nie.
+Disjoint 'n JalapenoPepperTopping is nie 'n SweetPepperTopping nie.
+Disjoint 'n CaperTopping is nie 'n OnionTopping nie.
+Disjoint 'n NonVegetarianPizza is nie 'n VegetarianPizza nie.
+Disjoint 'n UnclosedPizza is nie 'n Fiorentina nie.
+Disjoint 'n UnclosedPizza is nie 'n Giardiniera nie.
+Disjoint 'n Margherita is nie 'n FourSeasons nie.
+Disjoint 'n OliveTopping is nie 'n PepperTopping nie.
+Disjoint 'n Rosa is nie 'n Capricciosa nie.
+Disjoint 'n Fiorentina is nie 'n Veneziana nie.
+Disjoint 'n SloppyGiuseppe is nie 'n UnclosedPizza nie.
+Disjoint 'n VegetableTopping is nie 'n NutTopping nie.
+Disjoint 'n Veneziana is nie 'n Rosa nie.
+Disjoint 'n PetitPoisTopping is nie 'n GarlicTopping nie.
+Disjoint 'n GarlicTopping is nie 'n SpinachTopping nie.
+Disjoint 'n ArtichokeTopping is nie 'n PepperTopping nie.
+Disjoint 'n Cajun is nie 'n Rosa nie.
+Disjoint 'n LaReine is nie 'n PolloAdAstra nie.
+Disjoint 'n Soho is nie 'n FourSeasons nie.
+Disjoint 'n Cajun is nie 'n Margherita nie.
+Disjoint 'n GarlicTopping is nie 'n OnionTopping nie.
+Disjoint 'n Giardiniera is nie 'n American nie.
+Disjoint 'n Mushroom is nie 'n SloppyGiuseppe nie.
+Disjoint 'n Rosa is nie 'n Caprina nie.
+Disjoint 'n Napoletana is nie 'n American nie.
+Disjoint 'n CaperTopping is nie 'n AsparagusTopping nie.
+Disjoint 'n MozzarellaTopping is nie 'n ParmesanTopping nie.
+Disjoint 'n QuattroFormaggi is nie 'n Veneziana nie.
+Disjoint 'n UnclosedPizza is nie 'n PrinceCarlo nie.
+Disjoint 'n Cajun is nie 'n FruttiDiMare nie.
+Disjoint 'n PolloAdAstra is nie 'n Caprina nie.
+Disjoint 'n SloppyGiuseppe is nie 'n Parmense nie.
+Disjoint 'n FishTopping is nie 'n HerbSpiceTopping nie.
+Disjoint 'n FishTopping is nie 'n NutTopping nie.
+Disjoint 'n PrinceCarlo is nie 'n FruttiDiMare nie.
+Disjoint 'n VegetableTopping is nie 'n CheeseTopping nie.
+Disjoint 'n HotSpicedBeefTopping is nie 'n PeperoniSausageTopping nie.
+Disjoint 'n Rosa is nie 'n Margherita nie.
+InverseFunctionalObjectProperty Net een individuele hasBase iets.
+InverseFunctionalObjectProperty Net een individuele hasTopping iets.
+InverseFunctionalObjectProperty Net een individuele isBaseOf iets.

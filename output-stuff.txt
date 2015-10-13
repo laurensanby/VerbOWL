@@ -1,0 +1,175 @@
+Disjoint 'n DispersionColloid is nie 'n AssociationalColloid nie.
+Disjoint 'n MolecularColloid is nie 'n AssociationalColloid nie.
+Disjoint 'n DispersionColloid is nie 'n MolecularColloid nie.
+Disjoint 'n Atom is nie 'n Ion nie.
+Disjoint 'n MultiMoleculeParticle is nie 'n Ion nie.
+Disjoint 'n MultiMoleculeParticle is nie 'n Atom nie.
+Disjoint 'n Molecule is nie 'n Ion nie.
+Disjoint 'n Molecule is nie 'n MultiMoleculeParticle nie.
+Disjoint 'n Molecule is nie 'n Atom nie.
+Disjoint 'n Liquid is nie 'n Solid nie.
+Disjoint 'n Gas is nie 'n Solid nie.
+Disjoint 'n Liquid is nie 'n Gas nie.
+Disjoint 'n Stuff is nie 'n PhysicalObject nie.
+Disjoint 'n StructuredPureStuff is nie 'n UnstructuredPureStuff nie.
+Disjoint 'n PureStuff is nie 'n MixedStuff nie.
+Disjoint 'n Perdurant is nie 'n Endurant nie.
+Disjoint 'n Quality is nie 'n Abstract nie.
+Disjoint 'n Perdurant is nie 'n Quality nie.
+Disjoint 'n Endurant is nie 'n Abstract nie.
+Disjoint 'n Perdurant is nie 'n Abstract nie.
+Disjoint 'n Endurant is nie 'n Quality nie.
+Disjoint 'n Perdurant is nie 'n Endurant nie.
+Disjoint 'n HeterogeneousMixture is nie 'n HomogeneousMixture nie.
+Disjoint 'n Solvent is nie 'n Solute nie.
+Disjoint 'n Role is nie 'n PhysicalEndurant nie.
+Disjoint 'n Emulsion is nie 'n Gel nie.
+Disjoint 'n LiquidAerosol is nie 'n SolidAerosol nie.
+Disjoint 'n Emulsion is nie 'n Sol nie.
+Disjoint 'n LiquidAerosol is nie 'n SolidFoam nie.
+Disjoint 'n Gel is nie 'n SolidAerosol nie.
+Disjoint 'n Emulsion is nie 'n Foam nie.
+Disjoint 'n SolidFoam is nie 'n SolidSol nie.
+Disjoint 'n Emulsion is nie 'n SolidSol nie.
+Disjoint 'n Gel is nie 'n SolidSol nie.
+Disjoint 'n LiquidAerosol is nie 'n Emulsion nie.
+Disjoint 'n Sol is nie 'n SolidAerosol nie.
+Disjoint 'n SolidFoam is nie 'n SolidAerosol nie.
+Disjoint 'n SolidFoam is nie 'n Sol nie.
+Disjoint 'n SolidSol is nie 'n Foam nie.
+Disjoint 'n Emulsion is nie 'n SolidAerosol nie.
+Disjoint 'n LiquidAerosol is nie 'n Foam nie.
+Disjoint 'n LiquidAerosol is nie 'n Sol nie.
+Disjoint 'n Sol is nie 'n SolidSol nie.
+Disjoint 'n Emulsion is nie 'n SolidFoam nie.
+Disjoint 'n Gel is nie 'n Sol nie.
+Disjoint 'n Foam is nie 'n SolidAerosol nie.
+Disjoint 'n LiquidAerosol is nie 'n Gel nie.
+Disjoint 'n SolidSol is nie 'n SolidAerosol nie.
+Disjoint 'n Gel is nie 'n SolidFoam nie.
+Disjoint 'n Gel is nie 'n Foam nie.
+Disjoint 'n SolidFoam is nie 'n Foam nie.
+Disjoint 'n LiquidAerosol is nie 'n SolidSol nie.
+Disjoint 'n Sol is nie 'n Foam nie.
+Disjoint 'n ContinuousMedium is nie 'n DispersedPhase nie.
+DataPropertyDomain Net Abstract het hasDataValue.
+DataPropertyDomain Net Stuff het hasNrOfPhase.
+TransitiveObjectProperty "hasPart" is Oorganklike (As X hasPart Y, en Y hasPart Z; dit beteken dat X hasPart Z.).
+TransitiveObjectProperty "portionOf" is Oorganklike (As X portionOf Y, en Y portionOf Z; dit beteken dat X portionOf Z.).
+DisjointUnion Elke Stuff is of 'n MixedStuff of 'n PureStuff; elke MixedStuff is 'n Stuff, elke PureStuff is 'n Stuff; en niks kan 'n MixedStuff en 'n PureStuff wees nie.
+DisjointUnion Elke PureStuff is of 'n PureBulk of 'n StructuredPureStuff of 'n UnstructuredPureStuff; elke PureBulk is 'n PureStuff, elke StructuredPureStuff is 'n PureStuff, elke UnstructuredPureStuff is 'n PureStuff; en niks kan 'n PureBulk en 'n StructuredPureStuff en 'n UnstructuredPureStuff wees nie.
+DisjointUnion Elke MixedStuff is of 'n HeterogeneousMixture of 'n HomogeneousMixture; elke HeterogeneousMixture is 'n MixedStuff, elke HomogeneousMixture is 'n MixedStuff; en niks kan 'n HeterogeneousMixture en 'n HomogeneousMixture wees nie.
+Complex SubClass Elke HeterogeneousMixture hasSubStuff ten minste 2 PureStuff of MixedStuff.
+OWLSubClassOfAxiom Elke PhysicalObject is 'n PhysicalEndurant.
+OWLSubClassOfAxiom Elke Paste is 'n Suspension.
+OWLSubClassOfAxiom Elke UnevenDistribution is 'n AbstractRegion.
+OWLSubClassOfAxiom Elke PureBulk is 'n PureStuff.
+Complex SubClass Elke NumberOfPhases hasDataValue xsd:nonNegativeInteger.
+OWLSubClassOfAxiom Elke Solid is 'n StuffState.
+OWLSubClassOfAxiom Elke AbstractRegion is 'n Abstract.
+OWLSubClassOfAxiom Elke Emulsion is 'n DispersionColloid.
+OWLSubClassOfAxiom Elke StructuredPureStuff is 'n PureStuff.
+OWLSubClassOfAxiom Elke Solution is 'n HomogeneousMixture.
+Complex SubClass Elke Suspension (hasGranuleType ten minste een Molecule en hasGranuleType ten minste een MultiMoleculeParticle).
+OWLSubClassOfAxiom Elke DispersionColloid is 'n Colloid.
+OWLSubClassOfAxiom Elke SolidHeterogeneousMixture is 'n HeterogeneousMixture.
+OWLSubClassOfAxiom Elke Gel is 'n DispersionColloid.
+OWLSubClassOfAxiom Elke Sol is 'n DispersionColloid.
+OWLSubClassOfAxiom Elke MolecularColloid is 'n Colloid.
+OWLSubClassOfAxiom Elke DispersedPhase is 'n StuffRole.
+OWLSubClassOfAxiom Elke MixedStuff is 'n Stuff.
+OWLSubClassOfAxiom Elke Atom is 'n PhysicalObject.
+Complex SubClass Elke HeterogeneousMixture hasGranuleType ten minste 2 Molecule of MultiMoleculeParticle.
+Complex SubClass Elke HeterogeneousMixture (hasStuffDistribution by die meeste 1 UnevenDistribution en hasStuffDistribution ten minste 1 UnevenDistribution).
+OWLSubClassOfAxiom Elke UnstructuredPureStuff is 'n PureStuff.
+Complex SubClass Elke StuffRole srInheresIn ten minste een Stuff.
+OWLSubClassOfAxiom Elke Bulk is 'n Stuff.
+OWLSubClassOfAxiom Elke Ion is 'n PhysicalObject.
+OWLSubClassOfAxiom Elke PureStuff is 'n Stuff.
+OWLSubClassOfAxiom Elke Distribution is 'n Quality.
+OWLSubClassOfAxiom Elke HomogeneousMixture is 'n MixedStuff.
+Complex SubClass Elke MixedStuff (is Stuff en hasSubStuff ten minste 2 Stuff).
+OWLSubClassOfAxiom Elke EvenDistribution is 'n AbstractRegion.
+OWLSubClassOfAxiom Elke HeterogeneousMixture is 'n MixedStuff.
+OWLSubClassOfAxiom Elke SolidSol is 'n DispersionColloid.
+OWLSubClassOfAxiom Elke Role is 'n Endurant.
+OWLSubClassOfAxiom Elke NumberOfPhases is 'n AbstractRegion.
+OWLSubClassOfAxiom Elke PhysicalEndurant is 'n Endurant.
+OWLSubClassOfAxiom Elke AssociationalColloid is 'n Colloid.
+OWLSubClassOfAxiom Elke Molecule is 'n PhysicalObject.
+OWLSubClassOfAxiom Elke Suspension is 'n HeterogeneousMixture.
+Complex SubClass Elke ContinuousMedium colloidFormingRelation ten minste een DispersedPhase.
+OWLSubClassOfAxiom Elke Stuff is 'n PhysicalEndurant.
+OWLSubClassOfAxiom Elke MultiMoleculeParticle is 'n PhysicalObject.
+Complex SubClass Elke Stuff hasState by die meeste 3 StuffState.
+OWLSubClassOfAxiom Elke Liquid is 'n StuffState.
+Complex SubClass Elke Distribution hasQuale ten minste een EvenDistribution of UnevenDistribution.
+OWLSubClassOfAxiom Elke Foam is 'n DispersionColloid.
+Complex SubClass Elke Bulk (hasSubStuff ten minste een Stuff of hasGranuleType ten minste een Molecule of MultiMoleculeParticle en hasGranuleType net Molecule of MultiMoleculeParticle of hasSubStuff net Stuff).
+Complex SubClass Elke HomogeneousMixture (hasStuffDistribution by die meeste 1 EvenDistribution en hasStuffDistribution ten minste 1 EvenDistribution).
+OWLSubClassOfAxiom Elke Solvent is 'n StuffRole.
+OWLSubClassOfAxiom Elke Solute is 'n StuffRole.
+OWLSubClassOfAxiom Elke SolidFoam is 'n DispersionColloid.
+Complex SubClass Elke Solute die inverse van solutionFormingRelation ten minste een Solvent.
+Complex SubClass Elke HomogeneousMixture hasGranuleType net Molecule of Atom of Ion.
+OWLSubClassOfAxiom Elke StuffState is 'n State.
+OWLSubClassOfAxiom Elke StuffRole is 'n Role.
+OWLSubClassOfAxiom Elke Gas is 'n StuffState.
+OWLSubClassOfAxiom Elke State is 'n Perdurant.
+OWLSubClassOfAxiom Elke Colloid is 'n HomogeneousMixture.
+Complex SubClass Elke Bulk is StructuredPureStuff of is MixedStuff.
+OWLSubClassOfAxiom Elke SolidAerosol is 'n DispersionColloid.
+OWLSubClassOfAxiom Elke ContinuousMedium is 'n StuffRole.
+OWLSubClassOfAxiom Elke MicellarColloid is 'n AssociationalColloid.
+Complex SubClass Elke Molecule hasPart ten minste een Atom.
+OWLSubClassOfAxiom Elke LiquidAerosol is 'n DispersionColloid.
+Complex SubClass Elke Stuff hasState net StuffState.
+ObjectPropertyRange Iets solutionFormingRelation net Solute.
+ObjectPropertyRange Iets colloidFormingRelation net DispersedPhase.
+ObjectPropertyRange Iets hasQuality net Quality.
+ObjectPropertyRange Iets portionOf net PureStuff of HomogeneousMixture.
+ObjectPropertyRange Iets inheresIn net PhysicalEndurant.
+ObjectPropertyRange Iets subQuantityOf net Stuff.
+ObjectPropertyRange Iets hasSubStuff net Stuff.
+ObjectPropertyRange Iets stuffFormingRelation net Solvent of Solute of ContinuousMedium of DispersedPhase.
+ObjectPropertyRange Iets srInheresIn net Stuff.
+ObjectPropertyRange Iets hasGranuleType net PhysicalObject.
+ObjectPropertyRange Iets hasState net State.
+ObjectPropertyRange Iets hasQuale net Abstract.
+SubObjectProperty As iets hasPart, dit hasSubStuff.
+SubObjectProperty As iets portionOf, dit scatteredPortionOf.
+SubObjectProperty As iets stuffFormingRelation, dit colloidFormingRelation.
+SubObjectProperty As iets scatteredPortionOf, dit containedPortionOf.
+SubObjectProperty As iets scatteredPortionOf, dit piecePortionOf.
+SubObjectProperty As iets stuffFormingRelation, dit solutionFormingRelation.
+SubObjectProperty As iets subQuantityOf, dit portionOf.
+SubObjectProperty As iets inheresIn, dit srInheresIn.
+ObjectPropertyDomain Net Stuff subQuantityOf iets.
+ObjectPropertyDomain Net Solvent of Solute of ContinuousMedium of DispersedPhase stuffFormingRelation iets.
+ObjectPropertyDomain Net Solvent solutionFormingRelation iets.
+ObjectPropertyDomain Net ContinuousMedium colloidFormingRelation iets.
+ObjectPropertyDomain Net Quality hasQuale iets.
+ObjectPropertyDomain Net StuffRole srInheresIn iets.
+ObjectPropertyDomain Net PureStuff of HomogeneousMixture portionOf iets.
+ObjectPropertyDomain Net Role inheresIn iets.
+ObjectPropertyDomain Net Stuff hasGranuleType iets.
+ObjectPropertyDomain Net Stuff hasSubStuff iets.
+ObjectPropertyDomain Net PhysicalEndurant hasState iets.
+ObjectPropertyDomain Net Perdurant of Endurant hasQuality iets.
+DataPropertyRange hasNrOfPhase kan net integer wees.
+EquivalentClass Elke PureBulk (hasGranuleType ten minste 1 MultiMoleculeParticle en is PureStuff en hasGranuleType net MultiMoleculeParticle en hasGranuleType by die meeste 1 MultiMoleculeParticle).
+EquivalentClass Elke Sol (is DispersionColloid en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een ContinuousMedium en hasState ten minste een Liquid) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Solid) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een ContinuousMedium en hasState ten minste een Liquid) en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Solid)).
+EquivalentClass Elke UnstructuredPureStuff (hasGranuleType net Atom en is PureStuff en hasGranuleType by die meeste 1 Atom en hasGranuleType ten minste 1 Atom).
+EquivalentClass Elke LiquidAerosol (is DispersionColloid en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een ContinuousMedium en hasState ten minste een Gas) en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Liquid) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een ContinuousMedium en hasState ten minste een Gas) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Liquid)).
+EquivalentClass Elke SolidHeterogeneousMixture (is HeterogeneousMixture en hasState ten minste 2 (Stuff en hasState ten minste een Solid)).
+EquivalentClass Elke PureStuff (is Stuff en hasSubStuff ten minste 1 StructuredPureStuff of PureBulk of UnstructuredPureStuff en hasGranuleType by die meeste 1 Molecule of MultiMoleculeParticle of Atom en hasStuffDistribution by die meeste 1 EvenDistribution en hasSubStuff by die meeste 1 StructuredPureStuff of PureBulk of UnstructuredPureStuff en hasGranuleType ten minste 1 Molecule of MultiMoleculeParticle of Atom en hasStuffDistribution ten minste 1 EvenDistribution).
+EquivalentClass Elke Suspension (is HeterogeneousMixture en hasSubStuff ten minste een (Stuff en van iets wat die inverse van srInheresIn ten minste een ContinuousMedium en van iets wat hasState ten minste een Liquid) en hasSubStuff ten minste een (Stuff en van iets wat die inverse van srInheresIn ten minste een DispersedPhase en van iets wat hasState ten minste een Solid)).
+EquivalentClass Elke SolidSol (is DispersionColloid en srInheresIn ten minste 1 (Stuff en hasState ten minste een Solid en die inverse van srInheresIn ten minste een ContinuousMedium) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Solid) en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Solid) en srInheresIn by die meeste 1 (Stuff en hasState ten minste een Solid en die inverse van srInheresIn ten minste een ContinuousMedium)).
+EquivalentClass Elke SolidFoam (is DispersionColloid en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Gas) en srInheresIn ten minste 1 (Stuff en hasState ten minste een Solid en die inverse van srInheresIn ten minste een ContinuousMedium) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Gas) en srInheresIn by die meeste 1 (Stuff en hasState ten minste een Solid en die inverse van srInheresIn ten minste een ContinuousMedium)).
+EquivalentClass Elke Emulsion (is DispersionColloid en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Liquid) en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een ContinuousMedium en hasState ten minste een Liquid) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een ContinuousMedium en hasState ten minste een Liquid) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Liquid)).
+EquivalentClass Elke Gel (is DispersionColloid en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Liquid) en srInheresIn ten minste 1 (Stuff en hasState ten minste een Solid en die inverse van srInheresIn ten minste een ContinuousMedium) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Liquid) en srInheresIn by die meeste 1 (Stuff en hasState ten minste een Solid en die inverse van srInheresIn ten minste een ContinuousMedium)).
+EquivalentClass Elke Foam (is DispersionColloid en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Gas) en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een ContinuousMedium en hasState ten minste een Liquid) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Gas) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een ContinuousMedium en hasState ten minste een Liquid)).
+EquivalentClass Elke Colloid (srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een ContinuousMedium en hasState ten minste een StuffState) en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een StuffState) en is HomogeneousMixture en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een StuffState) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een ContinuousMedium en hasState ten minste een StuffState) en hasNrOfPhase ten minste 2).
+EquivalentClass Elke SolidAerosol (is DispersionColloid en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een ContinuousMedium en hasState ten minste een Gas) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Solid) en srInheresIn ten minste 1 (Stuff en die inverse van srInheresIn ten minste een ContinuousMedium en hasState ten minste een Gas) en srInheresIn by die meeste 1 (Stuff en die inverse van srInheresIn ten minste een DispersedPhase en hasState ten minste een Solid)).
+EquivalentClass Elke Solution (hasSubStuff ten minste een (Stuff en van iets wat die inverse van srInheresIn ten minste een Solute en van iets wat hasGranuleType net Molecule of Atom of Ion) en hasNrOfPhase by die meeste 1 en is HomogeneousMixture en hasSubStuff ten minste een (Stuff en van iets wat die inverse van srInheresIn ten minste een Solvent en van iets wat hasGranuleType net Molecule of Atom of Ion)).
+EquivalentClass Elke StructuredPureStuff (hasGranuleType by die meeste 1 Molecule en is PureStuff en hasGranuleType ten minste 1 Molecule en hasGranuleType net Molecule).

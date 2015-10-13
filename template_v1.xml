@@ -4,6 +4,122 @@
 
 <VerbOwlBody>
 
+	<!-- ..................... -->
+	<!-- FOR NESTED STATEMENTS -->
+	<!-- ..................... -->
+	<!-- Object is an individual. ClassExpression is a placeholder for what could be a more complicated nested class -->
+
+	<!-- Boolean Connectives and Enumerations of Individuals -->
+	<Constraint type="PartObject">
+		<Text>Elke</Text>
+		<Object index="0"/>
+	</Constraint>
+
+	<Constraint type="PartObjectIntersectionOf">
+		<Text>(?</Text>
+		<ClassExpression index="0"/>
+		<Loop index="1">
+			<Text>en</Text>
+			<ClassExpression index="n"/>
+		</Loop>
+		<Text>?)</Text>
+	</Constraint>
+
+	<Constraint type="PartObjectUnionOf">
+		<ClassExpression index="0"/>
+		<Loop index="1">
+			<Text>of</Text>
+			<ClassExpression index="n"/>
+		</Loop>
+	</Constraint>
+
+	<Constraint type="PartObjectComplementOf">
+		<Text>iets wat nie 'n</Text>
+		<Object index="0"/>
+		<Text>is nie</Text>
+	</Constraint>
+
+	<Constraint type="PartObjectOneOf">
+		<Object index="0"/>
+		<Loop index="1">
+			<Text>of</Text>
+			<Object index="0"/>
+		</Loop>
+	</Constraint>
+
+	<!-- Object Property Restriction (and Data Properties) -->
+
+	<Constraint type="PartObjectAllValuesFrom">
+		<Role index="0"/>
+		<Text>net</Text>
+		<Role index="1"/>
+		<ClassExpression index="n"/>
+	</Constraint>
+
+	<Constraint type="PartObjectSomeValuesFrom">
+		<Role index="0"/>
+		<Text>ten minste een</Text>
+		<ClassExpression index="n"/>
+	</Constraint>
+
+	<Constraint type="PartDataSomeValuesFrom">
+		<Role index="0"/>
+		<Object index="0"/>
+	</Constraint>
+
+	<Constraint type="PartDataSomeValuesFromMin">
+		<Role index="0"/>
+		<Text>ten minste</Text>
+		<Cardinality index="0"/>
+	</Constraint>
+
+	<Constraint type="PartDataSomeValuesFromMax">
+		<Role index="0"/>
+		<Text>by die meeste</Text>
+		<Cardinality index="0"/>
+	</Constraint>
+
+	<Constraint type="PartObjectHasValue">
+		<Role index="0"/>
+		<ClassExpression index="n"/>
+	</Constraint>
+
+	<Constraint type="PartObjectHasSelf">
+		<Role index="0"/>
+		<Text>homself</Text>
+	</Constraint>
+
+	<Constraint type="PartObjectExactCardinality">
+		<Role index="0"/>
+		<Text>presies</Text>
+		<Cardinality index="0"/>
+		<ClassExpression index="n"/>
+	</Constraint>
+
+	<Constraint type="PartObjectMaxCardinality">
+		<Role index="0"/>
+		<Text>by die meeste</Text>
+		<Cardinality index="0"/>
+		<ClassExpression index="n"/>
+	</Constraint>
+
+	<Constraint type="PartObjectMinCardinality">
+		<Role index="0"/>
+		<Text>ten minste</Text>
+		<Cardinality index="0"/>
+		<ClassExpression index="n"/>
+	</Constraint>
+
+	<Constraint type="SomeReferringExpression">
+		<Text>van iets wat</Text>
+	</Constraint>
+
+	<Constraint type="AllReferringExpression">
+		<Text>iets wat</Text>
+	</Constraint>
+
+	<!-- Assertions -->
+
 	<Constraint type="ClassAssertion">
 		<Object index="0"/>
 		<Text>is 'n</Text>
@@ -16,6 +132,50 @@
 		<Object index="1"/>
 	</Constraint>
 
+	<Constraint type="DataPropertyAssertion">
+		<Object index="0"/>
+		<Text>het</Text>
+		<Role index="0"/>
+		<Object index="1"/>
+	</Constraint>
+
+	<Constraint type="NegativeObjectPropertyAssertion">
+		<Object index="0"/>
+		<Role index="0"/>
+		<Text>nie</Text>
+		<Role index="1"/>
+		<Object index="1"/>
+		<Text>nie</Text>
+	</Constraint>
+
+	<Constraint type="NegativeDataPropertyAssertion">
+		<Object index="0"/>
+		<Text>het nie</Text>
+		<Role index="0"/>
+		<Object index="1"/>
+		<Text>nie</Text>
+	</Constraint>
+
+	<Constraint type="SameIndividual">
+		<Object index="0"/>
+		<Loop index="1">
+			<Text>en</Text>
+			<Object index="n"/>
+		</Loop>
+		<Text>is dieselfde ding</Text>
+	</Constraint>
+
+	<Constraint type="DifferentIndividual">
+		<Object index="0"/>
+		<Loop index="1">
+			<Text>en</Text>
+			<Object index="n"/>
+		</Loop>
+		<Text>is almal verskillend</Text>
+	</Constraint>
+
+	<!-- Simple sub class -->
+
 	<Constraint type="OWLSubClassOfAxiom">
 		<Text>Elke</Text>
 		<Object index="0"/>
@@ -23,76 +183,7 @@
 		<Object index="1"/>
 	</Constraint>
 
-	<Constraint type="OWLSubClassOfAxiom negation">
-		<Text>Elke</Text>
-		<Object index="0"/>
-		<Text>is nie 'n</Text>
-		<Object index="1"/>
-		<Text>nie</Text>
-	</Constraint>
-
-	<Constraint type="OWLObjectSomeValuesFrom">
-		<Text>Elke</Text>
-		<Object index="0"/>
-		<Role index="0"/>
-		<Text>ten minste een</Text>
-		<Object index="1"/>
-	</Constraint>
-
-	<Constraint type="OWLObjectSomeValuesFrom negation">
-		<Text>Elke</Text>
-		<Object index="0"/>
-		<Role index="0"/>
-		<Text>ten minste een van iets wat nie 'n</Text>
-		<Object index="1"/>
-		<Text>is nie</Text>
-	</Constraint>
-
-	<Constraint type="OWLObjectSomeValuesFrom union">
-		<Text>Elke</Text>
-		<Object index="0"/>
-		<Role index="0"/>
-		<Text>ten minste een</Text>
-		<Object index="1"/>
-	 	<Loop index="2" >
-	 		<Text>of</Text>
-	 		<Object index="n"/>
-	 	</Loop>
-	</Constraint>
-
-	<Constraint type="OWLObjectSomeValuesFrom intersection">
-		<Text>Elke</Text>
-		<Object index="0"/>
-		<Role index="0"/>
-		<Text>ten minste een</Text>
-		<Object index="1"/>
-	 	<Loop index="2" >
-	 		<Text>en</Text>
-	 		<Role index="n-1"/>
-			<Text>ten minste een</Text>
-	 		<Object index="n"/>
-	 	</Loop>
-	</Constraint>
-
-	<Constraint type="OWLObjectSomeValuesFrom nested">
-		<Text>Elke</Text>
-		<Object index="0"/>	
-		<Role index="0"/>
-		<Loop index="1">
-			<Nest index="n-1">
-				<Text>ten minste een van iets wat</Text>
-				<Role index="n"/>
-				<Text>ten minste een</Text>
-				<Object index="n"/>
-			</Nest>
-			<Else>
-				<Role index="n"/>
-				<Text>ten minste een</Text>
-				<Object index="n"/>
-			</Else>
-			<AndOr index="n-1"/>
-	 	</Loop>
-	</Constraint>
+	<!-- Disjoint -->
 
 	<Constraint type="Disjoint">
 		<Text>'n</Text>
@@ -119,6 +210,7 @@
 			<Text>?, elke</Text>
 			<Object index="n"/>
 			<Text>is 'n</Text>
+			<Object index="0"/>			
 		</Loop>
 		<Text>?; en niks kan 'n</Text>
 		<Object index="1"/>
@@ -129,36 +221,7 @@
 		<Text>wees nie</Text>
 	</Constraint>
 
-	<Constraint type="OWLObjectAllValuesFrom">
-		<Text>Elke</Text>
-		<Object index="0"/> <!--blaar-->
-		<Role index="0"/> <!--is-->
-		<Text>net</Text> <!--net-->
-		<Role index="1"/> <!--deel van 'n-->
-		<Object index="1"/> <!--boom-->
-	</Constraint>
-
-	<Constraint type="OWLObjectAllValuesFrom negation">
-		<Text>Elke</Text>
-		<Object index="0"/>
-		<Role index="0"/>
-		<Text>net iets wat nie 'n</Text>
-		<Object index="1"/>
-		<Text>is nie</Text>
-	</Constraint>
-
-	<Constraint type="OWLObjectAllValuesFrom union">
-		<Text>Elke</Text>
-		<Object index="0"/>
-		<Role index="0"/>
-		<Text>net</Text>
-		<Role index="1"/>
-		<Object index="1"/>
-	 	<Loop index="2" >
-	 		<Text>of</Text>
-	 		<Object index="n"/>
-	 	</Loop>
-	</Constraint>
+	<!-- Object Properties -->
 
 	<Constraint type="TransitiveObjectProperty">
 		<Text>"?</Text>
@@ -227,192 +290,51 @@
 	</Constraint>
 
 	<Constraint type="InverseFunctionalObjectProperty">
-		<Text>Net een individuele kan fatherOf 'n objek wees.</Text>
+		<Text>Net een individuele</Text>
+		<Role index="0"/>
+		<Text>iets</Text>
 	</Constraint>
 
-	<!-- ..................... -->
-	<!-- FOR NESTED STATEMENTS -->
-	<!-- ..................... -->
-	<!-- Object is an individual. ClassExpression is a placeholder for what could be a more complicated nested class -->
-
-	<!-- Boolean Connectives and Enumerations of Individuals -->
-	<Constraint type="PartObject">
-		<Text>Elke</Text>
-		<Object index="0"/>
+	<Constraint type="SubObjectProperty">
+		<Text>As iets</Text>
+		<Role index="1"/>
+		<Loop index="2">
+			<Text>wat</Text>
+			<Role index="n"/>
+		</Loop>
+		<Text>?, dit</Text>
+		<Role index="0"/>
 	</Constraint>
 
-	<Constraint type="PartObjectIntersectionOf">
+	<Constraint type="ObjectPropertyDomain">
+		<Text>Net</Text>
 		<ClassExpression index="0"/>
-		<Loop index="1">
-			<Text>en</Text>
-			<ClassExpression index="n"/>
-		</Loop>
+		<Role index="0"/>
+		<Text>iets</Text>
 	</Constraint>
 
-	<Constraint type="PartObjectUnionOf">
-		<ClassExpression index="0"/>
-		<Loop index="1">
-			<Text>of</Text>
-			<ClassExpression index="n"/>
-		</Loop>
-	</Constraint>
-
-	<Constraint type="PartObjectComplementOf">
-		<Text>iets wat nie 'n</Text>
-		<Object index="0"/>
-		<Text>is nie</Text>
-	</Constraint>
-
-	<Constraint type="PartObjectOneOf">
-		<Object index="0"/>
-		<Loop index="1">
-			<Text>of</Text>
-			<Object index="0"/>
-		</Loop>
-	</Constraint>
-
-	<!-- Object Property Restriction -->
-
-	<Constraint type="PartObjectAllValuesFrom">
+	<Constraint type="ObjectPropertyRange">
+		<Text>Iets</Text>
 		<Role index="0"/>
 		<Text>net</Text>
 		<Role index="1"/>
-		<ClassExpression index="n"/>
+		<ClassExpression index="0"/>
 	</Constraint>
 
-	<Constraint type="PartObjectSomeValuesFrom">
+	<!-- Data Properties that need to follow different template to object properties -->
+
+	<Constraint type="DataPropertyDomain">
+		<Text>Net</Text>
+		<ClassExpression index="0"/>		
+		<Text>het</Text>
 		<Role index="0"/>
-		<Text>ten minste een</Text>
-		<ClassExpression index="n"/>
 	</Constraint>
 
-	<Constraint type="PartObjectHasValue">
+	<Constraint type="DataPropertyRange">
 		<Role index="0"/>
-		<ClassExpression index="n"/>
-	</Constraint>
-
-	<Constraint type="PartObjectHasSelf">
-		<Role index="0"/>
-		<Text>homself</Text>
-	</Constraint>
-
-	<Constraint type="PartObjectExactCardinality">
-		<Role index="0"/>
-		<Text>presies</Text>
-		<Cardinality index="0"/>
-		<ClassExpression index="n"/>
-	</Constraint>
-
-	<Constraint type="PartObjectMaxCardinality">
-		<Role index="0"/>
-		<Text>by die meeste</Text>
-		<Cardinality index="0"/>
-		<ClassExpression index="n"/>
-	</Constraint>
-
-	<Constraint type="PartObjectMinCardinality">
-		<Role index="0"/>
-		<Text>ten minste</Text>
-		<Cardinality index="0"/>
-		<ClassExpression index="n"/>
-	</Constraint>
-
-	<Constraint type="SomeReferringExpression">
-		<Text>van iets wat</Text>
-	</Constraint>
-
-	<Constraint type="AllReferringExpression">
-		<Text>iets wat</Text>
+		<Text>kan net</Text>
+		<Object index="0"/>		
+		<Text>wees</Text>
 	</Constraint>
 
 </VerbOwlBody>
-
-
-
-
-
-
-
-
-<!--DataIntersectionOf
-DataUnionOf
-DataComplementOf
-DataOneOf
-DatatypeRestriction
-ObjectIntersectionOf
-ObjectUnionOf
-ObjectComplementOf
-ObjectOneOf
-ObjectSomeValuesFrom
-ObjectAllValuesFrom
-ObjectHasValue
-ObjectHasSelf
-ObjectMinCardinality
-ObjectMaxCardinality
-ObjectExactCardinality
-ObjectMinCardinality( n OPE
-CE )
-{ x | #{ y | ( x , y ) ∈ (OPE)OP and y ∈
-(CE)C } ≥ n }
-ObjectMaxCardinality( n OPE
-CE )
-{ x | #{ y | ( x , y ) ∈ (OPE)OP and y ∈
-(CE)C } ≤ n }
-ObjectExactCardinality( n
-OPE CE )
-{ x | #{ y | ( x , y ) ∈ (OPE)OP and y ∈
-(CE)C } = n }
-DataSomeValuesFrom
-DataAllValuesFrom
-DataHasValue
-DataMinCardinality
-DataMaxCardinality
-DataExactCardinality
-DataMinCardinality( n DPE DR
-)
-{ x | #{ y | ( x , y ) ∈ (DPE)DP and y ∈
-(DR)DT } ≥ n }
-DataMaxCardinality( n DPE DR
-)
-{ x | #{ y | ( x , y ) ∈ (DPE)DP and y ∈
-(DR)DT } ≤ n }
-DataExactCardinality( n DPE
-DR )
-
-SubClassOf
-EquivalentClasses
-DisjointClasses
-DisjointUnion
-
-SubObjectPropertyOf
-SubObjectPropertyOf(ObjectPropertyChain( OPE1 ... OPEn )OPE )
-EquivalentObjectProperties
-DisjointObjectProperties
-ObjectPropertyDomain
-ObjectPropertyRange
-InverseObjectProperties
-FunctionalObjectProperty
-InverseFunctionalObjectProperty
-ReflexiveObjectProperty
-IrreflexiveObjectProperty
-SymmetricObjectProperty
-AsymmetricObjectProperty
-TransitiveObjectProperty
-
-SubDataPropertyOf
-EquivalentDataProperties
-DisjointDataProperties
-DataPropertyDomain
-DataPropertyRange
-FunctionalDataProperty
-
-DatatypeDefinition
-HasKey
-
-SameIndividual
-DifferentIndividuals
-ClassAssertion
-ObjectPropertyAssertion
-NegativeObjectPropertyAssertion
-DataPropertyAssertion
-NegativeDataPropertyAssertion-->

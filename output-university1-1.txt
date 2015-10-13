@@ -1,0 +1,91 @@
+ClassAssertion CS102 is 'n ComputerScienceModule.
+ClassAssertion MT102 is 'n MathsModule.
+ClassAssertion CS101 is 'n ComputerScienceModule.
+ClassAssertion Prof9 is 'n AcademicStaff.
+ClassAssertion Prof3 is 'n AcademicStaff.
+ClassAssertion Prof2 is 'n AcademicStaff.
+ClassAssertion Student2 is 'n UndergraduateStudent.
+ClassAssertion Student7 is 'n takes.
+ClassAssertion EC102 is 'n EconomicsModule.
+ClassAssertion Prof4 is 'n AcademicStaff.
+ClassAssertion EC103 is 'n EconomicsModule.
+ClassAssertion EC101 is 'n EconomicsModule.
+ClassAssertion Prof6 is 'n AcademicStaff.
+ClassAssertion Student6 is 'n UndergraduateStudent.
+ClassAssertion CS105 is 'n ComputerScienceModule.
+ClassAssertion MT101 is 'n MathsModule.
+ClassAssertion CS104 is 'n ComputerScienceModule.
+ClassAssertion MT103 is 'n MathsModule.
+ClassAssertion Prof1 is 'n AcademicStaff.
+ClassAssertion Student1 is 'n UndergraduateStudent.
+ClassAssertion Student4 is 'n UndergraduateStudent.
+ClassAssertion Student8 is 'n takes.
+ClassAssertion Prof8 is 'n AcademicStaff.
+ClassAssertion Student3 is 'n UndergraduateStudent.
+ClassAssertion Prof7 is 'n AcademicStaff.
+ClassAssertion Prof5 is 'n AcademicStaff.
+ClassAssertion Student5 is 'n UndergraduateStudent.
+ClassAssertion CS103 is 'n ComputerScienceModule.
+ClassAssertion Student6 is 'n takes.
+Disjoint 'n MathsModule is nie 'n EconomicsModule nie.
+Disjoint 'n GraduateStudent is nie 'n UndergraduateStudent nie.
+Disjoint 'n ComputerScienceModule is nie 'n MathsModule nie.
+Disjoint 'n ComputerScienceModule is nie 'n EconomicsModule nie.
+OWLSubClassOfAxiom Elke MathsModule is 'n Module.
+Complex SubClass Elke Module isTaughtBy net AcademicStaff.
+OWLSubClassOfAxiom Elke UndergraduateStudent is 'n Student.
+OWLSubClassOfAxiom Elke NonAcademicStaff is 'n Staff.
+OWLSubClassOfAxiom Elke ComputerScienceModule is 'n Module.
+Complex SubClass Elke UndergraduateStudent takes by die meeste 2 tipe en takes ten minste 2 tipe.
+OWLSubClassOfAxiom Elke Staff is 'n Person.
+OWLSubClassOfAxiom Elke EconomicsModule is 'n Module.
+OWLSubClassOfAxiom Elke Student is 'n Person.
+OWLSubClassOfAxiom Elke GraduateStudent is 'n Student.
+Complex SubClass Elke Module isTaughtBy ten minste 1 tipe en isTaughtBy by die meeste 1 tipe.
+OWLSubClassOfAxiom Elke AcademicStaff is 'n Staff.
+Complex SubClass Elke Module hasAssistant by die meeste 2 tipe.
+ObjectPropertyRange Iets assistsWith net Module.
+ObjectPropertyRange Iets takes net Module.
+ObjectPropertyRange Iets teaches net Module.
+ObjectPropertyAssertion CS101 isTaughtBy Prof1.
+ObjectPropertyAssertion Student1 takes CS102.
+ObjectPropertyAssertion Student3 takes MT101.
+ObjectPropertyAssertion Prof5 teaches MT102.
+ObjectPropertyAssertion Student3 takes MT103.
+ObjectPropertyAssertion CS104 isTaughtBy Prof1.
+ObjectPropertyAssertion MT102 isTaughtBy Prof5.
+ObjectPropertyAssertion Prof4 teaches MT101.
+ObjectPropertyAssertion CS103 isTaughtBy Prof3.
+ObjectPropertyAssertion MT101 isTaughtBy Prof4.
+ObjectPropertyAssertion Student5 takes MT102.
+ObjectPropertyAssertion Student2 takes CS101.
+ObjectPropertyAssertion Student2 takes MT101.
+ObjectPropertyAssertion Student9 takes CS101.
+ObjectPropertyAssertion Student1 takes CS101.
+ObjectPropertyAssertion Prof3 teaches CS103.
+ObjectPropertyAssertion Prof1 teaches CS104.
+ObjectPropertyAssertion Prof3 teaches CS105.
+ObjectPropertyAssertion Student5 takes MT103.
+ObjectPropertyAssertion CS105 isTaughtBy Prof3.
+ObjectPropertyAssertion Student8 takes CS102.
+ObjectPropertyAssertion Student4 takes CS101.
+ObjectPropertyAssertion Prof9 teaches EC103.
+ObjectPropertyAssertion Student7 takes CS101.
+ObjectPropertyAssertion Prof6 teaches MT103.
+ObjectPropertyAssertion Prof7 teaches EC101.
+ObjectPropertyAssertion Prof8 teaches EC102.
+ObjectPropertyAssertion Student4 takes MT101.
+ObjectPropertyAssertion EC103 isTaughtBy Prof9.
+ObjectPropertyAssertion Student9 takes CS102.
+ObjectPropertyAssertion Student6 takes MT101.
+ObjectPropertyAssertion MT103 isTaughtBy Prof6.
+ObjectPropertyAssertion Student9 takes MT101.
+ObjectPropertyAssertion Prof1 teaches CS101.
+ObjectPropertyAssertion Prof2 teaches CS102.
+ObjectPropertyAssertion CS102 isTaughtBy Prof2.
+ObjectPropertyAssertion EC101 isTaughtBy Prof7.
+ObjectPropertyAssertion EC102 isTaughtBy Prof8.
+ObjectPropertyDomain Net UndergraduateStudent takes iets.
+ObjectPropertyDomain Net AcademicStaff teaches iets.
+InverseObjectProperty "assistsWith" is die teenoorgestelde van "hasAssistant" (As X assistsWith Y; Y hasAssistant X.).
+InverseObjectProperty "isTaughtBy" is die teenoorgestelde van "teaches" (As X isTaughtBy Y; Y teaches X.).

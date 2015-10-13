@@ -1,0 +1,228 @@
+InverseObjectProperty "gevreet deur" is die teenoorgestelde van "vreet" (As X gevreet deur Y; Y vreet X.).
+InverseObjectProperty "het deel" is die teenoorgestelde van "is deel van" (As X het deel Y; Y is deel van X.).
+ObjectPropertyRange Iets vreet net plant of is deel van ten minste een dier of is deel van ten minste een plant of is dier.
+EquivalentClass Elke Omnivoor vreet ten minste een van iets wat is deel van ten minste een dier of is deel van ten minste een plant en vreet ten minste een dier en vreet ten minste een plant.
+EquivalentClass Elke karnivoor vreet net dier of vreet net iets wat is deel van ten minste een dier.
+EquivalentClass Elke herbivoor vreet net iets wat is deel van ten minste een plant of vreet net plant.
+Disjoint 'n karnivoor is nie 'n Omnivoor nie.
+Disjoint 'n leeu is nie 'n kameelperd nie.
+Disjoint 'n herbivoor is nie 'n karnivoor nie.
+Disjoint 'n herbivoor is nie 'n Omnivoor nie.
+Disjoint 'n boom is nie 'n Palmboom nie.
+Disjoint 'n blaar is nie 'n Takkie nie.
+Disjoint 'n Takkie is nie 'n tak nie.
+Disjoint 'n blaar is nie 'n tak nie.
+Disjoint 'n plant is nie 'n dier nie.
+TransitiveObjectProperty "het deel" is Oorganklike (As X het deel Y, en Y het deel Z; dit beteken dat X het deel Z.).
+TransitiveObjectProperty "is deel van" is Oorganklike (As X is deel van Y, en Y is deel van Z; dit beteken dat X is deel van Z.).
+SubObjectProperty As iets is deel van, dit is behoorlike deel van.
+IrreflexiveObjectProperty Niks is behoorlike deel van homself nie.
+ReflexiveObjectProperty Alles is deel van homself.
+OWLSubClassOfAxiom Elke Olifant is 'n herbivoor.
+Complex SubClass Elke Floëem is behoorlike deel van ten minste een Stam.
+OWLSubClassOfAxiom Elke Vlakvark is 'n dier.
+OWLSubClassOfAxiom Elke Omnivoor is 'n dier.
+Complex SubClass Elke kameelperd vreet net blaar of is Takkie.
+OWLSubClassOfAxiom Elke tak is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke karnivoor is 'n dier.
+OWLSubClassOfAxiom Elke Stam is 'n PlantGedeelte.
+Complex SubClass Elke blaar is deel van ten minste een Takkie of is tak.
+OWLSubClassOfAxiom Elke VleisetendePlant is 'n plant.
+OWLSubClassOfAxiom Elke Appel is 'n Vrug.
+OWLSubClassOfAxiom Elke Bessie is 'n Vrug.
+OWLSubClassOfAxiom Elke leeu is 'n dier.
+OWLSubClassOfAxiom Elke blaar is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke Wortel is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke Takkie is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke herbivoor is 'n dier.
+Complex SubClass Elke VleisetendePlant vreet ten minste een dier.
+OWLSubClassOfAxiom Elke Xileem is 'n PlantGedeelte.
+Complex SubClass Elke Vlakvark vreet ten minste een Wortel en vreet ten minste een dier en vreet ten minste een Vrug en vreet ten minste een Grass.
+OWLSubClassOfAxiom Elke Witwortel is 'n Wortel.
+OWLSubClassOfAxiom Elke Palmboom is 'n plant.
+OWLSubClassOfAxiom Elke kameelperd is 'n dier.
+OWLSubClassOfAxiom Elke Impala is 'n dier.
+OWLSubClassOfAxiom Elke RockDassie is 'n dier.
+OWLSubClassOfAxiom Elke Grass is 'n plant.
+Complex SubClass Elke tak is deel van ten minste een boom.
+OWLSubClassOfAxiom Elke Floëem is 'n PlantGedeelte.
+Complex SubClass Elke leeu vreet net herbivoor.
+OWLSubClassOfAxiom Elke boom is 'n plant.
+OWLSubClassOfAxiom Elke smaaklike plant is 'n plant.
+Complex SubClass Elke Xileem is behoorlike deel van ten minste een Stam.
+OWLSubClassOfAxiom Elke Vrug is 'n PlantGedeelte.
+Complex SubClass Elke PlantGedeelte is behoorlike deel van ten minste een plant.
+Complex SubClass Elke smaaklike plant gevreet deur ten minste een karnivoor en gevreet deur ten minste een herbivoor.
+Complex SubClass Elke Palmboom het deel ten minste een iets wat nie 'n tak is nie.
+Complex SubClass Elke leeu vreet ten minste een Impala.
+Disjoint 'n karnivoor is nie 'n Omnivoor nie.
+Disjoint 'n leeu is nie 'n kameelperd nie.
+Disjoint 'n herbivoor is nie 'n karnivoor nie.
+Disjoint 'n herbivoor is nie 'n Omnivoor nie.
+Disjoint 'n boom is nie 'n Palmboom nie.
+Disjoint 'n blaar is nie 'n Takkie nie.
+Disjoint 'n Takkie is nie 'n tak nie.
+Disjoint 'n blaar is nie 'n tak nie.
+Disjoint 'n plant is nie 'n dier nie.
+TransitiveObjectProperty "het deel" is Oorganklike (As X het deel Y, en Y het deel Z; dit beteken dat X het deel Z.).
+TransitiveObjectProperty "is deel van" is Oorganklike (As X is deel van Y, en Y is deel van Z; dit beteken dat X is deel van Z.).
+IrreflexiveObjectProperty Niks is behoorlike deel van homself nie.
+OWLSubClassOfAxiom Elke Olifant is 'n herbivoor.
+Complex SubClass Elke Floëem is behoorlike deel van ten minste een Stam.
+OWLSubClassOfAxiom Elke Vlakvark is 'n dier.
+OWLSubClassOfAxiom Elke Omnivoor is 'n dier.
+Complex SubClass Elke kameelperd vreet net blaar of is Takkie.
+OWLSubClassOfAxiom Elke tak is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke karnivoor is 'n dier.
+OWLSubClassOfAxiom Elke Stam is 'n PlantGedeelte.
+Complex SubClass Elke blaar is deel van ten minste een Takkie of is tak.
+OWLSubClassOfAxiom Elke VleisetendePlant is 'n plant.
+OWLSubClassOfAxiom Elke Appel is 'n Vrug.
+OWLSubClassOfAxiom Elke Bessie is 'n Vrug.
+OWLSubClassOfAxiom Elke leeu is 'n dier.
+OWLSubClassOfAxiom Elke blaar is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke Wortel is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke Takkie is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke herbivoor is 'n dier.
+Complex SubClass Elke VleisetendePlant vreet ten minste een dier.
+OWLSubClassOfAxiom Elke Xileem is 'n PlantGedeelte.
+Complex SubClass Elke Vlakvark vreet ten minste een Wortel en vreet ten minste een dier en vreet ten minste een Vrug en vreet ten minste een Grass.
+OWLSubClassOfAxiom Elke Witwortel is 'n Wortel.
+OWLSubClassOfAxiom Elke Palmboom is 'n plant.
+OWLSubClassOfAxiom Elke kameelperd is 'n dier.
+OWLSubClassOfAxiom Elke Impala is 'n dier.
+OWLSubClassOfAxiom Elke RockDassie is 'n dier.
+OWLSubClassOfAxiom Elke Grass is 'n plant.
+Complex SubClass Elke tak is deel van ten minste een boom.
+OWLSubClassOfAxiom Elke Floëem is 'n PlantGedeelte.
+Complex SubClass Elke leeu vreet net herbivoor.
+OWLSubClassOfAxiom Elke boom is 'n plant.
+OWLSubClassOfAxiom Elke smaaklike plant is 'n plant.
+Complex SubClass Elke Xileem is behoorlike deel van ten minste een Stam.
+OWLSubClassOfAxiom Elke Vrug is 'n PlantGedeelte.
+Complex SubClass Elke PlantGedeelte is behoorlike deel van ten minste een plant.
+Complex SubClass Elke smaaklike plant gevreet deur ten minste een karnivoor en gevreet deur ten minste een herbivoor.
+Complex SubClass Elke Palmboom het deel ten minste een iets wat nie 'n tak is nie.
+Complex SubClass Elke leeu vreet ten minste een Impala.
+ObjectPropertyRange Iets vreet net plant of is deel van ten minste een dier of is deel van ten minste een plant of is dier.
+ReflexiveObjectProperty Alles is deel van homself.
+SubObjectProperty As iets is deel van, dit is behoorlike deel van.
+InverseObjectProperty "gevreet deur" is die teenoorgestelde van "vreet" (As X gevreet deur Y; Y vreet X.).
+InverseObjectProperty "het deel" is die teenoorgestelde van "is deel van" (As X het deel Y; Y is deel van X.).
+EquivalentClass Elke Omnivoor vreet ten minste een van iets wat is deel van ten minste een dier of is deel van ten minste een plant en vreet ten minste een dier en vreet ten minste een plant.
+EquivalentClass Elke karnivoor vreet net dier of vreet net iets wat is deel van ten minste een dier.
+EquivalentClass Elke herbivoor vreet net iets wat is deel van ten minste een plant of vreet net plant.
+Disjoint 'n karnivoor is nie 'n Omnivoor nie.
+Disjoint 'n leeu is nie 'n kameelperd nie.
+Disjoint 'n herbivoor is nie 'n karnivoor nie.
+Disjoint 'n herbivoor is nie 'n Omnivoor nie.
+Disjoint 'n boom is nie 'n Palmboom nie.
+Disjoint 'n blaar is nie 'n Takkie nie.
+Disjoint 'n Takkie is nie 'n tak nie.
+Disjoint 'n blaar is nie 'n tak nie.
+Disjoint 'n plant is nie 'n dier nie.
+TransitiveObjectProperty "het deel" is Oorganklike (As X het deel Y, en Y het deel Z; dit beteken dat X het deel Z.).
+TransitiveObjectProperty "is deel van" is Oorganklike (As X is deel van Y, en Y is deel van Z; dit beteken dat X is deel van Z.).
+IrreflexiveObjectProperty Niks is behoorlike deel van homself nie.
+OWLSubClassOfAxiom Elke Olifant is 'n herbivoor.
+Complex SubClass Elke Floëem is behoorlike deel van ten minste een Stam.
+OWLSubClassOfAxiom Elke Vlakvark is 'n dier.
+OWLSubClassOfAxiom Elke Omnivoor is 'n dier.
+Complex SubClass Elke kameelperd vreet net blaar of is Takkie.
+OWLSubClassOfAxiom Elke tak is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke karnivoor is 'n dier.
+OWLSubClassOfAxiom Elke Stam is 'n PlantGedeelte.
+Complex SubClass Elke blaar is deel van ten minste een Takkie of is tak.
+OWLSubClassOfAxiom Elke VleisetendePlant is 'n plant.
+OWLSubClassOfAxiom Elke Appel is 'n Vrug.
+OWLSubClassOfAxiom Elke Bessie is 'n Vrug.
+OWLSubClassOfAxiom Elke leeu is 'n dier.
+OWLSubClassOfAxiom Elke blaar is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke Wortel is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke Takkie is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke herbivoor is 'n dier.
+Complex SubClass Elke VleisetendePlant vreet ten minste een dier.
+OWLSubClassOfAxiom Elke Xileem is 'n PlantGedeelte.
+Complex SubClass Elke Vlakvark vreet ten minste een Wortel en vreet ten minste een dier en vreet ten minste een Vrug en vreet ten minste een Grass.
+OWLSubClassOfAxiom Elke Witwortel is 'n Wortel.
+OWLSubClassOfAxiom Elke Palmboom is 'n plant.
+OWLSubClassOfAxiom Elke kameelperd is 'n dier.
+OWLSubClassOfAxiom Elke Impala is 'n dier.
+OWLSubClassOfAxiom Elke RockDassie is 'n dier.
+OWLSubClassOfAxiom Elke Grass is 'n plant.
+Complex SubClass Elke tak is deel van ten minste een boom.
+OWLSubClassOfAxiom Elke Floëem is 'n PlantGedeelte.
+Complex SubClass Elke leeu vreet net herbivoor.
+OWLSubClassOfAxiom Elke boom is 'n plant.
+OWLSubClassOfAxiom Elke smaaklike plant is 'n plant.
+Complex SubClass Elke Xileem is behoorlike deel van ten minste een Stam.
+OWLSubClassOfAxiom Elke Vrug is 'n PlantGedeelte.
+Complex SubClass Elke PlantGedeelte is behoorlike deel van ten minste een plant.
+Complex SubClass Elke smaaklike plant gevreet deur ten minste een karnivoor en gevreet deur ten minste een herbivoor.
+Complex SubClass Elke Palmboom het deel ten minste een iets wat nie 'n tak is nie.
+Complex SubClass Elke leeu vreet ten minste een Impala.
+ObjectPropertyRange Iets vreet net plant of is deel van ten minste een dier of is deel van ten minste een plant of is dier.
+ReflexiveObjectProperty Alles is deel van homself.
+SubObjectProperty As iets is deel van, dit is behoorlike deel van.
+InverseObjectProperty "gevreet deur" is die teenoorgestelde van "vreet" (As X gevreet deur Y; Y vreet X.).
+InverseObjectProperty "het deel" is die teenoorgestelde van "is deel van" (As X het deel Y; Y is deel van X.).
+EquivalentClass Elke Omnivoor vreet ten minste een van iets wat is deel van ten minste een dier of is deel van ten minste een plant en vreet ten minste een dier en vreet ten minste een plant.
+EquivalentClass Elke karnivoor vreet net dier of vreet net iets wat is deel van ten minste een dier.
+EquivalentClass Elke herbivoor vreet net iets wat is deel van ten minste een plant of vreet net plant.
+Disjoint 'n karnivoor is nie 'n Omnivoor nie.
+Disjoint 'n leeu is nie 'n kameelperd nie.
+Disjoint 'n herbivoor is nie 'n karnivoor nie.
+Disjoint 'n herbivoor is nie 'n Omnivoor nie.
+Disjoint 'n boom is nie 'n Palmboom nie.
+Disjoint 'n blaar is nie 'n Takkie nie.
+Disjoint 'n Takkie is nie 'n tak nie.
+Disjoint 'n blaar is nie 'n tak nie.
+Disjoint 'n plant is nie 'n dier nie.
+TransitiveObjectProperty "het deel" is Oorganklike (As X het deel Y, en Y het deel Z; dit beteken dat X het deel Z.).
+TransitiveObjectProperty "is deel van" is Oorganklike (As X is deel van Y, en Y is deel van Z; dit beteken dat X is deel van Z.).
+IrreflexiveObjectProperty Niks is behoorlike deel van homself nie.
+OWLSubClassOfAxiom Elke Olifant is 'n herbivoor.
+Complex SubClass Elke Floëem is behoorlike deel van ten minste een Stam.
+OWLSubClassOfAxiom Elke Vlakvark is 'n dier.
+OWLSubClassOfAxiom Elke Omnivoor is 'n dier.
+Complex SubClass Elke kameelperd vreet net blaar of is Takkie.
+OWLSubClassOfAxiom Elke tak is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke karnivoor is 'n dier.
+OWLSubClassOfAxiom Elke Stam is 'n PlantGedeelte.
+Complex SubClass Elke blaar is deel van ten minste een Takkie of is tak.
+OWLSubClassOfAxiom Elke VleisetendePlant is 'n plant.
+OWLSubClassOfAxiom Elke Appel is 'n Vrug.
+OWLSubClassOfAxiom Elke Bessie is 'n Vrug.
+OWLSubClassOfAxiom Elke leeu is 'n dier.
+OWLSubClassOfAxiom Elke blaar is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke Wortel is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke Takkie is 'n PlantGedeelte.
+OWLSubClassOfAxiom Elke herbivoor is 'n dier.
+Complex SubClass Elke VleisetendePlant vreet ten minste een dier.
+OWLSubClassOfAxiom Elke Xileem is 'n PlantGedeelte.
+Complex SubClass Elke Vlakvark vreet ten minste een Wortel en vreet ten minste een dier en vreet ten minste een Vrug en vreet ten minste een Grass.
+OWLSubClassOfAxiom Elke Witwortel is 'n Wortel.
+OWLSubClassOfAxiom Elke Palmboom is 'n plant.
+OWLSubClassOfAxiom Elke kameelperd is 'n dier.
+OWLSubClassOfAxiom Elke Impala is 'n dier.
+OWLSubClassOfAxiom Elke RockDassie is 'n dier.
+OWLSubClassOfAxiom Elke Grass is 'n plant.
+Complex SubClass Elke tak is deel van ten minste een boom.
+OWLSubClassOfAxiom Elke Floëem is 'n PlantGedeelte.
+Complex SubClass Elke leeu vreet net herbivoor.
+OWLSubClassOfAxiom Elke boom is 'n plant.
+OWLSubClassOfAxiom Elke smaaklike plant is 'n plant.
+Complex SubClass Elke Xileem is behoorlike deel van ten minste een Stam.
+OWLSubClassOfAxiom Elke Vrug is 'n PlantGedeelte.
+Complex SubClass Elke PlantGedeelte is behoorlike deel van ten minste een plant.
+Complex SubClass Elke smaaklike plant gevreet deur ten minste een karnivoor en gevreet deur ten minste een herbivoor.
+Complex SubClass Elke Palmboom het deel ten minste een iets wat nie 'n tak is nie.
+Complex SubClass Elke leeu vreet ten minste een Impala.
+ObjectPropertyRange Iets vreet net plant of is deel van ten minste een dier of is deel van ten minste een plant of is dier.
+ReflexiveObjectProperty Alles is deel van homself.
+SubObjectProperty As iets is deel van, dit is behoorlike deel van.
+InverseObjectProperty "gevreet deur" is die teenoorgestelde van "vreet" (As X gevreet deur Y; Y vreet X.).
+InverseObjectProperty "het deel" is die teenoorgestelde van "is deel van" (As X het deel Y; Y is deel van X.).
+EquivalentClass Elke Omnivoor vreet ten minste een van iets wat is deel van ten minste een dier of is deel van ten minste een plant en vreet ten minste een dier en vreet ten minste een plant.
+EquivalentClass Elke karnivoor vreet net dier of vreet net iets wat is deel van ten minste een dier.
+EquivalentClass Elke herbivoor vreet net iets wat is deel van ten minste een plant of vreet net plant.
