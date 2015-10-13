@@ -1,7 +1,20 @@
-;Num axioms in ontology;Num axioms verbalised;Num sentences written
+stuff.owl;Num axioms in ontology;Num axioms verbalised;Num sentences written
 Total;136;134;175
 EquivalentClass;16;16;16
-Disjoint;16;13;57
+SubClass;65;65;65
+Disjoint;16;16;57
 SubProperty;10;8;8
+Inverse OP;0;0;0
+Transitive OP;2;2;2
+Reflexive OP;0;0;0
+Irreflexive OP;0;0;0
+Functional;0;0;0
+InverseFunctional OP;0;0;0
+Symmetric OP;0;0;0
+Asymmetric OP;0;0;0
+Domain;14;14;14
+Range;13;13;13
 Assertions;0;0;0
-OwlThing;0
+
+OwlThing;2
+Time taken;3.429790851

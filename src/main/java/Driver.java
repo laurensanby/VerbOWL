@@ -28,7 +28,9 @@ import org.xml.sax.SAXException;
  */
 public class Driver {
 
-    static int count, subClassCount, disjointCount, owlThingCount, sentenceCount, equivalentCount, equivalentSentCount, disjointSentCount, subPropertyCount, subPropertySentCount, assertionCount, assertionSentCount;
+    static int count, subClassCount, subClassSentCount, disjointCount, owlThingCount, sentenceCount, equivalentCount, equivalentSentCount, disjointSentCount, subPropertyCount, subPropertySentCount, assertionCount, assertionSentCount;
+    static int inverseCount, transitiveCount, reflexiveCount, irreflexiveCount, functionalCount, inverseFunctionalCount, symmetricCount, asymmetricCount, domainCount, rangeCount;
+    static int inverseSentCount, transitiveSentCount, reflexiveSentCount, irreflexiveSentCount, functionalSentCount, inverseSentFunctionalCount, symmetricSentCount, asymmetricSentCount, domainSentCount, rangeSentCount;
     static String globalRoles, globalLiterals, globalAndOr, globalNest;
     static NodeList constraints;
     static final String fileName = "stuff.owl";
@@ -37,15 +39,15 @@ public class Driver {
         // TODO code application logic here
         count = 0;
         sentenceCount = 0;
-        equivalentCount = 0;
-        equivalentSentCount = 0;
-        subClassCount = 0;
-        disjointCount = 0;
-        disjointSentCount = 0;
+        equivalentCount = equivalentSentCount = 0;
+        subClassCount = subClassSentCount = 0;
+        disjointCount = disjointSentCount = 0;
         owlThingCount = 0;
-        subPropertyCount = 0;
-        subPropertySentCount = 0;
+        subPropertyCount = subPropertySentCount = 0;
         assertionCount = assertionSentCount = 0;
+        inverseCount = transitiveCount = reflexiveCount = irreflexiveCount = functionalCount = inverseFunctionalCount = symmetricCount = asymmetricCount = domainCount = rangeCount = 0;
+        inverseSentCount = transitiveSentCount = reflexiveSentCount = irreflexiveSentCount = functionalSentCount = inverseSentFunctionalCount = symmetricSentCount = asymmetricSentCount = domainSentCount = rangeSentCount = 0;
+        long startTime = System.nanoTime();
 
         try {
             File f = new File("C:\\Users\\Lauren\\Documents\\UCT\\Honours\\project\\Ontologies\\" + fileName);
@@ -182,6 +184,7 @@ public class Driver {
                 @Override
                 public void visit(OWLInverseObjectPropertiesAxiom axiom) {
                     count++;
+                    inverseCount++;
                     String roles[] = {getName(axiom.getFirstProperty() + ""), getName(axiom.getSecondProperty() + "")};
                     printSentence(null, roles, "InverseObjectProperty");
                 }
@@ -189,24 +192,28 @@ public class Driver {
                 @Override
                 public void visit(OWLTransitiveObjectPropertyAxiom axiom) {
                     count++;
+                    transitiveCount++;
                     printSentence(getName(axiom + ""), "TransitiveObjectProperty");
                 }
 
                 @Override
                 public void visit(OWLReflexiveObjectPropertyAxiom axiom) {
                     count++;
+                    reflexiveCount++;
                     printSentence(getName(axiom + ""), "ReflexiveObjectProperty");
                 }
 
                 @Override
                 public void visit(OWLIrreflexiveObjectPropertyAxiom axiom) {
                     count++;
+                    irreflexiveCount++;
                     printSentence(getName(axiom + ""), "IrreflexiveObjectProperty");
                 }
 
                 @Override
                 public void visit(OWLFunctionalObjectPropertyAxiom axiom) {
                     count++;
+                    functionalCount++;
                     String role = getName(axiom + "");
                     printFunctional(role);
                 }
@@ -214,18 +221,21 @@ public class Driver {
                 @Override
                 public void visit(OWLInverseFunctionalObjectPropertyAxiom axiom) {
                     count++;
+                    inverseFunctionalCount++;
                     printSentence(getName(axiom + ""), "InverseFunctionalObjectProperty");
                 }
 
                 @Override
                 public void visit(OWLSymmetricObjectPropertyAxiom axiom) {
                     count++;
+                    symmetricCount++;
                     printSentence(getName(axiom + ""), "SymmetricObjectProperty");
                 }
 
                 @Override
                 public void visit(OWLAsymmetricObjectPropertyAxiom axiom) {
                     count++;
+                    asymmetricCount++;
                     String role = getName(axiom + "");
                     role = role.replaceFirst("-", ";");
                     printSentence(null, role.split(";"), "AsymmetricObjectProperty");
@@ -240,12 +250,15 @@ public class Driver {
                         subPropertyCount++;
                         role += getName(ope + "");
                         printSentence(null, role.split(";"), "SubObjectProperty");
+                    } else {
+                        owlThingCount++;
                     }
                 }
 
                 @Override
                 public void visit(OWLSubPropertyChainOfAxiom axiom) {
                     count++;
+                    subPropertyCount++;
                     String role = getName(axiom.getSuperProperty() + "") + ";";
                     List<OWLObjectPropertyExpression> ope = axiom.getPropertyChain();
                     for (OWLObjectPropertyExpression ope1 : ope) {
@@ -259,6 +272,7 @@ public class Driver {
                 public void visit(OWLObjectPropertyDomainAxiom axiom) {
                     if (!axiom.getDomain().isOWLThing()) {
                         count++;
+                        domainCount++;
                         OWLClassExpression ce[] = {axiom.getDomain()};
                         String printString = "ObjectPropertyDomain " + getPartSentence(null, getName(axiom.getObjectPropertiesInSignature() + "").split(";"), "ObjectPropertyDomain", ce, "ObjectPropertyDomain");
                         printFullSentence(printString);
@@ -271,6 +285,7 @@ public class Driver {
                 public void visit(OWLObjectPropertyRangeAxiom axiom) {
                     if (!axiom.getRange().isOWLThing()) {
                         count++;
+                        rangeCount++;
                         OWLClassExpression ce[] = {axiom.getRange()};
                         String roles = getName(axiom.getObjectPropertiesInSignature() + "");
                         roles = roles.replaceFirst("-", ";");
@@ -293,6 +308,8 @@ public class Driver {
                         subPropertyCount++;
                         role += getName(ode + "");
                         printSentence(null, role.split(";"), "SubObjectProperty");
+                    } else {
+                        owlThingCount++;
                     }
                 }
 
@@ -300,6 +317,7 @@ public class Driver {
                 public void visit(OWLDataPropertyDomainAxiom axiom) {
                     if (!axiom.getDomain().isOWLThing()) {
                         count++;
+                        domainCount++;
                         OWLClassExpression ce[] = {axiom.getDomain()};
                         String printString = "DataPropertyDomain " + getPartSentence(null, getName(axiom.getDataPropertiesInSignature() + "").split(";"), "DataPropertyDomain", ce, "ObjectPropertyDomain");
                         printFullSentence(printString);
@@ -314,6 +332,7 @@ public class Driver {
                     if (!dr.isTopDatatype()) {
                         if (dr.isDatatype()) {
                             count++;
+                            rangeCount++;
                             OWLDatatype dt = dr.asOWLDatatype();
                             String objects[] = {getDataName(dt.getIRI() + "")};
                             String roles[] = {getName(axiom.getDataPropertiesInSignature() + "")};
@@ -325,6 +344,7 @@ public class Driver {
                 @Override
                 public void visit(OWLFunctionalDataPropertyAxiom axiom) {
                     count++;
+                    functionalCount++;
                     String role = getName(axiom + "");
                     printFunctional(role);
                 }
@@ -395,6 +415,7 @@ public class Driver {
                 @Override
                 public void visit(OWLDisjointUnionAxiom axiom) {
                     count++;
+                    disjointCount++;
                     Set<OWLClassExpression> objects = axiom.getClassExpressions();
                     String[] literals = new String[objects.size() + 1];
                     literals[0] = getName(axiom.getOWLClass() + "");
@@ -440,10 +461,15 @@ public class Driver {
             walker.walkStructure(visitor);
 
             //TESTING
+            long duration = System.nanoTime() - startTime;
+            double seconds = (double) duration / 1000000000.0;
             int numAxioms = o.getAxiomCount() - o.getAxiomCount(AxiomType.ANNOTATION_ASSERTION) - o.getAxiomCount(AxiomType.DECLARATION);
             int numDisjoint = o.getAxiomCount(AxiomType.DISJOINT_CLASSES) + o.getAxiomCount(AxiomType.DISJOINT_UNION) + o.getAxiomCount(AxiomType.DISJOINT_DATA_PROPERTIES) + o.getAxiomCount(AxiomType.DISJOINT_OBJECT_PROPERTIES);
-            int numSubProperty = o.getAxiomCount(AxiomType.SUB_DATA_PROPERTY) + o.getAxiomCount(AxiomType.SUB_OBJECT_PROPERTY);
+            int numSubProperty = o.getAxiomCount(AxiomType.SUB_DATA_PROPERTY) + o.getAxiomCount(AxiomType.SUB_OBJECT_PROPERTY) + o.getAxiomCount(AxiomType.SUB_PROPERTY_CHAIN_OF);
             int numAssertions = o.getAxiomCount(AxiomType.CLASS_ASSERTION) + o.getAxiomCount(AxiomType.OBJECT_PROPERTY_ASSERTION) + o.getAxiomCount(AxiomType.DATA_PROPERTY_ASSERTION) + o.getAxiomCount(AxiomType.NEGATIVE_DATA_PROPERTY_ASSERTION) + o.getAxiomCount(AxiomType.NEGATIVE_OBJECT_PROPERTY_ASSERTION) + o.getAxiomCount(AxiomType.SAME_INDIVIDUAL) + o.getAxiomCount(AxiomType.DIFFERENT_INDIVIDUALS);
+            int numFunctional = o.getAxiomCount(AxiomType.FUNCTIONAL_DATA_PROPERTY) + o.getAxiomCount(AxiomType.FUNCTIONAL_OBJECT_PROPERTY);
+            int numDomain = o.getAxiomCount(AxiomType.OBJECT_PROPERTY_DOMAIN) + o.getAxiomCount(AxiomType.DATA_PROPERTY_DOMAIN);
+            int numRange = o.getAxiomCount(AxiomType.OBJECT_PROPERTY_RANGE) + o.getAxiomCount(AxiomType.DATA_PROPERTY_RANGE);
             try {
                 File testFile = new File(fileName.substring(0, fileName.indexOf(".")) + "TestData.csv");
 
@@ -452,13 +478,25 @@ public class Driver {
                     testFile.createNewFile();
                 }
                 bw = new BufferedWriter(new FileWriter(testFile));
-                bw.write(";Num axioms in ontology;Num axioms verbalised;Num sentences written\n");
+                bw.write(fileName + ";Num axioms in ontology;Num axioms verbalised;Num sentences written\n");
                 bw.write("Total;" + numAxioms + ";" + count + ";" + sentenceCount + "\n");
                 bw.write("EquivalentClass;" + o.getAxiomCount(AxiomType.EQUIVALENT_CLASSES) + ";" + equivalentCount + ";" + equivalentSentCount + "\n");
+                bw.write("SubClass;" + o.getAxiomCount(AxiomType.SUBCLASS_OF) + ";" + subClassCount + ";" + subClassSentCount + "\n");
                 bw.write("Disjoint;" + numDisjoint + ";" + disjointCount + ";" + disjointSentCount + "\n");
                 bw.write("SubProperty;" + numSubProperty + ";" + subPropertyCount + ";" + subPropertySentCount + "\n");
+                bw.write("Inverse OP;" + o.getAxiomCount(AxiomType.INVERSE_OBJECT_PROPERTIES) + ";" + inverseCount + ";" + inverseSentCount + "\n");
+                bw.write("Transitive OP;" + o.getAxiomCount(AxiomType.TRANSITIVE_OBJECT_PROPERTY) + ";" + transitiveCount + ";" + transitiveSentCount + "\n");
+                bw.write("Reflexive OP;" + o.getAxiomCount(AxiomType.REFLEXIVE_OBJECT_PROPERTY) + ";" + reflexiveCount + ";" + reflexiveSentCount + "\n");
+                bw.write("Irreflexive OP;" + o.getAxiomCount(AxiomType.IRREFLEXIVE_OBJECT_PROPERTY) + ";" + irreflexiveCount + ";" + irreflexiveSentCount + "\n");
+                bw.write("Functional;" + numFunctional + ";" + functionalCount + ";" + functionalSentCount + "\n");
+                bw.write("InverseFunctional OP;" + o.getAxiomCount(AxiomType.INVERSE_FUNCTIONAL_OBJECT_PROPERTY) + ";" + inverseFunctionalCount + ";" + inverseSentFunctionalCount + "\n");
+                bw.write("Symmetric OP;" + o.getAxiomCount(AxiomType.SYMMETRIC_OBJECT_PROPERTY) + ";" + symmetricCount + ";" + symmetricSentCount + "\n");
+                bw.write("Asymmetric OP;" + o.getAxiomCount(AxiomType.ASYMMETRIC_OBJECT_PROPERTY) + ";" + asymmetricCount + ";" + asymmetricSentCount + "\n");
+                bw.write("Domain;" + numDomain + ";" + domainCount + ";" + domainSentCount + "\n");
+                bw.write("Range;" + numRange + ";" + rangeCount + ";" + rangeSentCount + "\n");
                 bw.write("Assertions;" + numAssertions + ";" + assertionCount + ";" + assertionSentCount + "\n");
-                bw.write("OwlThing;" + owlThingCount);
+                bw.write("\nOwlThing;" + owlThingCount + "\n");
+                bw.write("Time taken;" + seconds);
                 bw.close();
                 //subClassCount, disjointCount, owlThingCount, sentenceCount, equivalentCount, sameIndividualCount
             } catch (IOException e) {
@@ -683,9 +721,7 @@ public class Driver {
                     throw new AssertionError(ce.getClassExpressionType().name());
             }
         }
-        if (printSentence.equals("[]")) {
-            System.out.println(ce + "");
-        }
+
         return printSentence;
     }
 
@@ -838,6 +874,28 @@ public class Driver {
                 subPropertySentCount++;
             } else if (printString.contains("Assertion") || (printString.contains("DifferentIndividual")) || (printString.contains("SameIndividual"))) {
                 assertionSentCount++;
+            } else if (printString.contains("SubClass")) {
+                subClassSentCount++;
+            } else if (printString.contains("InverseObjectProperty")) {
+                inverseSentCount++;
+            } else if (printString.contains("Transitive")) {
+                transitiveSentCount++;
+            } else if (printString.substring(0, 9).equals("Reflexive")) {
+                reflexiveSentCount++;
+            } else if (printString.contains("Irreflexive")) {
+                irreflexiveSentCount++;
+            } else if (printString.contains("FunctionalProperty")) {
+                functionalSentCount++;
+            } else if (printString.contains("InverseFunctionalObjectProperty")) {
+                inverseSentFunctionalCount++;
+            } else if (printString.substring(0, 9).equals("Symmetric")) {
+                symmetricSentCount++;
+            } else if (printString.contains("AsymmetricObjectProperty")) {
+                assertionSentCount++;
+            } else if (printString.contains("Domain")) {
+                domainSentCount++;
+            } else if (printString.contains("Range")) {
+                rangeSentCount++;
             }
             bw.close();
         } catch (IOException e) {
