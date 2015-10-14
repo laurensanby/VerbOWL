@@ -1,0 +1,2402 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [
+     <!ENTITY vin  "http://www.w3.org/TR/2003/PR-owl-guide-20031209/Wyn#" >
+     <!ENTITY food "http://www.w3.org/TR/2003/PR-owl-guide-20031209/food#" >
+     <!ENTITY owl  "http://www.w3.org/2002/07/owl#" >
+     <!ENTITY xsd  "http://www.w3.org/2001/XMLSchema#" >
+   ]>
+
+<rdf:RDF
+  xmlns     = "http://www.w3.org/TR/2003/PR-owl-guide-20031209/Wyn#"
+  xmlns:vin = "http://www.w3.org/TR/2003/PR-owl-guide-20031209/Wyn#"
+  xml:base  = "http://www.w3.org/TR/2003/PR-owl-guide-20031209/Wyn#"
+  xmlns:food= "http://www.w3.org/TR/2003/PR-owl-guide-20031209/food#"
+  xmlns:owl = "http://www.w3.org/2002/07/owl#"
+  xmlns:rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs= "http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:xsd = "http://www.w3.org/2001/XMLSchema#">
+
+  <owl:Ontology rdf:about="">
+    <rdfs:comment>An example OWL ontology</rdfs:comment>
+    <owl:priorVersion>
+      <owl:Ontology rdf:about="http://www.w3.org/TR/2003/CR-owl-guide-20030818/Wyn"/>
+    </owl:priorVersion>
+    <owl:imports rdf:resource="http://www.w3.org/TR/2003/PR-owl-guide-20031209/food"/>
+    <rdfs:comment>Derived from the DAML Wyn ontology at 
+      http://ontolingua.stanford.edu/doc/chimaera/ontologies/Wyns.daml
+      Substantially changed, in particular the Streek based relations.
+    </rdfs:comment>
+    <rdfs:label>Wyn Ontology</rdfs:label>
+  </owl:Ontology>
+  
+  <owl:Class rdf:ID="Wyn">
+    <rdfs:subClassOf rdf:resource="&food;Drinkbare-Vloeistof" />
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-maker" />
+	<owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-maker" />
+	<owl:allValuesFrom rdf:resource="#wynmakery" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+ 	<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in"/> 
+        <owl:someValuesFrom rdf:resource="&vin;Streek"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Wyn</rdfs:label>
+    <rdfs:label xml:lang="fr">vin</rdfs:label>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Vintage">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-vintage-jaar"/>  
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <owl:Class rdf:ID="WynDruiwe">
+    <rdfs:subClassOf rdf:resource="&food;Druiwe" />
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Witwyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Wit" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="WitTafelwyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Tafelwyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Wit" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="WitNieSoetWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Witwyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Droe" />
+              <owl:Thing rdf:about="#AfDroe" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="WitLoire">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Loire" />
+      <owl:Class rdf:about="#Witwyn" />
+    </owl:intersectionOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="#WitLoire">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#CheninBlancDruiwe" />
+              <owl:Thing rdf:about="#PinotBlancDruiwe" />
+              <owl:Thing rdf:about="#SauvignonBlancDruiwe" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="WitBurgundy">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Burgundy" />
+      <owl:Class rdf:about="#Witwyn" />
+    </owl:intersectionOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="#WitBurgundy">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#ChardonnayDruiwe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="WitBordeaux">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Bordeaux" />
+      <owl:Class rdf:about="#Witwyn" />
+    </owl:intersectionOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="#WitBordeaux">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#SemillonDruiwe" />
+              <owl:Thing rdf:about="#SauvignonBlancDruiwe" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Streek" />
+
+  <owl:ObjectProperty rdf:ID="gelee-in">
+    <rdf:type rdf:resource="&owl;TransitiveProperty" />
+    <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing" />
+    <rdfs:range rdf:resource="#Streek" />
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="is-aangrensende-streek-van">
+    <rdf:type rdf:resource="&owl;SymmetricProperty" />
+    <rdfs:domain rdf:resource="#Streek" />
+    <rdfs:range rdf:resource="#Streek" />
+  </owl:ObjectProperty>
+  
+  <owl:Class rdf:ID="VintageJaar" />
+
+  <owl:DatatypeProperty rdf:ID="jaarWaarde">
+    <rdfs:domain rdf:resource="#VintageJaar" />    
+    <rdfs:range  rdf:resource="&xsd;positiveInteger" />
+  </owl:DatatypeProperty>
+  
+  <VintageJaar rdf:ID="Jaar1998">
+    <jaarWaarde rdf:datatype="&xsd;positiveInteger">1998</jaarWaarde>
+  </VintageJaar>
+
+  <owl:ObjectProperty rdf:ID="het-vintage-jaar">
+    <rdf:type rdf:resource="&owl;FunctionalProperty" />
+    <rdfs:domain rdf:resource="#Vintage" />
+    <rdfs:range  rdf:resource="#VintageJaar" />
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:ID="is-gemaak-van-druiwe">
+    <rdfs:subPropertyOf rdf:resource="&food;madeFromFruit" />
+    <rdfs:domain rdf:resource="#Wyn" />
+    <rdfs:range rdf:resource="#WynDruiwe" />
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="gemaak-in-wyn">
+    <owl:inverseOf rdf:resource="#is-gemaak-van-druiwe" />
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="het-wyn-descriptor">
+    <rdfs:domain rdf:resource="#Wyn" />
+    <rdfs:range  rdf:resource="#WynDescriptor" />
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="het-suiker">
+    <rdf:type rdf:resource="&owl;FunctionalProperty" />
+    <rdfs:subPropertyOf rdf:resource="#het-wyn-descriptor" />
+    <rdfs:range rdf:resource="#WynSuiker" />
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:ID="het-Body">
+    <rdf:type rdf:resource="&owl;FunctionalProperty" />
+    <rdfs:subPropertyOf rdf:resource="#het-wyn-descriptor" />
+    <rdfs:range rdf:resource="#WynBody" />
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:ID="het-geur">
+    <rdf:type rdf:resource="&owl;FunctionalProperty" />
+    <rdfs:subPropertyOf rdf:resource="#het-wyn-descriptor" />
+    <rdfs:range rdf:resource="#WynGeur" />
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:ID="het-kleur">
+    <rdf:type rdf:resource="&owl;FunctionalProperty" />
+    <rdfs:subPropertyOf rdf:resource="#het-wyn-descriptor" />
+    <rdfs:domain rdf:resource="#Wyn" />
+    <rdfs:range rdf:resource="#WynKleur" />
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:ID="het-maker">
+    <rdf:type rdf:resource="&owl;FunctionalProperty" />
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:ID="produseer-wyn">
+    <owl:inverseOf rdf:resource="#het-maker" />
+  </owl:ObjectProperty>
+
+  <owl:Class rdf:ID="Zinfandel">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#ZinfandelDruiwe" />
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:about="#Zinfandel">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Rooi" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Droe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Vol" />
+              <owl:Thing rdf:about="#Middelmatig" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Gematig" />
+              <owl:Thing rdf:about="#Sterk" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="wynmakery" />
+  
+  <owl:Class rdf:ID="WynDescriptor">
+    <rdfs:comment>Made WynDescriptor unionType of Geurs and Kleur</rdfs:comment>
+    <owl:unionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#WynGeur" />
+      <owl:Class rdf:about="#WynKleur" />
+    </owl:unionOf>
+  </owl:Class>
+
+  <owl:Class rdf:ID="WynGeur">
+    <rdfs:subClassOf rdf:resource="#WynDescriptor" />
+  </owl:Class>
+
+  <owl:Class rdf:ID="WynKleur">
+    <rdfs:subClassOf rdf:resource="#WynDescriptor" />
+    <owl:oneOf rdf:parseType="Collection">
+      <owl:Thing rdf:about="#Wit" />
+      <owl:Thing rdf:about="#Roos" />
+      <owl:Thing rdf:about="#Rooi" />
+    </owl:oneOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="WynSuiker">
+    <rdfs:subClassOf rdf:resource="#WynGeur" />
+    <owl:oneOf rdf:parseType="Collection">
+      <owl:Thing rdf:about="#Soet" />
+      <owl:Thing rdf:about="#AfDroe" />
+      <owl:Thing rdf:about="#Droe" />
+    </owl:oneOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="WynGeur">
+    <rdfs:subClassOf rdf:resource="#WynGeur" />
+    <owl:oneOf rdf:parseType="Collection">
+      <owl:Thing rdf:about="#Delikaat" />
+      <owl:Thing rdf:about="#Gematig" />
+      <owl:Thing rdf:about="#Sterk" />
+    </owl:oneOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="WynBody">
+    <rdfs:subClassOf rdf:resource="#WynGeur" />
+    <owl:oneOf rdf:parseType="Collection">
+      <owl:Thing rdf:about="#Lig" />
+      <owl:Thing rdf:about="#Middelmatig" />
+      <owl:Thing rdf:about="#Vol" />
+    </owl:oneOf>
+  </owl:Class>
+  
+  <Streek rdf:ID="USStreek" />
+  
+  <owl:Class rdf:ID="Toere">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Loire" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#ToereStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="#Toere">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#CheninBlancDruiwe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Tafelwyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Droe" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="SoetWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Soet" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="SoetRiesling">
+    <rdfs:subClassOf rdf:resource="#NageregWyn" />
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:hasValue rdf:resource="#Vol" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Gematig" />
+              <owl:Thing rdf:about="#Sterk" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Riesling" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Soet" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="StEmilion">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Rooi" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:hasValue rdf:resource="#Sterk" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#CabernetSauvignonDruiwe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Bordeaux" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#StEmilionStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="SemillonOrSauvignonBlanc">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Wit" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Middelmatig" />
+              <owl:Thing rdf:about="#Vol" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#SemillonDruiwe" />
+              <owl:Thing rdf:about="#SauvignonBlancDruiwe" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Semillon">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#SemillonOrSauvignonBlanc" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#SemillonDruiwe" />
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="SauvignonBlanc">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#SemillonOrSauvignonBlanc" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#SauvignonBlancDruiwe" />
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Sauternes">
+    <rdfs:subClassOf rdf:resource="#Laatoes" />
+    <rdfs:subClassOf rdf:resource="#Bordeaux" />
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#SauterneStreek" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:hasValue rdf:resource="#Middelmatig" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Wit" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Sancerre">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:hasValue rdf:resource="#Middelmatig" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#AfDroe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:hasValue rdf:resource="#Delikaat" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#SauvignonBlancDruiwe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Loire" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#SancerreStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="RoosWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Roos" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Riesling">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Wit" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#RieslingDruiwe" />
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="RooiWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Rooi" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="RooiTafelWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Tafelwyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Rooi" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="RooiBurgundy">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#PinotNoirDruiwe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Burgundy" />
+      <owl:Class rdf:about="#RooiWyn" />
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="RooiBordeaux">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#CabernetSauvignonDruiwe" />
+              <owl:Thing rdf:about="#MerlotDruiwe" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Bordeaux" />
+      <owl:Class rdf:about="#RooiWyn" />
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Port">
+    <rdfs:subClassOf rdf:resource="#RooiWyn" />
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#PortugalStreek" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:hasValue rdf:resource="#Vol" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:hasValue rdf:resource="#Sterk" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Soet" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="PinotNoir">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Rooi" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#PinotNoirDruiwe" />
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="PinotBlanc">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Wit" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#PinotBlancDruiwe" />
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="PetiteSyrah">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Rooi" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Droe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Gematig" />
+              <owl:Thing rdf:about="#Sterk" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Middelmatig" />
+              <owl:Thing rdf:about="#Vol" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#PetiteSyrahDruiwe" />
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Pauillac">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:hasValue rdf:resource="#Vol" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:hasValue rdf:resource="#Sterk" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#CabernetSauvignonDruiwe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Medoc" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#PauillacStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Muscadet">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:hasValue rdf:resource="#Lig" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:hasValue rdf:resource="#Delikaat" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Droe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#PinotBlancDruiwe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Loire" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#MuscadetStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Meursault">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:hasValue rdf:resource="#Vol" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#WitBurgundy" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#MeursaultStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Merlot">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Rooi" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Droe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Gematig" />
+              <owl:Thing rdf:about="#Delikaat" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Lig" />
+              <owl:Thing rdf:about="#Middelmatig" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#MerlotDruiwe" />
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Meritage">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Rooi" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#CabernetSauvignonDruiwe" />
+              <owl:Thing rdf:about="#CabernetFrancDruiwe" />
+              <owl:Thing rdf:about="#MalbecDruiwe" />
+              <owl:Thing rdf:about="#PetiteVerdotDruiwe" />
+              <owl:Thing rdf:about="#MerlotDruiwe" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <Streek rdf:ID="MedocStreek">
+    <gelee-in rdf:resource="#BordeauxStreek" />
+  </Streek>
+  
+  <owl:Class rdf:ID="Medoc">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Rooi" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Droe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Bordeaux" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#MedocStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Margaux">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:hasValue rdf:resource="#Delikaat" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#MerlotDruiwe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Medoc" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#MargauxStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <Streek rdf:ID="LoireStreek">
+    <gelee-in rdf:resource="#FranseStreek" />
+  </Streek>
+  
+  <owl:Class rdf:ID="Loire">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#LoireStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Laatoes">
+    <rdfs:subClassOf rdf:resource="#Wyn" />
+    <owl:disjointWith rdf:resource="#VroeeOes" />
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Soet" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Gematig" />
+              <owl:Thing rdf:about="#Sterk" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="ItalianWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#ItalianStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <Streek rdf:ID="ItalianStreek" />
+  
+  <owl:Class rdf:ID="YsWyn">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Middelmatig" />
+              <owl:Thing rdf:about="#Vol" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Gematig" />
+              <owl:Thing rdf:about="#Sterk" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Laatoes" />
+      <owl:Class rdf:about="#NageregWyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Wit" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="GermanWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#GermanyStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Gamay">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#GamayDruiwe" />
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="FullBodiedWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:hasValue rdf:resource="#Vol" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <Streek rdf:ID="FranseStreek" />
+  
+  <owl:Class rdf:ID="FranseWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#FranseStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+
+  <owl:Class rdf:ID="VroeeOes">
+    <rdfs:subClassOf rdf:resource="#Wyn" />
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Droe" />
+              <owl:Thing rdf:about="#AfDroe" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="DroeWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Droe" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="DroeWitWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#DroeWyn" />
+      <owl:Class rdf:about="#Witwyn" />
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="DroeRiesling">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Wit" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:hasValue rdf:resource="#Delikaat" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Lig" />
+              <owl:Thing rdf:about="#Middelmatig" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Riesling" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Droe" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="DroeRooiWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#DroeWyn" />
+      <owl:Class rdf:about="#RooiWyn" />
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="NageregWyn">
+    <rdfs:subClassOf rdf:resource="#Wyn" />
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#AfDroe" />
+              <owl:Thing rdf:about="#Soet" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="CotesDOr">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:hasValue rdf:resource="#Gematig" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#RooiBurgundy" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#CotesDOrStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Chianti">
+    <rdfs:subClassOf rdf:resource="#ItalianWyn" />
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#ChiantiStreek" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Rooi" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#SangioveseDruiwe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:hasValue rdf:resource="#Gematig" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Droe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Lig" />
+              <owl:Thing rdf:about="#Middelmatig" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="CheninBlanc">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Wit" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:hasValue rdf:resource="#Gematig" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Vol" />
+              <owl:Thing rdf:about="#Middelmatig" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Droe" />
+              <owl:Thing rdf:about="#AfDroe" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#CheninBlancDruiwe" />
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Chardonnay">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Wit" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Vol" />
+              <owl:Thing rdf:about="#Middelmatig" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Sterk" />
+              <owl:Thing rdf:about="#Gematig" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#ChardonnayDruiwe" />
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <Streek rdf:ID="CaliforniaStreek">
+    <gelee-in rdf:resource="#USStreek" />
+  </Streek>
+  
+  <Streek rdf:ID="TexasStreek">
+    <gelee-in rdf:resource="#USStreek" />
+  </Streek>
+  
+  <owl:Class rdf:ID="CaliforniaWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#CaliforniaStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="TexasWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#TexasStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="CabernetSauvignon">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Rooi" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Droe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Gematig" />
+              <owl:Thing rdf:about="#Sterk" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <owl:Thing rdf:about="#Middelmatig" />
+              <owl:Thing rdf:about="#Vol" />
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#CabernetSauvignonDruiwe" />
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="CabernetFranc">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Rooi" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:hasValue rdf:resource="#Gematig" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:hasValue rdf:resource="#Middelmatig" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Droe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#CabernetFrancDruiwe" />
+      </owl:Restriction>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Burgundy">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#BourgogneStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Droe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <Streek rdf:ID="BourgogneStreek">
+    <gelee-in rdf:resource="#FranseStreek" />
+  </Streek>
+  
+  <Streek rdf:ID="BordeauxStreek">
+    <gelee-in rdf:resource="#FranseStreek" />
+  </Streek>
+  
+  <owl:Class rdf:ID="Bordeaux">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#BordeauxStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="Beaujolais">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Rooi" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:hasValue rdf:resource="#Lig" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#Droe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:hasValue rdf:resource="#Delikaat" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:hasValue rdf:resource="#GamayDruiwe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#is-gemaak-van-druiwe" />
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#BeaujolaisStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <Streek rdf:ID="AustralianStreek" />
+  
+  <owl:Class rdf:ID="Anjou">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-kleur" />
+        <owl:hasValue rdf:resource="#Roos" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-Body" />
+        <owl:hasValue rdf:resource="#Lig" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-geur" />
+        <owl:hasValue rdf:resource="#Delikaat" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#het-suiker" />
+        <owl:hasValue rdf:resource="#AfDroe" />
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Loire" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#AnjouStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="AmericanWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#USStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <owl:Class rdf:ID="AlsatianWyn">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#Wyn" />
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#gelee-in" />
+        <owl:hasValue rdf:resource="#AlsaceStreek" />
+      </owl:Restriction>
+    </owl:intersectionOf>
+  </owl:Class>
+  
+  <WynBody rdf:ID="Vol" />
+  
+  <WynBody rdf:ID="Middelmatig" />
+  
+  <WynBody rdf:ID="Lig" />
+  
+  <WynKleur rdf:ID="Rooi" />
+  
+  <WynKleur rdf:ID="Roos" />
+  
+  <WynKleur rdf:ID="Wit" />
+  
+  <WynGeur rdf:ID="Sterk" />
+  
+  <WynGeur rdf:ID="Gematig" />
+  
+  <WynGeur rdf:ID="Delikaat" />
+  
+  <WynSuiker rdf:ID="Droe" />
+  
+  <WynSuiker rdf:ID="AfDroe">
+    <owl:differentFrom rdf:resource="#Droe"/>
+    <owl:differentFrom rdf:resource="#Soet"/>
+  </WynSuiker>
+  
+  <WynSuiker rdf:ID="Soet">
+    <owl:differentFrom rdf:resource="#Droe"/>
+  </WynSuiker>
+  
+  <owl:AllDifferent>
+    <owl:distinctMembers rdf:parseType="Collection">
+      <vin:WynKleur rdf:about="#Rooi" />
+      <vin:WynKleur rdf:about="#Wit" />
+      <vin:WynKleur rdf:about="#Roos" />
+    </owl:distinctMembers>
+  </owl:AllDifferent>
+
+  <owl:AllDifferent>
+    <owl:distinctMembers rdf:parseType="Collection">
+      <vin:WynBody rdf:about="#Lig" />
+      <vin:WynBody rdf:about="#Middelmatig" />
+      <vin:WynBody rdf:about="#Vol" />
+    </owl:distinctMembers>
+  </owl:AllDifferent>
+
+  <owl:AllDifferent>
+    <owl:distinctMembers rdf:parseType="Collection">
+      <vin:WynGeur rdf:about="#Delikaat" />
+      <vin:WynGeur rdf:about="#Gematig" />
+      <vin:WynGeur rdf:about="#Sterk" />
+    </owl:distinctMembers>
+  </owl:AllDifferent>
+ 
+  <owl:AllDifferent>
+    <owl:distinctMembers rdf:parseType="Collection">
+      <vin:WynSuiker rdf:about="#Soet" />
+      <vin:WynSuiker rdf:about="#AfDroe" />
+      <vin:WynSuiker rdf:about="#Droe" />
+    </owl:distinctMembers>
+  </owl:AllDifferent>
+
+  <Streek rdf:ID="AlsaceStreek">   
+    <gelee-in rdf:resource="#FranseStreek" />
+  </Streek>
+
+  <Streek rdf:ID="AnjouStreek">
+    <gelee-in rdf:resource="#LoireStreek" />
+  </Streek>
+  
+  <Streek rdf:ID="ArroyoGrandeStreek">
+    <gelee-in rdf:resource="#CaliforniaStreek" />
+  </Streek>
+  
+  <wynmakery rdf:ID="Beringer" />
+
+  <wynmakery rdf:ID="Bancroft" />
+  
+  <Chardonnay rdf:ID="BancroftChardonnay">
+    <gelee-in rdf:resource="#NapaStreek" />
+    <het-maker  rdf:resource="#Bancroft" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </Chardonnay>
+  
+  <Streek rdf:ID="BeaujolaisStreek">
+    <gelee-in rdf:resource="#FranseStreek" />
+  </Streek>
+  
+  <WynDruiwe rdf:ID="CabernetFrancDruiwe" />
+  
+  <WynDruiwe rdf:ID="CabernetSauvignonDruiwe" />
+  
+  <Streek rdf:ID="CentralCoastStreek">
+    <gelee-in rdf:resource="#CaliforniaStreek" />
+  </Streek>
+  
+  <WynDruiwe rdf:ID="ChardonnayDruiwe" />
+  
+  <wynmakery rdf:ID="ChateauChevalBlanc" />
+  
+  <StEmilion rdf:ID="ChateauChevalBlancStEmilion">
+    <het-maker  rdf:resource="#ChateauChevalBlanc" />
+  </StEmilion>
+  
+  <wynmakery rdf:ID="ChateauDYchem" />
+  
+  <Sauternes rdf:ID="ChateauDYchemSauterne">
+    <is-gemaak-van-druiwe rdf:resource="#SauvignonBlancDruiwe" />
+    <is-gemaak-van-druiwe rdf:resource="#SemillonDruiwe" />
+    <het-geur rdf:resource="#Sterk" />
+    <het-maker  rdf:resource="#ChateauDYchem" />
+  </Sauternes> 
+  
+  <wynmakery rdf:ID="ChateauDeMeursault" />
+  
+  <Meursault rdf:ID="ChateauDeMeursaultMeursault">
+    <het-geur rdf:resource="#Gematig" />
+    <het-maker  rdf:resource="#ChateauDeMeursault" />
+  </Meursault>
+  
+  <wynmakery rdf:ID="ChateauLafiteRothschild" />
+  
+  <Pauillac rdf:ID="ChateauLafiteRothschildPauillac">
+    <het-maker  rdf:resource="#ChateauLafiteRothschild" />
+  </Pauillac>
+  
+  <Margaux rdf:ID="ChateauMargaux">
+    <het-maker  rdf:resource="#ChateauMargauxWynry" />
+  </Margaux>
+  
+  <wynmakery rdf:ID="ChateauMargauxWynry" />
+  
+  <wynmakery rdf:ID="ChateauMorgon" />
+  
+  <Beaujolais rdf:ID="ChateauMorgonBeaujolais">
+    <het-maker  rdf:resource="#ChateauMorgon" />
+  </Beaujolais>
+  
+  <WynDruiwe rdf:ID="CheninBlancDruiwe" />
+
+  <WynDruiwe rdf:ID="ZinfandelDruiwe" />
+
+  <Chianti rdf:ID="ChiantiClassico">
+    <het-Body   rdf:resource="#Middelmatig" />
+    <het-maker  rdf:resource="#McGuinnesso" />
+  </Chianti>
+  
+  <Streek rdf:ID="ChiantiStreek">
+    <gelee-in rdf:resource="#ItalianStreek" />
+  </Streek>
+  
+  <wynmakery rdf:ID="ClosDeLaPoussie" />
+  
+  <Sancerre rdf:ID="ClosDeLaPoussieSancerre">
+    <het-maker  rdf:resource="#ClosDeLaPoussie" />
+  </Sancerre>
+  
+  <wynmakery rdf:ID="ClosDeVougeot" />
+  
+  <CotesDOr rdf:ID="ClosDeVougeotCotesDOr">
+    <het-maker  rdf:resource="#ClosDeVougeot" />
+  </CotesDOr>
+  
+  <wynmakery rdf:ID="CongressSprings" />
+  
+  <Semillon rdf:ID="CongressSpringsSemillon">
+    <het-maker  rdf:resource="#CongressSprings" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </Semillon>
+
+  <wynmakery rdf:ID="Corbans" />
+  
+  <Riesling rdf:ID="CorbansDroeWitRiesling">
+    <gelee-in rdf:resource="#NewZealandStreek" />
+    <het-maker  rdf:resource="#Corbans" />
+    <het-suiker  rdf:resource="#AfDroe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </Riesling>
+  
+  <SauvignonBlanc rdf:ID="CorbansPrivateBinSauvignonBlanc">
+    <gelee-in rdf:resource="#NewZealandStreek" />
+    <het-maker  rdf:resource="#Corbans" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Sterk" />
+    <het-Body   rdf:resource="#Vol" />
+  </SauvignonBlanc>
+  
+  <SauvignonBlanc rdf:ID="CorbansSauvignonBlanc">
+    <gelee-in rdf:resource="#NewZealandStreek" />
+    <het-maker  rdf:resource="#Corbans" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Sterk" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </SauvignonBlanc>
+  
+  <wynmakery rdf:ID="CortonMontrachet" />
+  
+  <WitBurgundy rdf:ID="CortonMontrachetWitBurgundy">
+    <het-maker  rdf:resource="#CortonMontrachet" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Sterk" />
+    <het-Body   rdf:resource="#Vol" />
+  </WitBurgundy>
+  
+  <Streek rdf:ID="CotesDOrStreek">
+    <gelee-in rdf:resource="#BourgogneStreek" />
+  </Streek>
+  
+  <wynmakery rdf:ID="Cotturi" />
+  
+  <Zinfandel rdf:ID="CotturiZinfandel">
+    <gelee-in rdf:resource="#SonomaStreek" />
+    <het-maker  rdf:resource="#Cotturi" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Sterk" />
+    <het-Body   rdf:resource="#Vol" />
+  </Zinfandel>
+  
+  <wynmakery rdf:ID="DAnjou" />
+  
+  <Streek rdf:ID="EdnaValleyStreek">
+    <gelee-in rdf:resource="#CaliforniaStreek" />
+  </Streek>
+  
+  <wynmakery rdf:ID="Elyse" />
+  
+  <Zinfandel rdf:ID="ElyseZinfandel">
+    <gelee-in rdf:resource="#NapaStreek" />
+    <het-maker  rdf:resource="#Elyse" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Vol" />
+  </Zinfandel>
+  
+  <wynmakery rdf:ID="Forman" />
+  
+  <CabernetSauvignon rdf:ID="FormanCabernetSauvignon">
+    <gelee-in rdf:resource="#NapaStreek" />
+    <het-maker  rdf:resource="#Forman" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Sterk" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </CabernetSauvignon>
+  
+  <Chardonnay rdf:ID="FormanChardonnay">
+    <gelee-in rdf:resource="#NapaStreek" />
+    <het-maker  rdf:resource="#Forman" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Vol" />
+  </Chardonnay>
+  
+  <wynmakery rdf:ID="Foxen" />
+  
+  <CheninBlanc rdf:ID="FoxenCheninBlanc">
+    <gelee-in rdf:resource="#SantaBarbaraStreek" />
+    <het-maker  rdf:resource="#Foxen" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Vol" />
+  </CheninBlanc>
+  
+  <WynDruiwe rdf:ID="GamayDruiwe" />
+  
+  <wynmakery rdf:ID="GaryFarrell" />
+  
+  <Merlot rdf:ID="GaryFarrellMerlot">
+    <gelee-in rdf:resource="#SonomaStreek" />
+    <het-maker  rdf:resource="#GaryFarrell" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </Merlot>
+  
+  <Streek rdf:ID="GermanyStreek" />
+  
+  <wynmakery rdf:ID="Handley" />
+  
+  <wynmakery rdf:ID="KalinCellars" />
+  
+  <Semillon rdf:ID="KalinCellarsSemillon">
+    <het-maker  rdf:resource="#KalinCellars" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Sterk" />
+    <het-Body   rdf:resource="#Vol" />
+  </Semillon>
+  
+  <wynmakery rdf:ID="KathrynKennedy" />
+  
+  <Meritage rdf:ID="KathrynKennedyLateral">
+    <het-maker  rdf:resource="#KathrynKennedy" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Delikaat" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </Meritage>
+  
+  <wynmakery rdf:ID="LaneTanner" />
+  
+  <PinotNoir rdf:ID="LaneTannerPinotNoir">
+    <gelee-in rdf:resource="#SantaBarbaraStreek" />
+    <het-maker  rdf:resource="#LaneTanner" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Delikaat" />
+    <het-Body   rdf:resource="#Lig" />
+  </PinotNoir>
+  
+  <wynmakery rdf:ID="Longridge" />
+  
+  <Merlot rdf:ID="LongridgeMerlot">
+    <gelee-in rdf:resource="#NewZealandStreek" />
+    <het-maker  rdf:resource="#Longridge" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Lig" />
+  </Merlot>
+  
+  <WynDruiwe rdf:ID="MalbecDruiwe" />
+  
+  <Streek rdf:ID="MargauxStreek">
+    <gelee-in rdf:resource="#MedocStreek" />
+  </Streek>
+  
+  <wynmakery rdf:ID="Marietta" />
+  
+  <CabernetSauvignon rdf:ID="MariettaCabernetSauvignon">
+    <gelee-in rdf:resource="#SonomaStreek" />
+    <het-maker  rdf:resource="#Marietta" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </CabernetSauvignon>
+  
+  <RooiTafelWyn rdf:ID="MariettaOldVinesRooi">
+    <gelee-in rdf:resource="#SonomaStreek" />
+    <het-maker  rdf:resource="#Marietta" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </RooiTafelWyn>
+  
+  <PetiteSyrah rdf:ID="MariettaPetiteSyrah">
+    <gelee-in rdf:resource="#SonomaStreek" />
+    <het-maker  rdf:resource="#Marietta" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </PetiteSyrah>
+  
+  <Zinfandel rdf:ID="MariettaZinfandel">
+    <gelee-in rdf:resource="#SonomaStreek" />
+    <het-maker  rdf:resource="#Marietta" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </Zinfandel>
+  
+  <wynmakery rdf:ID="McGuinnesso" />
+  
+  <Streek rdf:ID="MendocinoStreek">
+    <gelee-in rdf:resource="#CaliforniaStreek" />
+    <is-aangrensende-streek-van rdf:resource="#SonomaStreek" />
+  </Streek>
+  
+  <WynDruiwe rdf:ID="MerlotDruiwe" />
+  
+  <Streek rdf:ID="MeursaultStreek">
+    <gelee-in rdf:resource="#BourgogneStreek" />
+  </Streek>
+  
+  <wynmakery rdf:ID="MountEdenVineyard" />
+  
+  <Chardonnay rdf:ID="MountEdenVineyardEdnaValleyChardonnay">
+    <gelee-in rdf:resource="#EdnaValleyStreek" />
+    <het-maker  rdf:resource="#MountEdenVineyard" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </Chardonnay>
+  
+  <PinotNoir rdf:ID="MountEdenVineyardEstatePinotNoir">
+    <gelee-in rdf:resource="#EdnaValleyStreek" />
+    <het-maker  rdf:resource="#MountEdenVineyard" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Sterk" />
+    <het-Body   rdf:resource="#Vol" />
+  </PinotNoir>
+  
+  <wynmakery rdf:ID="Mountadam" />
+  
+  <Chardonnay rdf:ID="MountadamChardonnay">
+    <gelee-in rdf:resource="#SouthAustraliaStreek" />
+    <het-maker  rdf:resource="#Mountadam" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Sterk" />
+    <het-Body   rdf:resource="#Vol" />
+  </Chardonnay>
+  
+  <PinotNoir rdf:ID="MountadamPinotNoir">
+    <gelee-in rdf:resource="#SouthAustraliaStreek" />
+    <het-maker  rdf:resource="#Mountadam" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </PinotNoir>
+  
+  <DroeRiesling rdf:ID="MountadamRiesling">
+    <gelee-in rdf:resource="#SouthAustraliaStreek" />
+    <het-maker  rdf:resource="#Mountadam" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Delikaat" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </DroeRiesling>
+  
+  <Streek rdf:ID="MuscadetStreek">
+    <gelee-in rdf:resource="#LoireStreek" />
+  </Streek>
+  
+  <Streek rdf:ID="NapaStreek">
+    <gelee-in rdf:resource="#CaliforniaStreek" />
+  </Streek>
+  
+  <Streek rdf:ID="NewZealandStreek" />
+  
+  <wynmakery rdf:ID="PageMillWynry" />  
+
+  <CabernetSauvignon rdf:ID="PageMillWynryCabernetSauvignon">
+    <gelee-in rdf:resource="#NapaStreek" />
+    <het-maker  rdf:resource="#PageMillWynry" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </CabernetSauvignon>
+  
+  <Streek rdf:ID="PauillacStreek">
+    <gelee-in rdf:resource="#MedocStreek" />
+  </Streek>
+  
+  <wynmakery rdf:ID="PeterMccoy" />
+  
+  <Chardonnay rdf:ID="PeterMccoyChardonnay">
+    <gelee-in rdf:resource="#SonomaStreek" />
+    <het-maker  rdf:resource="#PeterMccoy" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </Chardonnay>
+  
+  <WynDruiwe rdf:ID="PetiteSyrahDruiwe" />
+  
+  <WynDruiwe rdf:ID="PetiteVerdotDruiwe" />
+  
+  <WynDruiwe rdf:ID="PinotBlancDruiwe" />
+  
+  <WynDruiwe rdf:ID="PinotNoirDruiwe" />
+  
+  <Streek rdf:ID="PortugalStreek" />
+  
+  <wynmakery rdf:ID="PulignyMontrachet" />
+  
+  <WitBurgundy rdf:ID="PulignyMontrachetWitBurgundy">
+    <het-maker  rdf:resource="#PulignyMontrachet" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </WitBurgundy>
+  
+  <WynDruiwe rdf:ID="RieslingDruiwe" />
+  
+  <Anjou rdf:ID="RoosDAnjou">
+    <het-maker  rdf:resource="#DAnjou" />
+  </Anjou>
+  
+  <Streek rdf:ID="SancerreStreek">
+    <gelee-in rdf:resource="#LoireStreek" />
+  </Streek>
+  
+  <WynDruiwe rdf:ID="SangioveseDruiwe" />
+  
+  <Streek rdf:ID="SantaBarbaraStreek">
+    <gelee-in rdf:resource="#CaliforniaStreek" />
+  </Streek>
+  
+  <wynmakery rdf:ID="SantaCruzMountainVineyard" />
+  
+  <CabernetSauvignon rdf:ID="SantaCruzMountainVineyardCabernetSauvignon">
+    <gelee-in rdf:resource="#SantaCruzMountainsStreek" />
+    <het-maker  rdf:resource="#SantaCruzMountainVineyard" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Sterk" />
+    <het-Body   rdf:resource="#Vol" />
+  </CabernetSauvignon>
+  
+  <Streek rdf:ID="CentralTexasStreek">
+    <gelee-in rdf:resource="#TexasStreek" />
+  </Streek>
+
+  <wynmakery rdf:ID="StGenevieve" />
+
+  <Witwyn rdf:ID="StGenevieveTexasWit">
+    <gelee-in rdf:resource="#CentralTexasStreek" />
+    <het-maker  rdf:resource="#StGenevieve" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+  </Witwyn>
+
+  <Streek rdf:ID="SantaCruzMountainsStreek">
+    <gelee-in rdf:resource="#CaliforniaStreek" />
+  </Streek>
+  
+  <wynmakery rdf:ID="SaucelitoCanyon" />
+  
+  <Zinfandel rdf:ID="SaucelitoCanyonZinfandel">
+    <gelee-in rdf:resource="#ArroyoGrandeStreek" />
+    <het-maker  rdf:resource="#SaucelitoCanyon" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </Zinfandel>
+  
+  <Zinfandel rdf:ID="SaucelitoCanyonZinfandel1998">
+    <gelee-in rdf:resource="#ArroyoGrandeStreek" />
+    <het-vintage-jaar rdf:resource="#Jaar1998" />
+    <het-maker  rdf:resource="#SaucelitoCanyon" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </Zinfandel>
+
+  <Streek rdf:ID="SauterneStreek">
+    <gelee-in rdf:resource="#BordeauxStreek" />
+  </Streek>
+  
+  <WynDruiwe rdf:ID="SauvignonBlancDruiwe" />
+  
+  <wynmakery rdf:ID="SchlossRothermel" />
+  
+  <SoetRiesling rdf:ID="SchlossRothermelTrochenbierenausleseRiesling">
+    <gelee-in rdf:resource="#GermanyStreek" />
+    <het-maker  rdf:resource="#SchlossRothermel" />
+    <het-suiker  rdf:resource="#Soet" />
+    <het-geur rdf:resource="#Sterk" />
+    <het-Body   rdf:resource="#Vol" />
+  </SoetRiesling>
+  
+  <wynmakery rdf:ID="SchlossVolrad" />
+  
+  <SoetRiesling rdf:ID="SchlossVolradTrochenbierenausleseRiesling">
+    <gelee-in rdf:resource ="#GermanyStreek" />
+    <het-maker  rdf:resource="#SchlossVolrad" />
+    <het-suiker  rdf:resource="#Soet" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Vol" />
+  </SoetRiesling>
+  
+  <wynmakery rdf:ID="SeanThackrey" />
+  
+  <PetiteSyrah rdf:ID="SeanThackreySiriusPetiteSyrah">
+    <gelee-in rdf:resource="#NapaStreek" />
+    <het-maker  rdf:resource="#SeanThackrey" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Sterk" />
+    <het-Body   rdf:resource="#Vol" />
+  </PetiteSyrah>
+  
+  <wynmakery rdf:ID="Selaks" />
+  
+  <YsWyn rdf:ID="SelaksYsWyn">
+    <gelee-in rdf:resource="#NewZealandStreek" />
+    <het-maker  rdf:resource="#Selaks" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+    <het-kleur rdf:resource="#Wit" />
+  </YsWyn>
+  
+  <SauvignonBlanc rdf:ID="SelaksSauvignonBlanc">
+    <gelee-in rdf:resource="#NewZealandStreek" />
+    <het-maker  rdf:resource="#Selaks" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </SauvignonBlanc>
+  
+  <WynDruiwe rdf:ID="SemillonDruiwe" />
+  
+  <wynmakery rdf:ID="SevreEtMaine" />
+  
+  <Muscadet rdf:ID="SevreEtMaineMuscadet">
+    <het-maker  rdf:resource="#SevreEtMaine" />
+  </Muscadet>
+  
+  <Streek rdf:ID="SonomaStreek">
+    <gelee-in rdf:resource="#CaliforniaStreek" />
+  </Streek>
+  
+  <Streek rdf:ID="SouthAustraliaStreek">
+    <gelee-in rdf:resource="#AustralianStreek" />
+  </Streek>
+  
+  <Streek rdf:ID="StEmilionStreek">
+    <gelee-in rdf:resource="#BordeauxStreek" />
+  </Streek>
+  
+  <wynmakery rdf:ID="Stonleigh" />
+  
+  <SauvignonBlanc rdf:ID="StonleighSauvignonBlanc">
+    <gelee-in rdf:resource="#NewZealandStreek" />
+    <het-maker  rdf:resource="#Stonleigh" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Delikaat" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </SauvignonBlanc>
+  
+  <wynmakery rdf:ID="Taylor" />
+  
+  <Port rdf:ID="TaylorPort">
+    <het-maker  rdf:resource="#Taylor" />
+  </Port>
+  
+  <Streek rdf:ID="ToereStreek">
+    <gelee-in rdf:resource="#LoireStreek" />
+  </Streek>
+  
+  <wynmakery rdf:ID="Ventana" />
+  
+  <CheninBlanc rdf:ID="VentanaCheninBlanc">
+    <gelee-in rdf:resource="#CentralCoastStreek" />
+    <het-maker  rdf:resource="#Ventana" />
+    <het-suiker  rdf:resource="#AfDroe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </CheninBlanc>
+  
+  <wynmakery rdf:ID="WithallLane" />
+  
+  <CabernetFranc rdf:ID="WithallLaneCabernetFranc">
+    <gelee-in rdf:resource="#NapaStreek" />
+    <het-maker  rdf:resource="#WithallLane" />
+    <het-suiker  rdf:resource="#Droe" />
+    <het-geur rdf:resource="#Gematig" />
+    <het-Body   rdf:resource="#Middelmatig" />
+  </CabernetFranc>
+  
+  <NageregWyn rdf:ID="WithallLanePrimavera">
+    <gelee-in rdf:resource="#NapaStreek" />
+    <het-suiker  rdf:resource="#Soet" />
+    <het-geur rdf:resource="#Delikaat" />
+    <het-Body   rdf:resource="#Lig" />
+  </NageregWyn>
+  
+  <owl:AllDifferent>
+    <owl:distinctMembers rdf:parseType="Collection">
+      <vin:wynmakery rdf:about="#Bancroft" />
+      <vin:wynmakery rdf:about="#ChateauChevalBlanc" />
+      <vin:wynmakery rdf:about="#ChateauDYchem" />
+      <vin:wynmakery rdf:about="#ChateauDeMeursault" />
+      <vin:wynmakery rdf:about="#ChateauLafiteRothschild" />
+      <vin:wynmakery rdf:about="#ChateauMargauxWynry" />
+      <vin:wynmakery rdf:about="#ChateauMorgon" />
+      <vin:wynmakery rdf:about="#ClosDeLaPoussie" />
+      <vin:wynmakery rdf:about="#ClosDeVougeot" />
+      <vin:wynmakery rdf:about="#CongressSprings" />
+      <vin:wynmakery rdf:about="#Corbans" />
+      <vin:wynmakery rdf:about="#CortonMontrachet" />
+      <vin:wynmakery rdf:about="#Cotturi" />
+      <vin:wynmakery rdf:about="#DAnjou" />
+      <vin:wynmakery rdf:about="#Elyse" />
+      <vin:wynmakery rdf:about="#Forman" />
+      <vin:wynmakery rdf:about="#Foxen" />
+      <vin:wynmakery rdf:about="#GaryFarrell" />
+      <vin:wynmakery rdf:about="#KalinCellars" />
+      <vin:wynmakery rdf:about="#KathrynKennedy" />
+      <vin:wynmakery rdf:about="#LaneTanner" />
+      <vin:wynmakery rdf:about="#Longridge" />
+      <vin:wynmakery rdf:about="#Marietta" />
+      <vin:wynmakery rdf:about="#McGuinnesso" />
+      <vin:wynmakery rdf:about="#MountEdenVineyard" />
+      <vin:wynmakery rdf:about="#Mountadam" />
+      <vin:wynmakery rdf:about="#PageMillWynry" />
+      <vin:wynmakery rdf:about="#PeterMccoy" />
+      <vin:wynmakery rdf:about="#PulignyMontrachet" />
+      <vin:wynmakery rdf:about="#SantaCruzMountainVineyard" />
+      <vin:wynmakery rdf:about="#SaucelitoCanyon" />
+      <vin:wynmakery rdf:about="#SchlossRothermel" />
+      <vin:wynmakery rdf:about="#SchlossVolrad" />
+      <vin:wynmakery rdf:about="#SeanThackrey" />
+      <vin:wynmakery rdf:about="#Selaks" />
+      <vin:wynmakery rdf:about="#SevreEtMaine" />
+      <vin:wynmakery rdf:about="#StGenevieve" />
+      <vin:wynmakery rdf:about="#Stonleigh" />
+      <vin:wynmakery rdf:about="#Taylor" />
+      <vin:wynmakery rdf:about="#Ventana" />
+      <vin:wynmakery rdf:about="#WithallLane" />
+    </owl:distinctMembers>
+  </owl:AllDifferent>
+
+</rdf:RDF>

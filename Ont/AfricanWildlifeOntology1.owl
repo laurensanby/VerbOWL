@@ -1,0 +1,593 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY p1 "#" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY owl2 "http://www.w3.org/2006/12/owl2#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY AfricanWildlifeOntology1 "file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#" >
+]>
+
+
+<rdf:RDF xmlns="xml:base#"
+     xml:base="xml:base"
+     xmlns:AfricanWildlifeOntology1="file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:p1="#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl2="http://www.w3.org/2006/12/owl2#">
+    <owl:Ontology rdf:about="http://www.meteck.org/teaching/ontologies/AfricanWildlifeOntology1.owl">
+        <rdfs:comment>MK downloaded this file from http://www.iro.umontreal.ca/~lapalme/ift6281/OWL/AfricanWildlifeOntology.xml, changed the extension to .owl and appended the name with Web. That ontology give a load error in protege due to the use of Collection in the definition of herbivoor, so the AfricanWildlifeOntology0.owl has that piece removed.</rdfs:comment>
+        <rdfs:comment>African Wildlide Ontology, Semantic Web Primer, 4.3.1 pages 119-133</rdfs:comment>
+        <rdfs:comment>AfricanWildlifeOntology0.owl was then modified by Maria Keet (classes and object properties added, more comments added, updated the uri etc) and renamed into AfricanWildlifeOntology1.owl. 
+This is still an ontology just for tutorial purposes, so take it with a grain of salt</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="&rdfs;comment"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- #het-deel -->
+
+    <owl:ObjectProperty rdf:about="#het-deel">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <owl:inverseOf rdf:resource="&AfricanWildlifeOntology1;is-deel-van"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- #is-behoorlike-deel-van -->
+
+    <owl:ObjectProperty rdf:about="#is-behoorlike-deel-van">
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:subPropertyOf rdf:resource="&AfricanWildlifeOntology1;is-deel-van"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#gevreet-deur -->
+
+    <owl:ObjectProperty rdf:about="&AfricanWildlifeOntology1;gevreet-deur">
+        <owl:inverseOf rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#vreet -->
+
+    <owl:ObjectProperty rdf:about="&AfricanWildlifeOntology1;vreet">
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&AfricanWildlifeOntology1;dier"/>
+                    <rdf:Description rdf:about="&AfricanWildlifeOntology1;plant"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;is-deel-van"/>
+                        <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;dier"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;is-deel-van"/>
+                        <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;plant"/>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#is-deel-van -->
+
+    <owl:ObjectProperty rdf:about="&AfricanWildlifeOntology1;is-deel-van">
+        <rdf:type rdf:resource="&owl;ReflexiveProperty"/>
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- #Bessie -->
+
+    <owl:Class rdf:about="#Bessie">
+        <rdfs:subClassOf rdf:resource="#Vrug"/>
+    </owl:Class>
+    
+
+
+    <!-- #VleisetendePlant -->
+
+    <owl:Class rdf:about="#VleisetendePlant">
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;plant"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;dier"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- #Olifant -->
+
+    <owl:Class rdf:about="#Olifant">
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;herbivoor"/>
+    </owl:Class>
+    
+
+
+    <!-- #Vrug -->
+
+    <owl:Class rdf:about="#Vrug">
+        <rdfs:subClassOf rdf:resource="#PlantGedeelte"/>
+    </owl:Class>
+    
+
+
+    <!-- #Grass -->
+
+    <owl:Class rdf:about="#Grass">
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;plant"/>
+    </owl:Class>
+    
+
+
+    <!-- #Impala -->
+
+    <owl:Class rdf:about="#Impala">
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;dier"/>
+        <rdfs:comment>An african antelope http://en.wikipedia.org/wiki/Impala</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- #Omnivoor -->
+
+    <owl:Class rdf:about="#Omnivoor">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                        <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;dier"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                        <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;plant"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                        <owl:someValuesFrom>
+                            <owl:Class>
+                                <owl:unionOf rdf:parseType="Collection">
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;is-deel-van"/>
+                                        <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;dier"/>
+                                    </owl:Restriction>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;is-deel-van"/>
+                                        <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;plant"/>
+                                    </owl:Restriction>
+                                </owl:unionOf>
+                            </owl:Class>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;dier"/>
+        <owl:disjointWith rdf:resource="&AfricanWildlifeOntology1;karnivoor"/>
+        <owl:disjointWith rdf:resource="&AfricanWildlifeOntology1;herbivoor"/>
+    </owl:Class>
+    
+
+
+    <!-- #Palmboom -->
+
+    <owl:Class rdf:about="#Palmboom">
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;plant"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#het-deel"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:complementOf rdf:resource="&AfricanWildlifeOntology1;tak"/>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="&AfricanWildlifeOntology1;boom"/>
+    </owl:Class>
+    
+
+
+    <!-- #Floëem -->
+
+    <owl:Class rdf:about="#Floëem">
+        <rdfs:subClassOf rdf:resource="#PlantGedeelte"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#is-behoorlike-deel-van"/>
+                <owl:someValuesFrom rdf:resource="#Stam"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- #PlantGedeelte -->
+
+    <owl:Class rdf:about="#PlantGedeelte">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#is-behoorlike-deel-van"/>
+                <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;plant"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- #RockDassie -->
+
+    <owl:Class rdf:about="#RockDassie">
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;dier"/>
+        <rdfs:comment>http://en.wikipedia.org/wiki/Rock_Hyrax</rdfs:comment>
+        <rdfs:comment>They eat grasses and broad-blaared plants</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- #Wortel -->
+
+    <owl:Class rdf:about="#Wortel">
+        <rdfs:subClassOf rdf:resource="#PlantGedeelte"/>
+    </owl:Class>
+    
+
+
+    <!-- #Stam -->
+
+    <owl:Class rdf:about="#Stam">
+        <rdfs:subClassOf rdf:resource="#PlantGedeelte"/>
+    </owl:Class>
+    
+
+
+    <!-- #Takkie -->
+
+    <owl:Class rdf:about="#Takkie">
+        <rdfs:subClassOf rdf:resource="#PlantGedeelte"/>
+    </owl:Class>
+    
+
+
+    <!-- #Vlakvark -->
+
+    <owl:Class rdf:about="#Vlakvark">
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;dier"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                        <owl:someValuesFrom rdf:resource="#Vrug"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                        <owl:someValuesFrom rdf:resource="#Grass"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                        <owl:someValuesFrom rdf:resource="#Wortel"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                        <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;dier"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:comment>Vlakvarks are Omnivorous http://en.wikipedia.org/wiki/Vlakvark</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- #Xileem -->
+
+    <owl:Class rdf:about="#Xileem">
+        <rdfs:subClassOf rdf:resource="#PlantGedeelte"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#is-behoorlike-deel-van"/>
+                <owl:someValuesFrom rdf:resource="#Stam"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#dier -->
+
+    <owl:Class rdf:about="&AfricanWildlifeOntology1;dier">
+        <owl:disjointWith rdf:resource="&AfricanWildlifeOntology1;plant"/>
+    </owl:Class>
+    
+
+
+    <!-- file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#tak -->
+
+    <owl:Class rdf:about="&AfricanWildlifeOntology1;tak">
+        <rdfs:subClassOf rdf:resource="#PlantGedeelte"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;is-deel-van"/>
+                <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;boom"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>takes are parts of booms.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#karnivoor -->
+
+    <owl:Class rdf:about="&AfricanWildlifeOntology1;karnivoor">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                        <owl:allValuesFrom rdf:resource="&AfricanWildlifeOntology1;dier"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                        <owl:allValuesFrom>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;is-deel-van"/>
+                                <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;dier"/>
+                            </owl:Restriction>
+                        </owl:allValuesFrom>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;dier"/>
+        <owl:disjointWith rdf:resource="&AfricanWildlifeOntology1;herbivoor"/>
+        <rdfs:comment>karnivoors are exactly those diers that eat only dier
+s.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#kameelperd -->
+
+    <owl:Class rdf:about="&AfricanWildlifeOntology1;kameelperd">
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;dier"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="#Takkie"/>
+                            <rdf:Description rdf:about="&AfricanWildlifeOntology1;blaar"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="&AfricanWildlifeOntology1;leeu"/>
+        <rdfs:comment>kameelperds are herbivoors, and they eat only leaves.</rdfs:comment>
+        <rdfs:comment>they also eat Takkies</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#herbivoor -->
+
+    <owl:Class rdf:about="&AfricanWildlifeOntology1;herbivoor">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                        <owl:allValuesFrom rdf:resource="&AfricanWildlifeOntology1;plant"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                        <owl:allValuesFrom>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;is-deel-van"/>
+                                <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;plant"/>
+                            </owl:Restriction>
+                        </owl:allValuesFrom>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;dier"/>
+        <rdfs:comment>herbivoors are exactly those diers that eat only plants or parts of plants </rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#blaar -->
+
+    <owl:Class rdf:about="&AfricanWildlifeOntology1;blaar">
+        <rdfs:subClassOf rdf:resource="#PlantGedeelte"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;is-deel-van"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="#Takkie"/>
+                            <rdf:Description rdf:about="&AfricanWildlifeOntology1;tak"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Leaves are parts of takes.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#leeu -->
+
+    <owl:Class rdf:about="&AfricanWildlifeOntology1;leeu">
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;dier"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                <owl:someValuesFrom rdf:resource="#Impala"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;vreet"/>
+                <owl:allValuesFrom rdf:resource="&AfricanWildlifeOntology1;herbivoor"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>leeus are diers that eat only herbivoors.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#plant -->
+
+    <owl:Class rdf:about="&AfricanWildlifeOntology1;plant">
+        <rdfs:comment>Plants are disjoint from diers.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#smaaklike-plant -->
+
+    <owl:Class rdf:about="&AfricanWildlifeOntology1;smaaklike-plant">
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;plant"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;gevreet-deur"/>
+                        <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;karnivoor"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&AfricanWildlifeOntology1;gevreet-deur"/>
+                        <owl:someValuesFrom rdf:resource="&AfricanWildlifeOntology1;herbivoor"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:comment>Plants eaten both by herbivoors and karnivoors</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- file:/Applications/Protege_4.1_beta/AfricanWildlifeOntology1.owl#boom -->
+
+    <owl:Class rdf:about="&AfricanWildlifeOntology1;boom">
+        <rdfs:subClassOf rdf:resource="&AfricanWildlifeOntology1;plant"/>
+        <rdfs:comment>booms are a type of plant.</rdfs:comment>
+        <rdfs:comment>&#39;plant&#39; is here a shorthand for plant kingdom</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <owl:Class rdf:about="&owl;Thing"/>
+    
+
+
+    <!-- xml:base#Appel -->
+
+    <owl:Class rdf:about="xml:base#Appel">
+        <rdfs:subClassOf rdf:resource="#Vrug"/>
+    </owl:Class>
+    
+
+
+    <!-- xml:base#Verspreiding -->
+
+    <owl:Class rdf:about="xml:base#Verspreiding"/>
+    
+
+
+    <!-- xml:base#Habitat -->
+
+    <owl:Class rdf:about="xml:base#Habitat"/>
+    
+
+
+    <!-- xml:base#Witwortel -->
+
+    <owl:Class rdf:about="xml:base#Witwortel">
+        <rdfs:subClassOf rdf:resource="#Wortel"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Takkie"/>
+            <rdf:Description rdf:about="&AfricanWildlifeOntology1;tak"/>
+            <rdf:Description rdf:about="&AfricanWildlifeOntology1;blaar"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.0.0.1451) http://owlapi.sourceforge.net -->
+
