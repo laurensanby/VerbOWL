@@ -79,6 +79,17 @@
 		<Cardinality index="0"/>
 	</Constraint>
 
+	<Constraint type="PartDataSomeValuesFromFalse">
+		<Role index="0"/>
+		<Text>nie</Text>
+		<Role index="1"/>
+		<Text>nie</Text>
+	</Constraint>
+
+	<Constraint type="PartDataSomeValuesFromTrue">
+		<Role index="0"/>
+	</Constraint>
+
 	<Constraint type="PartObjectHasValue">
 		<Role index="0"/>
 		<ClassExpression index="n"/>

@@ -17,14 +17,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
- * @author Lauren
+ * @author Lauren Sanby
  */
 public class Driver {
 
@@ -33,7 +28,7 @@ public class Driver {
     static int inverseSentCount, transitiveSentCount, reflexiveSentCount, irreflexiveSentCount, functionalSentCount, inverseSentFunctionalCount, symmetricSentCount, asymmetricSentCount, domainSentCount, rangeSentCount;
     static String globalRoles, globalLiterals, globalAndOr, globalNest;
     static NodeList constraints;
-    static final String fileName = "stuff.owl";
+    static final String fileName = "computerscience.owl";
 
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
@@ -460,7 +455,9 @@ public class Driver {
 
             walker.walkStructure(visitor);
 
-            //TESTING
+            //--------------------------------------
+            //----------------TESTING---------------
+            //--------------------------------------
             long duration = System.nanoTime() - startTime;
             double seconds = (double) duration / 1000000000.0;
             int numAxioms = o.getAxiomCount() - o.getAxiomCount(AxiomType.ANNOTATION_ASSERTION) - o.getAxiomCount(AxiomType.DECLARATION);
@@ -638,6 +635,11 @@ public class Driver {
                         OWLDataSomeValuesFrom dsvf = (OWLDataSomeValuesFrom) ce;
                         OWLDatatypeRestriction dtr = null;
                         OWLDataRange dr = dsvf.getFiller();
+                        OWLDataOneOf doo = null;
+                        try {
+                            doo = (OWLDataOneOf) dr;
+                        } catch (Exception e) {
+                        }
                         try {
                             dtr = (OWLDatatypeRestriction) dr;
                         } catch (Exception e) {
@@ -656,6 +658,18 @@ public class Driver {
                                         break;
                                 }
                                 break;
+                            }
+                        } else if (doo != null) {
+                            String literalName = getLiteralName(doo.getValues() + "");
+                            System.out.println(literalName);
+                            if (literalName.equals("false")) {
+                                role = role.replace("-", ";");
+                                if (!role.contains(";")) {
+                                    role = "?;" + role;
+                                }
+                                printSentence += getPartSentence(null, role.split(";"), "PartDataSomeValuesFromFalse", null, "PartObjectSomeValuesFrom");
+                            } else if (literalName.equals("true")) {
+                                printSentence += getPartSentence(null, role.split(";"), "PartDataSomeValuesFromTrue", null, "PartObjectSomeValuesFrom");
                             }
                         } else {
                             dataName[0] = getName(dr + "");
@@ -944,7 +958,8 @@ public class Driver {
     }
 
     private static String getLiteralName(String literal) {
-        literal = literal.substring(1);
+        System.out.println(literal);
+        literal = literal.substring(literal.indexOf("\"")+1);
         return literal.substring(0, literal.indexOf("\""));
     }
 }
